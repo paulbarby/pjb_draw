@@ -1,0 +1,2 @@
+Adhear to docs/specifications.md requirements
+Record code changes in changes_log.md
