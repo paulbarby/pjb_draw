@@ -1,0 +1,427 @@
+2025-03-13 18:11:40,076 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-13 18:11:40,077 - root - INFO - Starting Drawing Package application
+2025-03-13 18:11:40,106 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-13 18:11:40,116 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-13 18:11:40,118 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-13 18:11:40,119 - src.ui.canvas - INFO - Canvas initialized
+2025-03-13 18:11:40,124 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-13 18:11:40,150 - src.app - INFO - Application initialized
+2025-03-14 14:50:11,398 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 14:50:11,399 - root - INFO - Starting Drawing Package application
+2025-03-14 14:50:11,427 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 14:50:11,437 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:11:33,153 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:11:33,154 - root - INFO - Starting Drawing Package application
+2025-03-14 15:11:33,183 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:11:33,183 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:11:33,183 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:11:33,184 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:11:33,184 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:11:33,194 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:11:33,196 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:11:33,196 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:11:33,202 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:13:22,847 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:13:22,847 - root - INFO - Starting Drawing Package application
+2025-03-14 15:13:22,876 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:13:22,877 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:13:22,877 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:13:22,877 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:13:22,877 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:13:22,887 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:13:22,891 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:13:22,891 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:13:22,897 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:13:22,923 - src.app - INFO - Application initialized
+2025-03-14 15:14:17,195 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:14:17,196 - root - INFO - Starting Drawing Package application
+2025-03-14 15:14:17,229 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:14:17,230 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:14:17,230 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:14:17,230 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:14:17,230 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:14:17,241 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:14:17,243 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:14:17,243 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:14:17,248 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:14:17,274 - src.app - INFO - Application initialized
+2025-03-14 15:16:09,548 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:16:09,548 - root - INFO - Starting Drawing Package application
+2025-03-14 15:16:09,577 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:16:09,577 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:16:09,578 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:16:09,578 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:16:09,578 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:16:09,588 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:16:09,590 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:16:09,590 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:16:09,596 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:16:09,621 - src.app - INFO - Application initialized
+2025-03-14 15:17:05,233 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:17:05,233 - root - INFO - Starting Drawing Package application
+2025-03-14 15:17:05,260 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:17:05,260 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:17:05,261 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:17:05,261 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:17:05,261 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:17:05,271 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:17:05,273 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:17:05,273 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:17:05,280 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:17:05,307 - src.app - INFO - Application initialized
+2025-03-14 15:17:05,454 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-14 15:17:53,939 - src.utils.tool_manager - INFO - Started drawing rectangle at (116.0, 104.0)
+2025-03-14 15:17:54,548 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:17:54,549 - src.app - INFO - Element created: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000001C67FC19EA0>
+2025-03-14 15:18:40,063 - src.utils.tool_manager - INFO - Started drawing rectangle at (545.0, 138.0)
+2025-03-14 15:18:40,586 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:18:40,587 - src.app - INFO - Element created: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000001C67FC19C60>
+2025-03-14 15:18:45,841 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-14 15:18:46,632 - src.utils.tool_manager - INFO - Started drawing line at (674.0, 105.0)
+2025-03-14 15:18:47,160 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:18:47,161 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000001C67FC19FC0>
+2025-03-14 15:18:47,541 - src.utils.tool_manager - INFO - Started drawing line at (763.0, 329.0)
+2025-03-14 15:18:47,670 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:18:48,406 - src.utils.tool_manager - INFO - Started drawing line at (412.0, 470.0)
+2025-03-14 15:18:48,518 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:18:49,262 - src.utils.tool_manager - INFO - Started drawing line at (759.0, 261.0)
+2025-03-14 15:18:49,375 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:18:50,810 - src.utils.tool_manager - INFO - Started drawing line at (714.0, 266.0)
+2025-03-14 15:18:51,526 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:18:51,526 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000001C67FC1A050>
+2025-03-14 15:18:51,838 - src.utils.tool_manager - INFO - Started drawing line at (369.0, 526.0)
+2025-03-14 15:18:52,044 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:18:53,031 - src.utils.tool_manager - INFO - Started drawing line at (310.0, 490.0)
+2025-03-14 15:18:53,222 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:18:54,163 - src.utils.tool_manager - INFO - Started drawing line at (603.0, 411.0)
+2025-03-14 15:18:54,378 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:18:54,950 - src.utils.tool_manager - INFO - Started drawing line at (647.0, 404.0)
+2025-03-14 15:18:55,635 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:18:55,636 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000001C67FC1A0E0>
+2025-03-14 15:18:56,333 - src.utils.tool_manager - INFO - Started drawing line at (202.0, 438.0)
+2025-03-14 15:18:56,420 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:19:00,394 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-14 15:19:01,116 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-14 15:19:02,193 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-14 15:19:03,002 - src.utils.tool_manager - INFO - Started drawing line at (70.0, 192.0)
+2025-03-14 15:19:03,631 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:19:03,631 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000001C67FC1A170>
+2025-03-14 15:19:04,109 - src.utils.tool_manager - INFO - Started drawing line at (213.0, 516.0)
+2025-03-14 15:19:04,250 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:19:06,120 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-14 15:19:06,936 - src.utils.tool_manager - INFO - Selected tool: circle
+2025-03-14 15:19:07,500 - src.utils.tool_manager - INFO - Started drawing circle at (251.0, 215.0)
+2025-03-14 15:19:08,076 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:19:08,077 - src.app - INFO - Element created: <src.drawing.elements.circle_element.CircleElement object at 0x000001C67FC19F30>
+2025-03-14 15:19:08,247 - src.utils.tool_manager - INFO - Started drawing circle at (321.0, 335.0)
+2025-03-14 15:19:08,374 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:19:10,761 - src.utils.tool_manager - INFO - Selected tool: text
+2025-03-14 15:19:11,349 - src.utils.tool_manager - INFO - Added text annotation at (495.0, 195.0)
+2025-03-14 15:19:17,964 - src.utils.tool_manager - INFO - Added text annotation at (519.0, 191.0)
+2025-03-14 15:19:18,774 - src.utils.tool_manager - INFO - Added text annotation at (483.0, 283.0)
+2025-03-14 15:19:20,060 - src.utils.tool_manager - INFO - Added text annotation at (511.0, 279.0)
+2025-03-14 15:19:20,642 - src.utils.tool_manager - INFO - Added text annotation at (497.0, 241.0)
+2025-03-14 15:19:25,775 - src.utils.tool_manager - INFO - Selected tool: circle
+2025-03-14 15:19:26,316 - src.utils.tool_manager - INFO - Selected tool: text
+2025-03-14 15:27:04,756 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:27:04,756 - root - INFO - Starting Drawing Package application
+2025-03-14 15:27:04,785 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:27:04,785 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:27:04,785 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:27:04,786 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:27:04,786 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:27:04,798 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:27:04,800 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:27:04,800 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:27:04,806 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:27:04,835 - src.app - INFO - Application initialized
+2025-03-14 15:27:05,152 - src.utils.tool_manager - INFO - Selected tool: text
+2025-03-14 15:27:27,829 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-14 15:27:28,636 - src.utils.tool_manager - INFO - Started drawing line at (131.0, 71.0)
+2025-03-14 15:27:28,763 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:27:30,554 - src.utils.tool_manager - INFO - Started drawing line at (323.0, 217.0)
+2025-03-14 15:27:30,706 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:27:33,515 - src.utils.tool_manager - INFO - Started drawing line at (132.0, 193.0)
+2025-03-14 15:27:34,332 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:27:34,332 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000001A47FA59CF0>
+2025-03-14 15:27:36,193 - src.utils.tool_manager - INFO - Started drawing line at (283.0, 113.0)
+2025-03-14 15:27:36,593 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:27:36,593 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000001A47FA59E10>
+2025-03-14 15:27:37,718 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-14 15:27:38,474 - src.utils.tool_manager - INFO - Started drawing rectangle at (642.0, 174.0)
+2025-03-14 15:27:38,982 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:27:38,983 - src.app - INFO - Element created: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000001A47FA59FC0>
+2025-03-14 15:27:40,476 - src.utils.tool_manager - INFO - Selected tool: circle
+2025-03-14 15:27:41,086 - src.utils.tool_manager - INFO - Started drawing circle at (454.0, 337.0)
+2025-03-14 15:27:41,746 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:27:41,746 - src.app - INFO - Element created: <src.drawing.elements.circle_element.CircleElement object at 0x000001A47FA59F30>
+2025-03-14 15:27:43,718 - src.utils.tool_manager - INFO - Selected tool: text
+2025-03-14 15:27:44,381 - src.utils.tool_manager - INFO - Selected tool: circle
+2025-03-14 15:27:44,748 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-14 15:27:45,525 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-14 15:27:51,307 - src.utils.tool_manager - INFO - Selected tool: circle
+2025-03-14 15:27:51,799 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-14 15:27:53,433 - src.utils.tool_manager - INFO - Started drawing rectangle at (213.0, 42.0)
+2025-03-14 15:27:53,944 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:27:53,944 - src.app - INFO - Element created: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000001A47FA5A050>
+2025-03-14 15:28:05,475 - src.app - INFO - Application closing
+2025-03-14 15:30:58,663 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:30:58,664 - root - INFO - Starting Drawing Package application
+2025-03-14 15:30:58,693 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:30:58,694 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:30:58,694 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:30:58,694 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:30:58,694 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:30:58,704 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:30:58,706 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:30:58,707 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:30:58,714 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:30:58,740 - src.app - INFO - Application initialized
+2025-03-14 15:31:01,805 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-14 15:31:02,361 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-14 15:31:03,311 - src.utils.tool_manager - INFO - Selected tool: circle
+2025-03-14 15:31:03,946 - src.utils.tool_manager - INFO - Selected tool: text
+2025-03-14 15:31:05,142 - src.utils.tool_manager - INFO - Selected tool: circle
+2025-03-14 15:31:06,465 - src.utils.tool_manager - INFO - Started drawing circle at (394.0, 257.0)
+2025-03-14 15:31:06,711 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:31:07,440 - src.utils.tool_manager - INFO - Started drawing circle at (392.0, 257.0)
+2025-03-14 15:31:08,312 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:31:08,312 - src.app - INFO - Element created: <src.drawing.elements.circle_element.CircleElement object at 0x0000023876379CF0>
+2025-03-14 15:31:09,475 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-14 15:31:10,715 - src.utils.tool_manager - INFO - Started drawing rectangle at (267.0, 131.0)
+2025-03-14 15:31:12,310 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:31:12,310 - src.app - INFO - Element created: <src.drawing.elements.rectangle_element.RectangleElement object at 0x0000023876379E10>
+2025-03-14 15:31:23,902 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-14 15:31:25,779 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-14 15:31:27,789 - src.utils.history_manager - INFO - No actions to undo
+2025-03-14 15:31:34,482 - src.utils.tool_manager - INFO - Selected tool: circle
+2025-03-14 15:31:37,011 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-14 15:31:38,131 - src.utils.tool_manager - INFO - Started drawing line at (268.0, 132.0)
+2025-03-14 15:31:39,759 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:31:39,760 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x0000023876379F30>
+2025-03-14 15:31:41,070 - src.utils.tool_manager - INFO - Started drawing line at (516.0, 133.0)
+2025-03-14 15:31:42,752 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:31:42,752 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x0000023876379D80>
+2025-03-14 15:31:49,820 - src.utils.tool_manager - INFO - Selected tool: text
+2025-03-14 15:31:50,462 - src.utils.tool_manager - INFO - Added text annotation at (576.0, 213.0)
+2025-03-14 15:32:10,996 - src.app - INFO - Application closing
+2025-03-14 15:33:55,552 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:33:55,553 - root - INFO - Starting Drawing Package application
+2025-03-14 15:33:55,581 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:33:55,582 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:33:55,582 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:33:55,582 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:33:55,582 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:33:55,592 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:33:55,594 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:33:55,594 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:33:55,600 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:33:55,628 - src.app - INFO - Application initialized
+2025-03-14 15:33:58,216 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-14 15:34:00,925 - src.utils.tool_manager - INFO - Started drawing line at (457.0, 164.0)
+2025-03-14 15:34:01,273 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:34:01,885 - src.utils.tool_manager - INFO - Started drawing line at (430.0, 184.0)
+2025-03-14 15:34:02,443 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:34:02,443 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x0000018776179D80>
+2025-03-14 15:34:15,891 - src.app - INFO - Application closing
+2025-03-14 15:39:06,898 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:39:06,898 - root - INFO - Starting Drawing Package application
+2025-03-14 15:39:06,925 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:39:06,926 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:39:06,926 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:39:06,926 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:39:06,926 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:39:06,936 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:39:06,938 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:39:06,939 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:39:06,946 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:39:06,973 - src.app - INFO - Application initialized
+2025-03-14 15:39:15,308 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-14 15:39:15,919 - src.utils.tool_manager - INFO - Started drawing line at (132.0, 68.0)
+2025-03-14 15:39:16,479 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:39:16,479 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x0000026FAD59E5F0>
+2025-03-14 15:40:03,314 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:40:03,315 - root - INFO - Starting Drawing Package application
+2025-03-14 15:40:03,343 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:40:03,343 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:40:03,344 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:40:03,344 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:40:03,344 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:40:03,354 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:40:03,356 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:40:03,356 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:40:03,363 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:40:03,391 - src.app - INFO - Application initialized
+2025-03-14 15:40:43,424 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-14 15:40:44,067 - src.utils.tool_manager - INFO - Started drawing line at (100.0, 51.0)
+2025-03-14 15:40:44,556 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:40:44,557 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000001D4EC82A680>
+2025-03-14 15:40:48,780 - src.utils.tool_manager - INFO - Started drawing line at (423.0, 80.0)
+2025-03-14 15:40:49,247 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:40:49,247 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000001D4EC82A8C0>
+2025-03-14 15:40:52,598 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-14 15:40:52,986 - src.utils.tool_manager - INFO - Started drawing rectangle at (298.0, 140.0)
+2025-03-14 15:40:53,476 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:40:53,476 - src.app - INFO - Element created: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000001D4EC82A950>
+2025-03-14 15:40:57,951 - src.utils.history_manager - INFO - No actions to undo
+2025-03-14 15:41:15,780 - src.utils.project_manager - INFO - Project saved to C:/Users/paulb/Documents/Development/Drawing Package/test1.draw
+2025-03-14 15:41:45,952 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:41:45,953 - root - INFO - Starting Drawing Package application
+2025-03-14 15:41:45,983 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:41:45,983 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:41:45,983 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:41:45,983 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:41:45,984 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:41:45,994 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:41:45,996 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:41:45,997 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:41:46,003 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:41:46,030 - src.app - INFO - Application initialized
+2025-03-14 15:41:50,862 - src.utils.element_factory - ERROR - Error creating element of type rectangle: setColor(self, color: Union[QColor, Qt.GlobalColor, int]): argument 1 has unexpected type 'str'
+2025-03-14 15:41:50,862 - src.utils.element_factory - ERROR - Error creating element of type line: setColor(self, color: Union[QColor, Qt.GlobalColor, int]): argument 1 has unexpected type 'str'
+2025-03-14 15:41:50,863 - src.utils.element_factory - ERROR - Error creating element of type line: setColor(self, color: Union[QColor, Qt.GlobalColor, int]): argument 1 has unexpected type 'str'
+2025-03-14 15:41:50,863 - src.utils.project_manager - INFO - Project loaded from C:/Users/paulb/Documents/Development/Drawing Package/test1.draw
+2025-03-14 15:42:29,189 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:42:29,189 - root - INFO - Starting Drawing Package application
+2025-03-14 15:42:29,219 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:42:29,219 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:42:29,219 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:42:29,220 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:42:29,220 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:42:29,230 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:42:29,232 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:42:29,233 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:42:29,239 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:42:29,266 - src.app - INFO - Application initialized
+2025-03-14 15:43:33,219 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-14 15:43:33,583 - src.utils.tool_manager - INFO - Started drawing line at (228.0, 117.0)
+2025-03-14 15:43:33,951 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:43:33,951 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000002015485E680>
+2025-03-14 15:43:35,033 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-14 15:43:36,007 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x000002015485E680>
+2025-03-14 15:43:36,008 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x000002015485E680>
+2025-03-14 15:43:44,407 - src.app - INFO - Changing property 'color' to '<PyQt6.QtGui.QColor object at 0x000002015489C040>' for LineElement
+2025-03-14 15:43:44,408 - src.app - INFO - Element modified: <src.drawing.elements.line_element.LineElement object at 0x000002015485E680>
+2025-03-14 15:43:47,675 - src.app - INFO - Changing property 'line_style' to 'Dashed' for LineElement
+2025-03-14 15:43:49,833 - src.app - INFO - Changing property 'line_style' to 'Dotted' for LineElement
+2025-03-14 15:43:52,479 - src.app - INFO - Changing property 'line_thickness' to '1' for LineElement
+2025-03-14 15:43:52,480 - src.app - INFO - Element modified: <src.drawing.elements.line_element.LineElement object at 0x000002015485E680>
+2025-03-14 15:43:54,072 - src.app - INFO - Element selected: None
+2025-03-14 15:43:55,637 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-14 15:43:56,490 - src.utils.tool_manager - INFO - Started drawing line at (461.0, 125.0)
+2025-03-14 15:43:57,293 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:43:57,293 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000002015485E4D0>
+2025-03-14 15:44:22,812 - src.utils.project_manager - INFO - Project saved to C:/Users/paulb/Documents/Development/Drawing Package/test1.draw
+2025-03-14 15:44:36,841 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:44:36,842 - root - INFO - Starting Drawing Package application
+2025-03-14 15:44:36,871 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:44:36,872 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:44:36,872 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:44:36,872 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:44:36,872 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:44:36,882 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:44:36,884 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:44:36,885 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:44:36,891 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:44:36,921 - src.app - INFO - Application initialized
+2025-03-14 15:44:41,871 - src.utils.element_factory - ERROR - Error creating element of type line: setColor(self, color: Union[QColor, Qt.GlobalColor, int]): argument 1 has unexpected type 'str'
+2025-03-14 15:44:41,872 - src.utils.element_factory - ERROR - Error creating element of type line: setColor(self, color: Union[QColor, Qt.GlobalColor, int]): argument 1 has unexpected type 'str'
+2025-03-14 15:44:41,872 - src.utils.project_manager - INFO - Project loaded from C:/Users/paulb/Documents/Development/Drawing Package/test1.draw
+2025-03-14 15:46:07,472 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:46:07,472 - root - INFO - Starting Drawing Package application
+2025-03-14 15:46:07,501 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:46:07,501 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:46:07,502 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:46:07,502 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:46:07,502 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:46:07,512 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:46:07,515 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:46:07,515 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:46:07,522 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:46:07,550 - src.app - INFO - Application initialized
+2025-03-14 15:46:27,975 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-14 15:46:28,520 - src.utils.tool_manager - INFO - Started drawing line at (156.0, 55.0)
+2025-03-14 15:46:28,908 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:46:28,909 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000001D5FFE6AB00>
+2025-03-14 15:46:29,921 - src.utils.tool_manager - INFO - Selected tool: circle
+2025-03-14 15:46:30,941 - src.utils.tool_manager - INFO - Started drawing circle at (413.0, 322.0)
+2025-03-14 15:46:31,618 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:46:31,619 - src.app - INFO - Element created: <src.drawing.elements.circle_element.CircleElement object at 0x000001D5FFE6A950>
+2025-03-14 15:46:32,695 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-14 15:46:33,824 - src.utils.tool_manager - INFO - Started drawing rectangle at (156.0, 53.0)
+2025-03-14 15:46:35,885 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-14 15:46:35,885 - src.app - INFO - Element created: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000001D5FFE6ADD0>
+2025-03-14 15:46:40,211 - src.utils.project_manager - INFO - Project saved to C:/Users/paulb/Documents/Development/Drawing Package/test1.draw
+2025-03-14 15:46:48,772 - src.app - INFO - Application closing
+2025-03-14 15:46:54,140 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:46:54,140 - root - INFO - Starting Drawing Package application
+2025-03-14 15:46:54,166 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:46:54,166 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:46:54,167 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:46:54,167 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:46:54,167 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:46:54,177 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:46:54,179 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:46:54,179 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:46:54,186 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:46:54,210 - src.app - INFO - Application initialized
+2025-03-14 15:47:04,528 - src.utils.project_manager - INFO - Project loaded from C:/Users/paulb/Documents/Development/Drawing Package/test1.draw
+2025-03-14 15:51:04,052 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:51:04,053 - root - INFO - Starting Drawing Package application
+2025-03-14 15:51:04,080 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:51:04,080 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:51:04,081 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:51:04,081 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:51:04,081 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:51:04,091 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:51:04,093 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:51:04,093 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:51:04,100 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:51:04,130 - src.app - INFO - Application initialized
+2025-03-14 15:51:09,535 - src.utils.project_manager - INFO - Project loaded from C:/Users/paulb/Documents/Development/Drawing Package/test1.draw
+2025-03-14 15:51:09,535 - src.utils.history_manager - INFO - History cleared
+2025-03-14 15:51:11,929 - src.utils.history_manager - INFO - Added action to history: Clear canvas
+2025-03-14 15:51:13,895 - src.app - INFO - Application closing
+2025-03-14 15:56:53,057 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:56:53,057 - root - INFO - Starting Drawing Package application
+2025-03-14 15:56:53,085 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:56:53,086 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:56:53,086 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:56:53,086 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:56:53,086 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:56:53,097 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:56:53,117 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:56:53,117 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:56:53,124 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:56:53,132 - src.app - INFO - Application initialized
+2025-03-14 15:57:30,208 - src.utils.image_handler - INFO - Image loaded successfully: C:/Users/paulb/Pictures/The horizon beckons with promises of success.jpg (1024x1024)
+2025-03-14 15:57:30,210 - src.ui.canvas - INFO - Background image set, size: 1024x1024
+2025-03-14 15:59:34,088 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 15:59:34,088 - root - INFO - Starting Drawing Package application
+2025-03-14 15:59:34,117 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 15:59:34,117 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 15:59:34,117 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 15:59:34,118 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 15:59:34,118 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 15:59:34,128 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:59:34,148 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 15:59:34,149 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 15:59:34,156 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 15:59:34,164 - src.app - INFO - Application initialized
+2025-03-14 16:00:12,296 - src.utils.image_handler - INFO - Image loaded successfully: C:/Users/paulb/Pictures/69516077_10157763027841803_792786697245949952_n.jpg (540x960)
+2025-03-14 16:00:12,296 - src.ui.canvas - INFO - Background image set, size: 540x960
+2025-03-14 16:00:12,297 - src.utils.history_manager - INFO - Added action to history: Set background image
+2025-03-14 16:01:19,423 - src.app - INFO - Application closing
+2025-03-14 16:31:10,972 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-14 16:31:10,972 - root - INFO - Starting Drawing Package application
+2025-03-14 16:31:10,998 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-14 16:31:10,999 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-14 16:31:10,999 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-14 16:31:10,999 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-14 16:31:10,999 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-14 16:31:11,010 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 16:31:11,032 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-14 16:31:11,032 - src.ui.canvas - INFO - Canvas initialized
+2025-03-14 16:31:11,039 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-14 16:31:11,046 - src.app - INFO - Application initialized
+2025-03-14 16:31:16,099 - src.app - INFO - Application closing

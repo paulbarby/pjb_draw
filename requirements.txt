@@ -1,0 +1,18 @@
+# UI Framework
+PyQt6>=6.4.0
+
+# Image Processing
+Pillow>=9.3.0
+opencv-python>=4.6.0
+numpy>=1.23.0
+
+# Vector Rendering
+svgwrite>=1.4.3
+
+# PDF Support
+PyPDF2>=3.0.0
+
+# Testing
+pytest>=7.2.0
+pytest-cov>=4.0.0
+pytest-qt>=4.2.0

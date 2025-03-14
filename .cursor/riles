@@ -1,0 +1,29 @@
+## Cursor Riles Configuration
+
+### Command Triggers
+
+- "build it": Execute the Build Instructions section below
+- "debug": Execute the Debugging Instructions section below
+
+### Build Instructions
+
+1. Check todo.md for the next task to implement
+2. Pick a todo item based on logical development order
+3. Mark the next logical todo item with "<--Next" in todo.md
+4. Follow requirements in docs/specifications.md
+5. Adhere to coding standards in docs/coding_standards.md
+6. Record all code changes in changes_log.md
+7. Keep code simple and maximize module reuse
+8. Write tests for each module
+9. Update todo.md to track progress
+10. Notify the user of completed work, tests to run, and code to review
+
+### Debugging Instructions
+
+When elements don't exist during debugging:
+
+1. Check the codebase to see if they exist elsewhere
+2. Prompt the user for code access if needed
+3. If elements don't exist, create barebones versions that can be enhanced later
+4. Don't unnecessarily modify already implemented and tested code
+5. Update todo.md to note that barebones implementations have been started

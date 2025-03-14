@@ -10,6 +10,13 @@
 - Keep functions and methods **short and focused** (preferably under 30 lines).
 - **Avoid code duplication** by refactoring common logic into reusable functions or classes.
 - Use **docstrings** for all modules, classes, and public functions.
+- All array/list indices must start at 0, and any constants used for array indexing must account for zero-based indexing
+  - Example: If you have 8 handles numbered 0-7, the constants should be defined as:
+    ```python
+    HANDLE_FIRST = 0
+    HANDLE_SECOND = 1
+    # ... and so on
+    ```
 
 ### 1.2 Python Version and Dependencies
 
@@ -118,6 +125,29 @@
 
 ---
 
-## 6. Conclusion
+## 6. Drawing Elements Architecture Standards
+
+### 6.1 Vector Element Implementation
+
+All drawing elements must:
+
+- Inherit from the `VectorElement` base class
+- Implement all required methods:
+  - `boundingRect()` - Define the element's bounding rectangle
+  - `paint(painter, option, widget)` - Draw the element and handle selection state
+  - `update_handles()` - Create/update resize handles for the element
+  - `resize_by_handle(handle_id, pos)` - Modify element dimensions based on handle movement
+- Follow consistent handle naming using the constants defined in `VectorElement`
+- Maintain clean separation between appearance (pen, brush) and geometry (points, sizes)
+
+### 6.2 Element State Management
+
+- All element state changes must call `update()` to ensure proper redrawing
+- Implement `clone()` method for copying elements when needed
+- Consider element property getters/setters for consistent state management
+
+---
+
+## 7. Conclusion
 
 Following these coding and testing standards will ensure the Python-based drawing package is maintainable, efficient, and robust. Regular reviews and updates should be conducted to refine best practices as the project evolves.

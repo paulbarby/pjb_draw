@@ -1,2 +1,23 @@
+[cursor can ignore this]
+This the first prompt you should read. 
+It has a basic format for grouping instructions so you know what to do. 
+
+First:
+When the user says "build it" do the steps below in the Build Instructions: section. 
+When the user says "debug" do the steps below in the Debugging Instructions: section.
+
+
+Build Instructions:
+Check todo.md
+Pick a todo keeping in mind the order of development that best suits a sucessfull outcome. Make sure the next logical todo item appended with "<--Next" to show what is the next todo to do.
 Adhear to docs/specifications.md requirements
+Adhear to docs/coding_standards.md
 Record code changes in changes_log.md
+Keep code simple and use modules extensivley for reusability
+Write tests for each modules
+Update todo.md to keep a track of progress
+Notifiy the user of the work done and any test to be run and code to be reviewed
+
+
+Debugging Instructions:
+In the case of elements not existing during debugging do the followings and only during debugging issues: instead of removing elements check the ccode base to see if they exists, be sure to promopt the user to give access to the code base, if they dont exists create the barebones version of the missing elements that can be added to later so that code that has been implmented and tested is not un nesscarly modified, and update the todo list to state this so the next run we now we have at least started the element in a barebones implmentation.

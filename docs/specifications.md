@@ -1,106 +1,178 @@
-# Python-Based Drawing Package Specification
+# Drawing Package Specifications
 
 ## Overview
 
-This document outlines the specifications for a Python-based drawing package designed for marking up plans and images. The package will provide essential tools for adding annotations, lines, and other vector-based elements, with features tailored for plan and image markup. The UI will have a modern iOS-like look, support responsive resizing, and offer a seamless user experience.
+### Layer System
 
-## Features
+- Support for multiple layers with bottom-to-top rendering
+- Layer management features:
+  - Create, delete, rename layers
+  - Reorder layers via drag-and-drop
+  - Toggle layer visibility
+  - Lock/unlock layers
+  - Layer opacity control
+  - Layer-specific operations (clear, duplicate, merge)
 
-### 1. **Core Functionality**
+### Drawing Elements
 
-- **Image Loading**
+- Vector-based drawing elements:
+  - Lines, rectangles, circles, polygons
+  - Freehand drawing
+  - Text elements
+  - Image elements with full manipulation capabilities
+- Element properties:
+  - Color with opacity
+  - Line width and style
+  - Fill style and color
+  - Rotation and scaling
+  - Position and size
 
-  - Support for loading existing images (JPEG, PNG, BMP, SVG, PDF).
-  - Drag-and-drop functionality for quick image loading.
+### Image Handling
 
-- **Vector-Based Drawing Elements**
-  - **Lines:** Straight-line drawing with adjustable thickness and color.
-  - **Arrows:** Customizable arrowheads with attached notes.
-  - **Text Annotations:** User-defined text with font size, color, and background options.
-  - **Free Draw with Smoothing:** Hand-drawn lines with automatic smoothing for better readability.
-  - **Circles and Shapes:** Ability to draw perfect circles, ellipses, and rectangles.
-  - **Layers:** Support for multiple layers, enabling independent manipulation and flattening.
+- Image elements as first-class drawing objects
+- Image manipulation features:
+  - Move, resize, rotate
+  - Flip horizontally/vertically
+  - Adjust opacity
+  - Crop and transform
+  - Cut, copy, paste operations
+- Support for common image formats (PNG, JPG, GIF, etc.)
+- Image import via:
+  - File menu
+  - Drag and drop
+  - Clipboard paste
 
-### 2. **Editing and Manipulation**
+### Element Grouping
 
-- **Multi-Step Undo/Redo**
+- Create and manage element groups
+- Group operations:
+  - Create/ungroup
+  - Rename groups
+  - Select all elements in group
+  - Transform group as a unit
+  - Nested groups support
+- Group properties:
+  - Name
+  - Visibility
+  - Lock status
+  - Transform properties
 
-  - Ability to undo and redo multiple drawing steps.
+## User Interface
 
-- **Vector Element Controls**
+### Tool System
 
-  - **Duplication:** Clone existing elements.
-  - **Repositioning:** Drag elements to reposition.
-  - **Resizing:** Adjust width and height while maintaining aspect ratio (if locked).
-  - **Rotation:** Free rotation of vector elements.
-  - **Alignment and Snapping:** Option to align elements and snap to guides.
+- Dockable and floating tool palettes
+- Tool organization:
+  - Drawing tools
+  - Selection tools
+  - Transform tools
+  - Layer management tools
+  - Group management tools
+- Tool options panel:
+  - Color picker with opacity
+  - Line width and style controls
+  - Tool-specific settings
+- Customizable workspace layout
 
-- **Hotkeys for Precision Editing**
-  - **Shift + Drag:** Lock vertical/horizontal movement.
-  - **Ctrl + Scroll:** Zoom in/out.
-  - **Arrow Keys:** Nudge elements in small increments.
-  - **Ctrl + Z:** Undo last action.
-  - **Ctrl + Y:** Redo last undone action.
-  - **Ctrl + C:** Copy selected element.
-  - **Ctrl + V:** Paste copied element.
-  - **Ctrl + X:** Cut selected element.
-  - **Delete:** Remove selected element.
-  - **Ctrl + S:** Save project.
-  - **Ctrl + O:** Open saved project.
-  - **Ctrl + P:** Export or print annotated image.
-  - **Ctrl + A:** Select all elements.
-  - **Ctrl + D:** Deselect all elements.
-  - **Space + Drag:** Pan the canvas.
-  - **Mouse Wheel:** Scroll vertically.
-  - **Shift + Mouse Wheel:** Scroll horizontally.
+### Panels and Views
 
-### 3. **Export and Saving**
+- Layer panel:
+  - Layer list with thumbnails
+  - Layer visibility toggles
+  - Layer lock toggles
+  - Layer reordering interface
+- Properties panel:
+  - Element properties
+  - Layer properties
+  - Group properties
+  - Image properties
+- Canvas view:
+  - Multiple view support
+  - Zoom and pan
+  - Grid and guides
+  - Selection overlay
 
-- **Save and Load Markup Files**
+## File Operations
 
-  - Ability to save the drawing as a project file retaining vector layers.
-  - Reopen saved projects for further edits.
+### Project Management
 
-- **Flattening Vectors to Bitmap**
+- Save/load project files with:
+  - All drawing elements
+  - Layer information
+  - Group information
+  - Image data
+  - Workspace layout
+- Auto-save functionality
+- Project recovery
 
-  - Convert vector elements to raster images while preserving the background image.
-  - Layer-specific flattening for finer control.
+### Export Options
 
-- **Export Options**
-  - PNG, JPG: Save the markup image with adjustable resolution.
-  - PDF: Export the annotated image as a high-resolution PDF.
-  - SVG: Preserve vector elements in scalable vector format.
+- Export formats:
+  - PNG, JPG, GIF
+  - SVG (vector)
+  - PDF
+- Export options:
+  - Layer visibility
+  - Group visibility
+  - Image quality
+  - Background transparency
+- Batch export support
 
-### 4. **User Interface**
+## Technical Requirements
 
-- **Modern iOS-Inspired UI**
+### Performance
 
-  - Clean and minimalist design with smooth animations.
-  - Floating toolbar with customizable tools.
-  - Responsive layout adapting to window resizing.
-  - Dark and light mode support.
+- Efficient layer rendering
+- Responsive UI during operations
+- Memory-efficient image handling
+- Smooth element manipulation
+- Quick file operations
 
-- **Workspace Customization**
-  - Full-window mode for distraction-free markup.
-  - Dockable tool panels for a flexible workspace.
-  - Zooming and panning support for large images.
+### Extensibility
 
-### 5. **Technical Requirements**
+- Plugin system for:
+  - New tools
+  - Export formats
+  - File formats
+  - Custom elements
+- API for external integration
 
-- **Programming Language:** Python
-- **Frameworks & Libraries:**
+### Compatibility
 
-  - PyQt or Tkinter for UI
-  - PIL/Pillow for image processing
-  - OpenCV for advanced image handling
-  - NumPy for performance optimization
-  - SVGwrite or Cairo for vector rendering
+- Cross-platform support
+- High DPI display support
+- Touch input support
+- Keyboard shortcuts
+- Accessibility features
 
-- **Operating System Compatibility:**
-  - Windows
-  - macOS
-  - Linux
+## Development Guidelines
 
-## Conclusion
+- PyQt6 or Tkinter for UI
+- PIL/Pillow for image processing
+- OpenCV for advanced image handling
+- NumPy for performance optimization
+- SVGwrite or Cairo for vector rendering
 
-This Python-based drawing package will provide an intuitive and efficient solution for marking up plans and images. With vector-based elements, undo/redo functionality, layer support, and modern UI design, it will serve as a powerful tool for professionals handling technical drawings and annotations.
+### Code Organization
+
+- Modular architecture
+- Clear separation of concerns
+- Well-documented API
+- Comprehensive test coverage
+- Consistent coding style
+
+### Version Control
+
+- Semantic versioning
+- Changelog maintenance
+- Feature branch workflow
+- Code review process
+- Release management
+
+### Documentation
+
+- User documentation
+- Developer documentation
+- API documentation
+- Installation guide
+- Migration guide
