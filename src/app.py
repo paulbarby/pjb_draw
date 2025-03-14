@@ -117,6 +117,7 @@ class DrawingApp(QMainWindow):
         
         # Create dock widget for property panel
         self.property_dock = QDockWidget("Properties", self)
+        self.property_dock.setObjectName("PropertiesDockWidget")  # Add object name for state saving
         self.property_dock.setWidget(self.property_panel)
         self.property_dock.setFeatures(
             QDockWidget.DockWidgetFeature.DockWidgetMovable |
@@ -168,6 +169,7 @@ class DrawingApp(QMainWindow):
         """Create the tools toolbar."""
         # Main toolbar
         self.toolbar = QToolBar("Drawing Tools")
+        self.toolbar.setObjectName("DrawingToolsToolBar")  # Add object name for state saving
         self.toolbar.setMovable(True)  # Allow toolbar to be moved
         self.toolbar.setFloatable(True)  # Allow toolbar to be detached as floating window
         self.toolbar.setIconSize(QSize(32, 32))
@@ -1310,7 +1312,7 @@ class DrawingApp(QMainWindow):
         toggle_toolbar_action.setStatusTip("Toggle toolbar visibility")
         toggle_toolbar_action.setCheckable(True)
         toggle_toolbar_action.setChecked(True)
-        toggle_toolbar_action.triggered.connect(self.not_implemented)
+        toggle_toolbar_action.triggered.connect(self.toggle_toolbar)
         ui_options_menu.addAction(toggle_toolbar_action)
         
         # Show/Hide Properties Panel (placeholder)
@@ -1318,7 +1320,7 @@ class DrawingApp(QMainWindow):
         toggle_properties_action.setStatusTip("Toggle properties panel visibility")
         toggle_properties_action.setCheckable(True)
         toggle_properties_action.setChecked(True)
-        toggle_properties_action.triggered.connect(self.not_implemented)
+        toggle_properties_action.triggered.connect(self.toggle_property_panel)
         ui_options_menu.addAction(toggle_properties_action)
         
         # ----- Draw menu -----
@@ -2010,3 +2012,15 @@ class DrawingApp(QMainWindow):
             self._update_named_selections_menu()
         else:
             self._update_status(f"Could not delete selection '{name}'")
+
+    def toggle_toolbar(self):
+        """Toggle the visibility of the toolbar."""
+        if hasattr(self, 'toolbar') and self.toolbar:
+            self.toolbar.setVisible(not self.toolbar.isVisible())
+            self.status_bar.showMessage(f"Toolbar {'shown' if self.toolbar.isVisible() else 'hidden'}")
+    
+    def toggle_property_panel(self):
+        """Toggle the visibility of the property panel."""
+        if hasattr(self, 'property_dock') and self.property_dock:
+            self.property_dock.setVisible(not self.property_dock.isVisible())
+            self.status_bar.showMessage(f"Property panel {'shown' if self.property_dock.isVisible() else 'hidden'}")
