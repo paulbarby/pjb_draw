@@ -295,9 +295,14 @@ class PropertyPanel(QWidget):
         self._block_signals(False)
     
     def update_from_element(self, element):
-        """Update the property panel based on the selected element."""
+        """
+        Update the property panel to reflect the properties of the given element.
+        
+        Args:
+            element: The element to display properties for
+        """
         if not element:
-            # Check if we have multiple elements selected
+            # If no element is provided, disable the panel
             if hasattr(self, 'multiple_elements') and self.multiple_elements:
                 return  # Keep showing the multi-selection panel
             else:
@@ -336,12 +341,10 @@ class PropertyPanel(QWidget):
             if index >= 0:
                 self.line_style_combo.setCurrentIndex(index)
         
-        # Update position properties - switch to using visual position
-        if "visual_x" in properties:
-            self.x_spinbox.setValue(properties["visual_x"])
-        
-        if "visual_y" in properties:
-            self.y_spinbox.setValue(properties["visual_y"])
+        # Update position properties - use visual position
+        visual_x, visual_y = element.get_visual_position()
+        self.x_spinbox.setValue(visual_x)
+        self.y_spinbox.setValue(visual_y)
         
         # Update width and height if supported
         if element.supports_property("width"):
@@ -411,6 +414,10 @@ class PropertyPanel(QWidget):
         
         # Highlight current element if it's in the list
         self._highlight_current_element_in_list()
+        
+        # Update the property panel with the first element
+        if elements and len(elements) > 0:
+            self.update_from_element(elements[0])
     
     def resizeEvent(self, event):
         """Handle resize events for the property panel."""

@@ -9,11 +9,11 @@ from src.drawing.elements import VectorElement
 from src.drawing.elements.text_element import TextElement
 
 @pytest.fixture
-def text_element():
+def text_element(qapp):
     """Test fixture that provides a TextElement instance."""
     return TextElement("Test Text", QPointF(10, 10))
 
-def test_text_creation(text_element):
+def test_text_creation(text_element, qapp):
     """Test that a text element is created with correct default properties."""
     assert isinstance(text_element, TextElement)
     assert text_element.text() == "Test Text"
@@ -21,7 +21,7 @@ def test_text_creation(text_element):
     assert text_element.pen().color().getRgb()[:3] == (0, 0, 0)  # Black
     assert isinstance(text_element.font(), QFont)
 
-def test_text_custom_creation():
+def test_text_custom_creation(qapp):
     """Test creating a text element with custom properties."""
     text = "Custom Text"
     pos = QPointF(50, 50)
@@ -40,7 +40,7 @@ def test_text_custom_creation():
     element.position = new_pos
     assert element.position == new_pos
 
-def test_text_font_properties(text_element):
+def test_text_font_properties(text_element, qapp):
     """Test that text font properties work correctly."""
     # Test custom font
     font = QFont("Arial", 16)
@@ -50,7 +50,7 @@ def test_text_font_properties(text_element):
     assert text_element.font().family() == "Arial"
     assert text_element.font().pointSize() == 16
 
-def test_text_color(text_element):
+def test_text_color(text_element, qapp):
     """Test changing text color."""
     test_color = QColor(255, 0, 0)  # Red
     pen = text_element.pen()
@@ -59,7 +59,7 @@ def test_text_color(text_element):
     assert text_element.pen().color().getRgb()[:3] == (255, 0, 0)
 
 @pytest.mark.ui_test
-def test_text_selection(text_element):
+def test_text_selection(text_element, qapp):
     """Test text selection state."""
     # Test selection state directly
     assert not text_element.isSelected()
@@ -74,7 +74,7 @@ def test_text_selection(text_element):
     assert any(handle is not None for handle in text_element._handles)
 
 @pytest.mark.ui_test
-def test_text_resize_moves_text(text_element):
+def test_text_resize_moves_text(text_element, qapp):
     """Test that resizing a text element actually moves it."""
     # Original position
     original_pos = QPointF(text_element.position)
@@ -90,7 +90,7 @@ def test_text_resize_moves_text(text_element):
     assert text_element.position == new_pos
     assert text_element.position != original_pos
 
-def test_text_clone(text_element):
+def test_text_clone(text_element, qapp):
     """Test cloning a text element."""
     # Modify the original
     text_element.setText("Modified Text")

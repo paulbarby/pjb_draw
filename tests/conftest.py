@@ -1,10 +1,13 @@
 """
-Global test configuration and fixtures.
+Global pytest configuration and fixtures.
+
+This module provides global fixtures and configuration for the entire test suite.
 """
 import pytest
 import sys
 import os
 import time
+from PyQt6.QtWidgets import QApplication
 
 # Add a custom option to skip UI tests
 def pytest_addoption(parser):
@@ -37,7 +40,6 @@ def qt_cleanup(request):
     """Auto-use fixture to clean up Qt resources between tests."""
     yield
     try:
-        from PyQt6.QtWidgets import QApplication
         app = QApplication.instance()
         if app:
             app.processEvents()
@@ -51,7 +53,6 @@ def qt_cleanup(request):
 def pytest_sessionfinish(session, exitstatus):
     """Clean up Qt resources after all tests are done."""
     try:
-        from PyQt6.QtWidgets import QApplication
         app = QApplication.instance()
         if app:
             app.closeAllWindows()
@@ -59,4 +60,38 @@ def pytest_sessionfinish(session, exitstatus):
             time.sleep(0.1)  # Give Qt time to process events
             app.processEvents()
     except Exception:
-        pass 
+        pass
+
+# Store a global reference to the QApplication to prevent it from being garbage collected
+_qapp = None
+
+@pytest.fixture(scope="session")
+def qapp():
+    """
+    Create a Qt application for the test session.
+    
+    This is a session-scoped fixture to ensure only one QApplication
+    exists during the entire test run. This prevents access violations
+    caused by multiple QApplication instances being created and destroyed.
+    """
+    global _qapp
+    if _qapp is None:
+        # Check if QApplication already exists
+        if not QApplication.instance():
+            _qapp = QApplication(sys.argv)
+        else:
+            _qapp = QApplication.instance()
+    return _qapp
+
+@pytest.fixture
+def qapp_fixture(qapp):
+    """
+    Provide the QApplication for individual tests.
+    
+    This ensures that tests have access to the same QApplication instance
+    and that it's available for each test that needs Qt functionality.
+    
+    Args:
+        qapp: The session-wide QApplication instance
+    """
+    return qapp 

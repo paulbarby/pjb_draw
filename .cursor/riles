@@ -12,7 +12,7 @@
 3. Mark the next logical todo item with "<--Next" in todo.md
 4. Follow requirements in docs/specifications.md
 5. Adhere to coding standards in docs/coding_standards.md
-6. Record all code changes in changes_log.md
+6. Record all code changes in CHANGELOG.md
 7. Keep code simple and maximize module reuse
 8. Write tests for each module
 9. Update todo.md to track progress

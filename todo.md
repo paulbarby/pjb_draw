@@ -100,14 +100,14 @@
    - [x] Add element metadata system
    - [x] Add test coverage for ElementFactory (standalone tests passing)
 
-3. [ ] Create ImageElement class (CURRENT TASK)
+3. [x] Create ImageElement class
 
-   - [ ] Inherit from VectorElement
-   - [ ] Implement image-specific properties (opacity, flip, rotation)
-   - [ ] Add image manipulation methods (crop, resize, rotate)
-   - [ ] Implement image data storage and retrieval
+   - [x] Inherit from VectorElement
+   - [x] Implement image-specific properties (opacity, flip, rotation)
+   - [x] Add image manipulation methods (crop, resize, rotate)
+   - [x] Implement image data storage and retrieval
 
-4. [ ] **Implement Element Grouping**
+4. [ ] **Implement Element Grouping** (CURRENT TASK)
    - [ ] Create GroupElement class inheriting from VectorElement
      - [ ] Add child element management (add, remove)
      - [ ] Implement dynamic bounding box calculation

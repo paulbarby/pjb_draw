@@ -16,11 +16,11 @@ from src.drawing.elements.line_element import LineElement
 from src.drawing.elements.text_element import TextElement
 
 @pytest.fixture
-def factory():
+def factory(qapp):
     """Fixture that provides an ElementFactory instance."""
     return ElementFactory()
 
-def test_factory_initialization(factory):
+def test_factory_initialization(factory, qapp):
     """Test that factory initializes with default element types."""
     element_types = factory.get_element_types()
     assert "rectangle" in element_types
@@ -28,7 +28,7 @@ def test_factory_initialization(factory):
     assert "line" in element_types
     assert "text" in element_types
 
-def test_factory_metadata(factory):
+def test_factory_metadata(factory, qapp):
     """Test element metadata functionality."""
     # Get metadata for all elements
     metadata = factory.get_element_metadata()
@@ -41,7 +41,7 @@ def test_factory_metadata(factory):
     assert rect_meta.type_name == "rectangle"
     assert any("rect" == p["name"] for p in rect_meta.creation_params)
 
-def test_create_element(factory):
+def test_create_element(factory, qapp):
     """Test creating elements through the factory."""
     # Create rectangle
     rect = factory.create_element("rectangle", QRectF(0, 0, 100, 100))
@@ -67,7 +67,7 @@ def test_create_element(factory):
     assert isinstance(text, TextElement)
     assert text.text() == "Test"
 
-def test_serialization(factory):
+def test_serialization(factory, qapp):
     """Test element serialization and deserialization."""
     # Create a rectangle
     original_rect = factory.create_element("rectangle", QRectF(0, 0, 100, 100))
@@ -88,7 +88,7 @@ def test_serialization(factory):
     # Verify properties were preserved (though boundingRect might be different due to properties like stroke width)
     assert abs(deserialized_rect.boundingRect().width() - original_rect.boundingRect().width()) < 1
 
-def test_custom_element_registration(factory):
+def test_custom_element_registration(factory, qapp):
     """Test registering custom element types."""
     # Create custom metadata
     custom_meta = ElementMetadata(
@@ -118,7 +118,7 @@ def test_custom_element_registration(factory):
     assert meta.display_name == "Custom Element"
     assert any("test_param" == p["name"] for p in meta.creation_params)
 
-def test_create_element_from_metadata(factory):
+def test_create_element_from_metadata(factory, qapp):
     """Test creating elements using metadata."""
     # Create circle using metadata
     circle = factory.create_element_from_metadata(
@@ -134,7 +134,7 @@ def test_create_element_from_metadata(factory):
     assert circle.center.x() == 100.0
     assert circle.center.y() == 100.0
 
-def test_element_registry_functions(factory):
+def test_element_registry_functions(factory, qapp):
     """Test that registry functions work correctly."""
     # Get all element types
     element_types = factory.get_element_types()

@@ -11,7 +11,7 @@ alwaysApply: false
 3. Mark the next logical todo item with "<--Next" in todo.md
 4. Follow requirements in [specifications.md](mdc:docs/specifications.md)
 5. Adhere to coding standards in [coding_standards.md](mdc:docs/coding_standards.md)
-6. Record all code changes in [changes_log.md](mdc:changes_log.md)
+6. Record all code changes in [CHANGELOG.md](mdc:CHANGELOG.md)
 7. Keep code simple and maximize module reuse
 8. Write tests for each module
 9. Update [todo.md](mdc:todo.md) to track progress

@@ -16,44 +16,44 @@ from src.drawing.elements.text_element import TextElement
 
 
 @pytest.fixture
-def rectangle_element():
+def rectangle_element(qapp):
     """Test fixture that provides a RectangleElement instance."""
     return RectangleElement(QRectF(0, 0, 100, 100))
 
 
 @pytest.fixture
-def circle_element():
+def circle_element(qapp):
     """Test fixture that provides a CircleElement instance."""
     return CircleElement(QPointF(50, 50), 50)
 
 
 @pytest.fixture
-def line_element():
+def line_element(qapp):
     """Test fixture that provides a LineElement instance."""
     return LineElement(QPointF(0, 0), QPointF(100, 100))
 
 
 @pytest.fixture
-def text_element():
+def text_element(qapp):
     """Test fixture that provides a TextElement instance."""
     return TextElement("Test Text", QPointF(50, 50))
 
 
 @pytest.fixture
-def scene():
+def scene(qapp):
     """Test fixture that provides a QGraphicsScene."""
     return QGraphicsScene()
 
 
 @pytest.fixture
-def view(scene):
+def view(scene, qapp):
     """Test fixture that provides a QGraphicsView with the scene."""
     view = QGraphicsView(scene)
     view.resize(800, 600)
     return view
 
 
-def test_rectangle_visual_position(rectangle_element):
+def test_rectangle_visual_position(rectangle_element, qapp):
     """Test the visual position methods for a rectangle element."""
     # Initial visual position should match the top-left of the rectangle
     vis_x, vis_y = rectangle_element.get_visual_position()
@@ -70,7 +70,7 @@ def test_rectangle_visual_position(rectangle_element):
     assert rectangle_element._rect.topLeft() == QPointF(50, 50)
 
 
-def test_circle_visual_position(circle_element):
+def test_circle_visual_position(circle_element, qapp):
     """Test the visual position methods for a circle element."""
     # Initial visual position should be at top-left of bounding rect
     vis_x, vis_y = circle_element.get_visual_position()
@@ -88,7 +88,7 @@ def test_circle_visual_position(circle_element):
     assert circle_element.center.y() == 75  # 25 + 50 (radius)
 
 
-def test_line_visual_position(line_element):
+def test_line_visual_position(line_element, qapp):
     """Test the visual position methods for a line element."""
     # Initial visual position should be at the min of start and end points
     vis_x, vis_y = line_element.get_visual_position()
@@ -108,7 +108,7 @@ def test_line_visual_position(line_element):
     assert line_element.end_point.y() == 125
 
 
-def test_text_visual_position(text_element):
+def test_text_visual_position(text_element, qapp):
     """Test the visual position methods for a text element."""
     # Get initial visual position
     vis_x, vis_y = text_element.get_visual_position()
@@ -120,7 +120,7 @@ def test_text_visual_position(text_element):
     assert new_vis_y == 25
 
 
-def test_element_in_scene(rectangle_element, scene):
+def test_element_in_scene(rectangle_element, scene, qapp):
     """Test that visual position works correctly when element is in a scene."""
     # Add element to scene
     scene.addItem(rectangle_element)
@@ -147,7 +147,7 @@ def test_element_in_scene(rectangle_element, scene):
     assert rectangle_element._rect.topLeft() == QPointF(0, 0)
 
 
-def test_negative_positions(rectangle_element):
+def test_negative_positions(rectangle_element, qapp):
     """Test that negative positions work correctly."""
     # Set negative visual position
     rectangle_element.set_visual_position(-50, -50)
@@ -159,7 +159,7 @@ def test_negative_positions(rectangle_element):
     assert rectangle_element._rect.topLeft() == QPointF(-50, -50)
 
 
-def test_global_positions(rectangle_element, scene):
+def test_global_positions(rectangle_element, scene, qapp):
     """Test that global position methods work correctly."""
     # Add element to scene
     scene.addItem(rectangle_element)
@@ -180,7 +180,7 @@ def test_global_positions(rectangle_element, scene):
     assert rectangle_element.pos() == QPointF(30, 30)
 
 
-def test_local_positions(rectangle_element, scene):
+def test_local_positions(rectangle_element, scene, qapp):
     """Test that local position methods work correctly."""
     # Add element to scene
     scene.addItem(rectangle_element)
@@ -198,7 +198,7 @@ def test_local_positions(rectangle_element, scene):
     # The scene position should remain unchanged
 
 
-def test_property_values(rectangle_element):
+def test_property_values(rectangle_element, qapp):
     """Test coordinate properties can be get/set through property interface."""
     # Test setting properties using property names
     rectangle_element.set_property_value("visual_x", 25)
@@ -220,7 +220,7 @@ def test_property_values(rectangle_element):
     assert rectangle_element.get_property_value("visual_y") == -35
 
 
-def test_all_element_types_support_positions():
+def test_all_element_types_support_positions(qapp):
     """Test that all element types support the position interfaces."""
     elements = [
         RectangleElement(),

@@ -6,6 +6,7 @@ from serialized data during project loading.
 """
 import logging
 import inspect
+import os
 from typing import Dict, Any, Optional, Type, List, Callable, Tuple
 
 from PyQt6.QtCore import QPointF, QRectF, Qt
@@ -16,6 +17,7 @@ from src.drawing.elements.rectangle_element import RectangleElement
 from src.drawing.elements.line_element import LineElement
 from src.drawing.elements.circle_element import CircleElement
 from src.drawing.elements.text_element import TextElement
+from src.drawing.elements.image_element import ImageElement
 from src.drawing.elements import VectorElement
 
 logger = logging.getLogger(__name__)
@@ -281,6 +283,25 @@ class ElementFactory:
             None,  # Use default serializer
             self._create_text_from_dict  # Custom deserializer
         )
+        
+        # Image element
+        self._registry.register_element_type(
+            "image", 
+            ImageElement,
+            ElementMetadata(
+                "image",
+                "Image",
+                "An image element for displaying raster graphics",
+                "icons/image.png",
+                [
+                    {"name": "pixmap", "type": "QPixmap", "description": "Image pixmap"},
+                    {"name": "rect", "type": "QRectF", "description": "Rectangle geometry for the image"},
+                    {"name": "image_path", "type": "str", "description": "Path to the image file"}
+                ]
+            ),
+            None,  # Use default serializer
+            self._create_image_from_dict  # Custom deserializer
+        )
     
     def create_element(self, element_type: str, *args, **kwargs) -> Optional[VectorElement]:
         """
@@ -347,6 +368,8 @@ class ElementFactory:
                 return self._create_circle_from_dict(element_data)
             elif element_type == "text":
                 return self._create_text_from_dict(element_data)
+            elif element_type == "image":
+                return self._create_image_from_dict(element_data)
             else:
                 logger.warning(f"No deserializer available for element type: {element_type}")
                 return None
@@ -479,6 +502,61 @@ class ElementFactory:
         self._set_common_properties(text_element, element_data)
         
         return text_element
+    
+    def _create_image_from_dict(self, element_data: Dict[str, Any]) -> ImageElement:
+        """Create an image element from serialized data."""
+        # Import necessary classes
+        from PyQt6.QtGui import QPixmap, QImage
+        from PyQt6.QtCore import QByteArray, QBuffer, QIODevice
+        import base64
+        
+        # Extract image-specific properties
+        rect_data = element_data.get("rect", {})
+        rect = QRectF(
+            rect_data.get("x", 0),
+            rect_data.get("y", 0),
+            rect_data.get("width", 100),
+            rect_data.get("height", 100)
+        )
+        
+        # Check if we have an image path
+        image_path = element_data.get("image_path")
+        pixmap = None
+        
+        if image_path and os.path.exists(image_path):
+            # Load image from path
+            pixmap = QPixmap(image_path)
+        elif "image_data" in element_data:
+            # Load image from base64 encoded data
+            image_data = element_data.get("image_data")
+            if image_data:
+                try:
+                    # Decode base64 data
+                    decoded_data = base64.b64decode(image_data)
+                    
+                    # Create QPixmap from decoded data
+                    pixmap = QPixmap()
+                    pixmap.loadFromData(decoded_data)
+                except Exception as e:
+                    logger.error(f"Error decoding image data: {str(e)}")
+        
+        # Create the image element
+        image_element = ImageElement(pixmap, rect, image_path)
+        
+        # Set opacity if available
+        if "opacity" in element_data:
+            image_element.set_opacity(element_data["opacity"])
+        
+        # Set flip properties if available
+        if "flip_x" in element_data:
+            image_element.set_flip_x(element_data["flip_x"])
+        if "flip_y" in element_data:
+            image_element.set_flip_y(element_data["flip_y"])
+        
+        # Set common properties
+        self._set_common_properties(image_element, element_data)
+        
+        return image_element
     
     def _set_common_properties(self, element: VectorElement, element_data: Dict[str, Any]):
         """Set common properties on an element from serialized data."""
@@ -637,6 +715,11 @@ class ElementFactory:
                 text = kwargs.get("text", "")
                 position = kwargs.get("position", QPointF(0, 0))
                 element = TextElement(text, position)
+            elif type_name == "image":
+                pixmap = kwargs.get("pixmap")
+                rect = kwargs.get("rect")
+                image_path = kwargs.get("image_path")
+                element = ImageElement(pixmap, rect, image_path)
             else:
                 # For custom element types, try to create using the class directly
                 element = element_class(**valid_params)
