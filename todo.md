@@ -43,81 +43,113 @@
   - [x] Design and implement toolbar
   - [x] Create property panel for selected elements
   - [x] Complete implementation of barebone action handlers (open, save, export, undo/redo)
-  - [ ] Implement dark/light mode toggle <-- Next
-  - [ ] Add responsive layout support
-  - [ ] **Implement comprehensive menu system**
-    - [ ] Create logically grouped dropdown menus (File, Edit, View, Draw, Tools, Help)
-    - [ ] Add hierarchical organization for related commands
-    - [ ] Implement visual separators between functional groups
-    - [ ] Add keyboard shortcut indicators beside menu items
-    - [ ] Create recent files functionality in File menu
-    - [ ] Build context-sensitive right-click menus
-    - [ ] Add status bar hints for menu items
+  - [x] Implement dark/light mode toggle
+  - [x] Add responsive layout support
+  - [x] Fix vector element handles bug in element rendering
+  - [x] **Implement comprehensive menu system**
+    - [x] Create logically grouped dropdown menus (File, Edit, View, Draw, Tools, Help)
+    - [x] Add hierarchical organization for related commands
+    - [x] Implement visual separators between functional groups
+    - [x] Add keyboard shortcut indicators beside menu items
+    - [x] Create recent files functionality in File menu
+    - [x] Build context-sensitive right-click menus
+    - [x] Add status bar hints for menu items
 
 ## Phase 3: Core System Architecture
 
 ### Core Application Infrastructure
 
-1. [ ] **Project File Format**
+1. [x] **Project File Format**
 
-   - [ ] Design custom file format for projects
-   - [ ] Implement basic save/load functionality
-   - [ ] Add autosave feature
+   - [x] Design custom file format for projects
+   - [x] Implement basic save/load functionality
+   - [x] Add autosave feature
 
-2. [ ] **History System**
+2. [x] **History System**
 
-   - [ ] Implement undo/redo stack
-   - [ ] Add action recording for all operations
-   - [ ] Design action serialization for project files
-   - [ ] Implement action grouping for complex operations
+   - [x] Implement undo/redo stack
+   - [x] Add action recording for all operations
+   - [x] Design action serialization for project files
+   - [x] Implement action grouping for complex operations
 
-3. [ ] **Selection System Enhancement**
-   - [ ] Improve selection interface
-   - [ ] Add multi-selection capabilities
-   - [ ] Implement selection history
-   - [ ] Create selection feedback UI
+3. [x] **Selection System Enhancement**
+   - [x] Improve selection interface
+   - [x] Add multi-selection capabilities
+   - [x] Implement selection history
+   - [x] Create selection feedback UI
 
 ### Element System Enhancement
 
-1. [ ] **ElementFactory Enhancement**
+1. [x] **Coordinate System Refactoring**
+
+   - [x] Update VectorElement to support global and local positions
+   - [x] Add visual position methods to properly represent element location
+   - [x] Modify property panel to display and edit visual positions
+   - [x] Allow negative coordinates in position spinboxes
+   - [x] Standardize position handling across all element types
+   - [x] Create utility methods for coordinate transformations
+   - [x] Implement visual feedback for element positioning
+
+2. [ ] **ElementFactory Enhancement**
 
    - [ ] Create robust ElementFactory pattern
    - [ ] Implement element type registration system
    - [ ] Create serialization/deserialization framework
    - [ ] Add element metadata system
 
-2. [ ] Create ImageElement class
+3. [ ] Create ImageElement class
 
    - [ ] Inherit from VectorElement
    - [ ] Implement image-specific properties (opacity, flip, rotation)
    - [ ] Add image manipulation methods (crop, resize, rotate)
    - [ ] Implement image data storage and retrieval
 
-3. [ ] Implement Element Grouping
-   - [ ] Create GroupElement class
-   - [ ] Add group management to Canvas
-   - [ ] Implement group operations (create, dissolve, rename)
+4. [ ] **Implement Element Grouping**
+   - [ ] Create GroupElement class inheriting from VectorElement
+     - [ ] Add child element management (add, remove)
+     - [ ] Implement dynamic bounding box calculation
+     - [ ] Create group transformation methods (move, resize, rotate)
+     - [ ] Implement parent-relative positioning for child elements
    - [ ] Update selection system to handle groups
+     - [ ] Group selection mechanism
+     - [ ] In-group element selection
+     - [ ] Group transformation handles
+   - [ ] Add UI for group operations
+     - [ ] Group creation/dissolution menu items and shortcuts
+     - [ ] Group naming and metadata UI
+     - [ ] Visual indicators for grouped elements
 
 ### Layer System Implementation
 
-1. [ ] Create LayerManager class
+1. [ ] **Create LayerManager class**
 
-   - [ ] Layer data structure with z-order, visibility, and lock status
-   - [ ] Methods for layer creation, deletion, reordering
-   - [ ] Layer rendering system (bottom to top)
-   - [ ] Layer selection and management
+   - [ ] Design layer data structure with z-order, visibility, and lock status
+   - [ ] Implement methods for layer creation, deletion, reordering
+   - [ ] Create layer-specific coordinate system
+   - [ ] Add element-to-layer assignment system
+   - [ ] Implement layer opacity and blend mode capabilities
 
-2. [ ] Update Canvas class
+2. [ ] **Update Canvas class**
 
    - [ ] Integrate LayerManager
    - [ ] Modify scene management to work with layers
    - [ ] Update element management to work with layers
    - [ ] Implement layer-based rendering
+   - [ ] Create layer-aware coordinate transformations
 
-3. [ ] Update HistoryManager for Layers
+3. [ ] **Create Layer Panel UI**
+
+   - [ ] Design layer management interface
+   - [ ] Add layer visibility toggles
+   - [ ] Implement layer reordering interface
+   - [ ] Add layer naming and organization
+   - [ ] Create layer property editing controls
+
+4. [ ] **Update HistoryManager for Layers and Groups**
    - [ ] Add layer-specific actions (create, delete, reorder, visibility)
    - [ ] Modify existing actions to work with layers
+   - [ ] Add group operation history tracking
+   - [ ] Implement compound operations for multi-layer changes
    - [ ] Add layer state tracking for undo/redo
 
 ## Phase 4: UI and Tool System Updates
@@ -167,7 +199,8 @@
 3. [ ] Create Properties Panel
 
    - [ ] Update for new element types
-   - [ ] Add group properties
+   - [ ] Add support for positioning in global and local coordinates
+   - [ ] Implement group properties
    - [ ] Implement layer properties
    - [ ] Add image-specific properties
 
