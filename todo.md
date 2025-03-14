@@ -39,7 +39,7 @@
   - [x] Create text annotation tool
   - [x] **Review and fully implement dummy elements** (see dummy_implementations.md)
 
-- [ ] **UI Framework**
+- [x] **UI Framework**
   - [x] Design and implement toolbar
   - [x] Create property panel for selected elements
   - [x] Complete implementation of barebone action handlers (open, save, export, undo/redo)
@@ -54,6 +54,8 @@
     - [x] Create recent files functionality in File menu
     - [x] Build context-sensitive right-click menus
     - [x] Add status bar hints for menu items
+  - [x] Fix Qt warnings for UI components (objectName issues)
+  - [x] Implement toolbar and property panel visibility toggle
 
 ## Phase 3: Core System Architecture
 
@@ -90,14 +92,14 @@
    - [x] Create utility methods for coordinate transformations
    - [x] Implement visual feedback for element positioning
 
-2. [ ] **ElementFactory Enhancement**
+2. [x] **ElementFactory Enhancement**
 
-   - [ ] Create robust ElementFactory pattern
-   - [ ] Implement element type registration system
-   - [ ] Create serialization/deserialization framework
-   - [ ] Add element metadata system
+   - [x] Create robust ElementFactory pattern
+   - [x] Implement element type registration system
+   - [x] Create serialization/deserialization framework
+   - [x] Add element metadata system
 
-3. [ ] Create ImageElement class
+3. [ ] Create ImageElement class (CURRENT TASK)
 
    - [ ] Inherit from VectorElement
    - [ ] Implement image-specific properties (opacity, flip, rotation)
