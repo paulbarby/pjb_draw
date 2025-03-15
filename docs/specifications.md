@@ -12,6 +12,10 @@
   - Lock/unlock layers
   - Layer opacity control
   - Layer-specific operations (clear, duplicate, merge)
+  - Layer-specific coordinate system
+  - Element-to-layer assignment system
+  - Layer-based rendering
+  - Layer-aware coordinate transformations
 
 ### Drawing Elements
 
@@ -36,11 +40,26 @@
   - Adjust opacity
   - Crop and transform
   - Cut, copy, paste operations
+  - Clipboard paste support for images
+  - Loading from file system
 - Support for common image formats (PNG, JPG, GIF, etc.)
 - Image import via:
   - File menu
   - Drag and drop
   - Clipboard paste
+
+### Element Interaction
+
+- Interactive UI elements:
+  - Click and drag for moving elements
+  - Center point helper anchored to element center
+  - Resizing using UI anchor points on canvas
+  - Rotation via center point helper
+- Selection system:
+  - Multi-selection capabilities
+  - Selection history
+  - Selection feedback UI
+  - Visual feedback for element positioning
 
 ### Element Grouping
 
@@ -51,17 +70,23 @@
   - Select all elements in group
   - Transform group as a unit
   - Nested groups support
+  - Parent-relative positioning for child elements
+  - Dynamic bounding box calculation
+  - Group transformation methods (move, resize, rotate)
 - Group properties:
   - Name
   - Visibility
   - Lock status
   - Transform properties
+  - Group naming and metadata
+  - Visual indicators for grouped elements
 
 ## User Interface
 
 ### Tool System
 
 - Dockable and floating tool palettes
+- Main tool pallet is to default to the left hand side and stacked verticaly
 - Tool organization:
   - Drawing tools
   - Selection tools
@@ -176,3 +201,14 @@
 - API documentation
 - Installation guide
 - Migration guide
+
+### History System
+
+- Comprehensive undo/redo functionality:
+  - Action recording for all operations
+  - Action serialization for project files
+  - Action grouping for complex operations
+  - Layer-specific actions (create, delete, reorder, visibility)
+  - Group operation history tracking
+  - Compound operations for multi-layer changes
+  - Layer state tracking for undo/redo

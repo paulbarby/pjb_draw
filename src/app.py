@@ -1033,51 +1033,95 @@ class DrawingApp(QMainWindow):
         """Create the application menu bar."""
         menu_bar = self.menuBar()
         
-        # ----- File menu -----
+        # File menu
         file_menu = menu_bar.addMenu("&File")
         
-        # Open action
-        open_action = QAction("&Open...", self)
-        open_action.setShortcut("Ctrl+O")
-        open_action.setStatusTip("Open a project")
-        open_action.triggered.connect(self.open_project)
-        file_menu.addAction(open_action)
+        # New Project
+        new_action = QAction("&New Project", self)
+        new_action.setShortcut("Ctrl+N")
+        new_action.setStatusTip("Create a new project")
+        new_action.triggered.connect(self.new_project)
+        file_menu.addAction(new_action)
         
-        # Recent files submenu
+        # Open submenu
+        open_menu = QMenu("&Open", self)
+        file_menu.addMenu(open_menu)
+        
+        # Open Project
+        open_project_action = QAction("&Project...", self)
+        open_project_action.setShortcut("Ctrl+O")
+        open_project_action.setStatusTip("Open an existing project")
+        open_project_action.triggered.connect(self.open_project)
+        open_menu.addAction(open_project_action)
+        
+        # Open Image
+        open_image_action = QAction("&Image as Background...", self)
+        open_image_action.setShortcut("Ctrl+I")
+        open_image_action.setStatusTip("Open an image as background")
+        open_image_action.triggered.connect(self.open_image)
+        open_menu.addAction(open_image_action)
+        
+        # Recent Files (placeholder for now)
         self.recent_files_menu = QMenu("Recent &Files", self)
+        self.update_recent_files_menu()  # Will implement this method
         file_menu.addMenu(self.recent_files_menu)
         self.update_recent_files_menu()
         
         file_menu.addSeparator()
         
-        # Save action
-        save_action = QAction("&Save", self)
+        # Save submenu
+        save_menu = QMenu("&Save", self)
+        file_menu.addMenu(save_menu)
+        
+        # Save
+        save_action = QAction("&Save Project", self)
         save_action.setShortcut("Ctrl+S")
         save_action.setStatusTip("Save the current project")
         save_action.triggered.connect(self.save_project)
-        file_menu.addAction(save_action)
+        save_menu.addAction(save_action)
         
-        # Save As action
-        save_as_action = QAction("Save &As...", self)
+        # Save As
+        save_as_action = QAction("Save Project &As...", self)
         save_as_action.setShortcut("Ctrl+Shift+S")
-        save_as_action.setStatusTip("Save the project with a new name")
+        save_as_action.setStatusTip("Save the current project with a new name")
         save_as_action.triggered.connect(self.save_project_as)
-        file_menu.addAction(save_as_action)
+        save_menu.addAction(save_as_action)
         
         file_menu.addSeparator()
         
-        # Export action
-        export_action = QAction("&Export...", self)
-        export_action.setShortcut("Ctrl+E")
-        export_action.setStatusTip("Export the drawing as an image")
-        export_action.triggered.connect(self.export_image)
-        file_menu.addAction(export_action)
+        # Export submenu
+        export_menu = QMenu("&Export", self)
+        file_menu.addMenu(export_menu)
+        
+        # Export as PNG
+        export_png_action = QAction("Export as &PNG...", self)
+        export_png_action.setStatusTip("Export the canvas as a PNG image")
+        export_png_action.triggered.connect(lambda: self.export_image(ExportFormat.PNG))
+        export_menu.addAction(export_png_action)
+        
+        # Export as JPG
+        export_jpg_action = QAction("Export as &JPG...", self)
+        export_jpg_action.setStatusTip("Export the canvas as a JPG image")
+        export_jpg_action.triggered.connect(lambda: self.export_image(ExportFormat.JPG))
+        export_menu.addAction(export_jpg_action)
+        
+        # Export as PDF
+        export_pdf_action = QAction("Export as P&DF...", self)
+        export_pdf_action.setStatusTip("Export the canvas as a PDF document")
+        export_pdf_action.triggered.connect(lambda: self.export_image(ExportFormat.PDF))
+        export_menu.addAction(export_pdf_action)
+        
+        # Export as SVG
+        export_svg_action = QAction("Export as &SVG...", self)
+        export_svg_action.setStatusTip("Export the canvas as an SVG vector image")
+        export_svg_action.triggered.connect(lambda: self.export_image(ExportFormat.SVG))
+        export_menu.addAction(export_svg_action)
         
         file_menu.addSeparator()
         
-        # Exit action
+        # Exit
         exit_action = QAction("E&xit", self)
-        exit_action.setShortcut("Alt+F4")
+        exit_action.setShortcut("Ctrl+Q")
         exit_action.setStatusTip("Exit the application")
         exit_action.triggered.connect(self.close)
         file_menu.addAction(exit_action)
@@ -1119,34 +1163,358 @@ class DrawingApp(QMainWindow):
         
         edit_menu.addSeparator()
         
-        # Select All
+        # Select All (placeholder)
         select_all_action = QAction("Select &All", self)
         select_all_action.setShortcut("Ctrl+A")
         select_all_action.setStatusTip("Select all elements on the canvas")
         select_all_action.triggered.connect(lambda: self.canvas.selection_manager.select_all())
         edit_menu.addAction(select_all_action)
         
+        # Deselect All
+        deselect_all_action = QAction("&Deselect All", self)
+        deselect_all_action.setShortcut("Ctrl+D")
+        deselect_all_action.setStatusTip("Deselect all elements")
+        deselect_all_action.triggered.connect(lambda: self.canvas.selection_manager.deselect_all())
+        edit_menu.addAction(deselect_all_action)
+        
+        # Invert Selection
+        invert_selection_action = QAction("&Invert Selection", self)
+        invert_selection_action.setShortcut("Ctrl+I")
+        invert_selection_action.setStatusTip("Invert the current selection")
+        invert_selection_action.triggered.connect(lambda: self.canvas.invert_selection())
+        edit_menu.addAction(invert_selection_action)
+        
+        # Selection submenu
+        selection_menu = QMenu("Se&lection", self)
+        edit_menu.addMenu(selection_menu)
+        
+        # Save Selection
+        save_selection_action = QAction("&Save Current Selection...", self)
+        save_selection_action.setStatusTip("Save the current selection for later use")
+        save_selection_action.triggered.connect(self._save_selection_with_dialog)
+        selection_menu.addAction(save_selection_action)
+        
+        # Selection history
+        selection_menu.addSeparator()
+        
+        # Undo Selection
+        undo_selection_action = QAction("&Undo Selection Change", self)
+        undo_selection_action.setShortcut("Ctrl+Shift+Z")
+        undo_selection_action.setStatusTip("Undo the last selection change")
+        undo_selection_action.triggered.connect(lambda: self.canvas.selection_manager.undo_selection())
+        selection_menu.addAction(undo_selection_action)
+        
+        # Redo Selection
+        redo_selection_action = QAction("&Redo Selection Change", self)
+        redo_selection_action.setShortcut("Ctrl+Shift+Y")
+        redo_selection_action.setStatusTip("Redo a previously undone selection change")
+        redo_selection_action.triggered.connect(lambda: self.canvas.selection_manager.redo_selection())
+        selection_menu.addAction(redo_selection_action)
+        
+        # Named selections submenu (will be populated dynamically)
+        self.named_selections_menu = QMenu("&Named Selections", self)
+        selection_menu.addMenu(self.named_selections_menu)
+        
+        # Add a placeholder item
+        no_selections_action = QAction("No saved selections", self)
+        no_selections_action.setEnabled(False)
+        self.named_selections_menu.addAction(no_selections_action)
+        
+        edit_menu.addSeparator()
+        
+        # Cut (placeholder)
+        cut_action = QAction("Cu&t", self)
+        cut_action.setShortcut("Ctrl+X")
+        cut_action.setStatusTip("Cut the selected elements")
+        cut_action.triggered.connect(self.not_implemented)
+        edit_menu.addAction(cut_action)
+        
+        # Copy (placeholder)
+        copy_action = QAction("&Copy", self)
+        copy_action.setShortcut("Ctrl+C")
+        copy_action.setStatusTip("Copy the selected elements")
+        copy_action.triggered.connect(self.not_implemented)
+        edit_menu.addAction(copy_action)
+        
+        # Paste (placeholder)
+        paste_action = QAction("&Paste", self)
+        paste_action.setShortcut("Ctrl+V")
+        paste_action.setStatusTip("Paste elements from clipboard")
+        paste_action.triggered.connect(self.not_implemented)
+        edit_menu.addAction(paste_action)
+        
+        # Delete (placeholder)
+        delete_action = QAction("&Delete", self)
+        delete_action.setShortcut("Delete")
+        delete_action.setStatusTip("Delete the selected elements")
+        delete_action.triggered.connect(self.not_implemented)
+        edit_menu.addAction(delete_action)
+        
+        edit_menu.addSeparator()
+        
+        # Clear Canvas
+        clear_action = QAction("&Clear Canvas", self)
+        clear_action.setShortcut("Ctrl+Shift+C")
+        clear_action.setStatusTip("Clear all elements from the canvas")
+        clear_action.triggered.connect(self.clear_canvas)
+        edit_menu.addAction(clear_action)
+        
         # ----- View menu -----
         view_menu = menu_bar.addMenu("&View")
         
-        # Property panel toggle
-        property_panel_action = QAction("&Property Panel", self)
-        property_panel_action.setShortcut("Ctrl+P")
-        property_panel_action.setStatusTip("Show/hide the property panel")
-        property_panel_action.setCheckable(True)
-        property_panel_action.setChecked(True)
-        property_panel_action.triggered.connect(self.toggle_property_panel)
-        view_menu.addAction(property_panel_action)
+        # Zoom submenu
+        zoom_menu = QMenu("&Zoom", self)
+        view_menu.addMenu(zoom_menu)
         
-        # Hit area visualization toggle
-        hit_areas_action = QAction("Show &Hit Areas", self)
-        hit_areas_action.setShortcut("Ctrl+H")
-        hit_areas_action.setStatusTip("Toggle hit area visualization for debugging")
-        hit_areas_action.setCheckable(True)
-        hit_areas_action.setChecked(False)
-        hit_areas_action.triggered.connect(self.toggle_hit_area_visualization)
-        view_menu.addAction(hit_areas_action)
-        self.hit_areas_action = hit_areas_action  # Store for updating checked state
+        # Zoom In
+        zoom_in_action = QAction("Zoom &In", self)
+        zoom_in_action.setShortcut("Ctrl++")
+        zoom_in_action.setStatusTip("Zoom in on the canvas")
+        zoom_in_action.triggered.connect(self.zoom_in)
+        zoom_menu.addAction(zoom_in_action)
+        
+        # Zoom Out
+        zoom_out_action = QAction("Zoom &Out", self)
+        zoom_out_action.setShortcut("Ctrl+-")
+        zoom_out_action.setStatusTip("Zoom out on the canvas")
+        zoom_out_action.triggered.connect(self.zoom_out)
+        zoom_menu.addAction(zoom_out_action)
+        
+        # Reset Zoom (placeholder)
+        reset_zoom_action = QAction("&Reset Zoom", self)
+        reset_zoom_action.setShortcut("Ctrl+0")
+        reset_zoom_action.setStatusTip("Reset zoom to 100%")
+        reset_zoom_action.triggered.connect(self.not_implemented)
+        zoom_menu.addAction(reset_zoom_action)
+        
+        view_menu.addSeparator()
+        
+        # Background submenu
+        background_menu = QMenu("&Background", self)
+        view_menu.addMenu(background_menu)
+        
+        # Set Background
+        set_bg_action = QAction("&Set Background Image...", self)
+        set_bg_action.setStatusTip("Set a background image for the canvas")
+        set_bg_action.triggered.connect(self.open_image)
+        background_menu.addAction(set_bg_action)
+        
+        # Clear Background
+        clear_bg_action = QAction("&Clear Background", self)
+        clear_bg_action.setStatusTip("Remove the background image")
+        clear_bg_action.triggered.connect(self.clear_background)
+        background_menu.addAction(clear_bg_action)
+        
+        view_menu.addSeparator()
+        
+        # UI Options submenu
+        ui_options_menu = QMenu("&UI Options", self)
+        view_menu.addMenu(ui_options_menu)
+        
+        # Theme toggle
+        self.dark_mode_action = QAction("&Dark Mode", self)
+        self.dark_mode_action.setShortcut("Ctrl+Shift+D")
+        self.dark_mode_action.setStatusTip("Toggle between dark and light mode")
+        self.dark_mode_action.setCheckable(True)
+        self.dark_mode_action.setChecked(self.is_dark_mode)
+        self.dark_mode_action.triggered.connect(self.toggle_theme)
+        ui_options_menu.addAction(self.dark_mode_action)
+        
+        # Show/Hide Toolbar (placeholder)
+        toggle_toolbar_action = QAction("Show/Hide &Toolbar", self)
+        toggle_toolbar_action.setStatusTip("Toggle toolbar visibility")
+        toggle_toolbar_action.setCheckable(True)
+        toggle_toolbar_action.setChecked(True)
+        toggle_toolbar_action.triggered.connect(self.not_implemented)
+        ui_options_menu.addAction(toggle_toolbar_action)
+        
+        # Show/Hide Properties Panel (placeholder)
+        toggle_properties_action = QAction("Show/Hide &Properties Panel", self)
+        toggle_properties_action.setStatusTip("Toggle properties panel visibility")
+        toggle_properties_action.setCheckable(True)
+        toggle_properties_action.setChecked(True)
+        toggle_properties_action.triggered.connect(self.not_implemented)
+        ui_options_menu.addAction(toggle_properties_action)
+        
+        # ----- Draw menu -----
+        draw_menu = menu_bar.addMenu("&Draw")
+        
+        # Drawing Tools submenu
+        tools_menu = QMenu("Drawing &Tools", self)
+        draw_menu.addMenu(tools_menu)
+        
+        # Select Tool
+        select_tool_action = QAction("&Select Tool", self)
+        select_tool_action.setShortcut("S")
+        select_tool_action.setStatusTip("Select and edit elements")
+        select_tool_action.triggered.connect(lambda: self.select_tool("select"))
+        tools_menu.addAction(select_tool_action)
+        
+        # Line Tool
+        line_tool_action = QAction("&Line Tool", self)
+        line_tool_action.setShortcut("L")
+        line_tool_action.setStatusTip("Draw straight lines")
+        line_tool_action.triggered.connect(lambda: self.select_tool("line"))
+        tools_menu.addAction(line_tool_action)
+        
+        # Rectangle Tool
+        rect_tool_action = QAction("&Rectangle Tool", self)
+        rect_tool_action.setShortcut("R")
+        rect_tool_action.setStatusTip("Draw rectangles")
+        rect_tool_action.triggered.connect(lambda: self.select_tool("rectangle"))
+        tools_menu.addAction(rect_tool_action)
+        
+        # Circle Tool
+        circle_tool_action = QAction("&Circle Tool", self)
+        circle_tool_action.setShortcut("C")
+        circle_tool_action.setStatusTip("Draw circles")
+        circle_tool_action.triggered.connect(lambda: self.select_tool("circle"))
+        tools_menu.addAction(circle_tool_action)
+        
+        # Text Tool
+        text_tool_action = QAction("&Text Tool", self)
+        text_tool_action.setShortcut("T")
+        text_tool_action.setStatusTip("Add text annotations")
+        text_tool_action.triggered.connect(lambda: self.select_tool("text"))
+        tools_menu.addAction(text_tool_action)
+        
+        draw_menu.addSeparator()
+        
+        # Element Properties submenu (placeholder)
+        properties_menu = QMenu("Element &Properties", self)
+        draw_menu.addMenu(properties_menu)
+        
+        # Line Color
+        line_color_action = QAction("Line &Color...", self)
+        line_color_action.setStatusTip("Change the line color of the selected element")
+        line_color_action.triggered.connect(self.not_implemented)
+        properties_menu.addAction(line_color_action)
+        
+        # Fill Color
+        fill_color_action = QAction("&Fill Color...", self)
+        fill_color_action.setStatusTip("Change the fill color of the selected element")
+        fill_color_action.triggered.connect(self.not_implemented)
+        properties_menu.addAction(fill_color_action)
+        
+        # Line Thickness submenu (placeholder)
+        thickness_menu = QMenu("Line &Thickness", self)
+        properties_menu.addMenu(thickness_menu)
+        
+        for thickness in [1, 2, 3, 5, 8, 12]:
+            thickness_action = QAction(f"{thickness}px", self)
+            thickness_action.setStatusTip(f"Set line thickness to {thickness} pixels")
+            thickness_action.triggered.connect(lambda checked, t=thickness: self.not_implemented())
+            thickness_menu.addAction(thickness_action)
+        
+        # ----- Tools menu -----
+        tools_menu = QMenu("&Tools")
+        
+        # Transform submenu (placeholder)
+        transform_menu = QMenu("&Transform", self)
+        tools_menu.addMenu(transform_menu)
+        
+        # Rotate
+        rotate_action = QAction("&Rotate...", self)
+        rotate_action.setStatusTip("Rotate the selected element")
+        rotate_action.triggered.connect(self.not_implemented)
+        transform_menu.addAction(rotate_action)
+        
+        # Scale
+        scale_action = QAction("&Scale...", self)
+        scale_action.setStatusTip("Scale the selected element")
+        scale_action.triggered.connect(self.not_implemented)
+        transform_menu.addAction(scale_action)
+        
+        # Flip Horizontal
+        flip_h_action = QAction("Flip &Horizontal", self)
+        flip_h_action.setStatusTip("Flip the selected element horizontally")
+        flip_h_action.triggered.connect(self.not_implemented)
+        transform_menu.addAction(flip_h_action)
+        
+        # Flip Vertical
+        flip_v_action = QAction("Flip &Vertical", self)
+        flip_v_action.setStatusTip("Flip the selected element vertically")
+        flip_v_action.triggered.connect(self.not_implemented)
+        transform_menu.addAction(flip_v_action)
+        
+        tools_menu.addSeparator()
+        
+        # Arrange submenu (placeholder)
+        arrange_menu = QMenu("&Arrange", self)
+        tools_menu.addMenu(arrange_menu)
+        
+        # Bring to Front
+        front_action = QAction("Bring to &Front", self)
+        front_action.setShortcut("Ctrl+Shift+]")
+        front_action.setStatusTip("Bring the selected element to the front")
+        front_action.triggered.connect(self.not_implemented)
+        arrange_menu.addAction(front_action)
+        
+        # Send to Back
+        back_action = QAction("Send to &Back", self)
+        back_action.setShortcut("Ctrl+Shift+[")
+        back_action.setStatusTip("Send the selected element to the back")
+        back_action.triggered.connect(self.not_implemented)
+        arrange_menu.addAction(back_action)
+        
+        # Bring Forward
+        forward_action = QAction("Bring &Forward", self)
+        forward_action.setShortcut("Ctrl+]")
+        forward_action.setStatusTip("Bring the selected element forward by one level")
+        forward_action.triggered.connect(self.not_implemented)
+        arrange_menu.addAction(forward_action)
+        
+        # Send Backward
+        backward_action = QAction("Send &Backward", self)
+        backward_action.setShortcut("Ctrl+[")
+        backward_action.setStatusTip("Send the selected element backward by one level")
+        backward_action.triggered.connect(self.not_implemented)
+        arrange_menu.addAction(backward_action)
+        
+        # ----- Preferences submenu -----
+        preferences_menu = QMenu("&Preferences", self)
+        tools_menu.addMenu(preferences_menu)
+        
+        # Theme toggle
+        theme_action = QAction("Toggle &Theme", self)
+        theme_action.setStatusTip("Switch between light and dark theme")
+        theme_action.triggered.connect(self.toggle_theme)
+        preferences_menu.addAction(theme_action)
+        
+        preferences_menu.addSeparator()
+        
+        # Autosave toggle
+        autosave_action = QAction("Enable &Autosave", self)
+        autosave_action.setCheckable(True)
+        autosave_action.setChecked(True)  # Default to enabled
+        autosave_action.setStatusTip("Toggle automatic saving of projects")
+        autosave_action.triggered.connect(lambda checked: self._enable_autosave(checked))
+        preferences_menu.addAction(autosave_action)
+        
+        # Autosave interval submenu
+        autosave_interval_menu = QMenu("Autosave &Interval", self)
+        preferences_menu.addMenu(autosave_interval_menu)
+        
+        # Autosave interval options
+        autosave_1min_action = QAction("1 Minute", self)
+        autosave_1min_action.setStatusTip("Set autosave interval to 1 minute")
+        autosave_1min_action.triggered.connect(lambda: self._set_autosave_interval(60))
+        autosave_interval_menu.addAction(autosave_1min_action)
+        
+        autosave_5min_action = QAction("5 Minutes", self)
+        autosave_5min_action.setStatusTip("Set autosave interval to 5 minutes")
+        autosave_5min_action.triggered.connect(lambda: self._set_autosave_interval(300))
+        autosave_interval_menu.addAction(autosave_5min_action)
+        
+        autosave_10min_action = QAction("10 Minutes", self)
+        autosave_10min_action.setStatusTip("Set autosave interval to 10 minutes")
+        autosave_10min_action.triggered.connect(lambda: self._set_autosave_interval(600))
+        autosave_interval_menu.addAction(autosave_10min_action)
+        
+        autosave_30min_action = QAction("30 Minutes", self)
+        autosave_30min_action.setStatusTip("Set autosave interval to 30 minutes")
+        autosave_30min_action.triggered.connect(lambda: self._set_autosave_interval(1800))
+        autosave_interval_menu.addAction(autosave_30min_action)
         
         # ----- Help menu -----
         help_menu = menu_bar.addMenu("&Help")

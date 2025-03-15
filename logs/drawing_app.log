@@ -4130,3 +4130,111 @@
 2025-03-15 11:17:52,758 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change width for multiple elements
 2025-03-15 11:17:52,759 - src.app - INFO - Changed property 'width' to '161.4' for 1 elements
 2025-03-15 11:19:25,289 - src.utils.project_manager - INFO - Autosave disabled
+2025-03-15 12:17:04,825 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-15 12:17:04,825 - root - INFO - Starting Drawing Package application
+2025-03-15 12:17:04,847 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-15 12:17:04,847 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-15 12:17:04,847 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-15 12:17:04,848 - src.utils.element_factory - INFO - Registered element type: rectangle
+2025-03-15 12:17:04,848 - src.utils.element_factory - INFO - Registered element type: line
+2025-03-15 12:17:04,848 - src.utils.element_factory - INFO - Registered element type: circle
+2025-03-15 12:17:04,848 - src.utils.element_factory - INFO - Registered element type: text
+2025-03-15 12:17:04,848 - src.utils.element_factory - INFO - Registered element type: image
+2025-03-15 12:17:04,848 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-15 12:17:04,848 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-15 12:17:04,857 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 12:17:04,878 - src.utils.selection_manager - INFO - Selection manager initialized
+2025-03-15 12:17:04,879 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 12:17:04,879 - src.ui.canvas - INFO - Canvas initialized
+2025-03-15 12:17:04,883 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-15 12:17:04,888 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 12:17:04,888 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 12:17:04,893 - src.app - INFO - Light theme applied
+2025-03-15 12:17:04,894 - src.app - INFO - Application initialized
+2025-03-15 12:17:46,040 - src.utils.project_manager - INFO - Autosave disabled
+2025-03-15 12:18:18,416 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-15 12:18:18,416 - root - INFO - Starting Drawing Package application
+2025-03-15 12:18:18,440 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-15 12:18:18,440 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-15 12:18:18,440 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-15 12:18:18,440 - src.utils.element_factory - INFO - Registered element type: rectangle
+2025-03-15 12:18:18,441 - src.utils.element_factory - INFO - Registered element type: line
+2025-03-15 12:18:18,441 - src.utils.element_factory - INFO - Registered element type: circle
+2025-03-15 12:18:18,441 - src.utils.element_factory - INFO - Registered element type: text
+2025-03-15 12:18:18,441 - src.utils.element_factory - INFO - Registered element type: image
+2025-03-15 12:18:18,441 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-15 12:18:18,441 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-15 12:18:18,451 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 12:18:18,472 - src.utils.selection_manager - INFO - Selection manager initialized
+2025-03-15 12:18:18,473 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 12:18:18,473 - src.ui.canvas - INFO - Canvas initialized
+2025-03-15 12:18:18,478 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-15 12:18:18,483 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 12:18:18,483 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 12:18:18,488 - src.app - INFO - Light theme applied
+2025-03-15 12:18:18,488 - src.app - INFO - Application initialized
+2025-03-15 12:18:44,756 - src.utils.project_manager - INFO - Project loaded from C:\Users\paulb\Documents\Development\Drawing Package\test3.draw
+2025-03-15 12:18:44,756 - src.utils.history_manager - INFO - History cleared
+2025-03-15 12:18:44,756 - src.utils.history_manager - INFO - Started action group: Load project
+2025-03-15 12:18:44,757 - src.utils.element_factory - ERROR - Error creating element of type line: LineElement.__init__() missing 1 required positional argument: 'end_point'
+2025-03-15 12:18:44,757 - src.app - INFO - Element created: None
+2025-03-15 12:18:44,758 - src.utils.element_factory - ERROR - Error creating element of type line: LineElement.__init__() missing 1 required positional argument: 'end_point'
+2025-03-15 12:18:44,758 - src.app - INFO - Element created: None
+2025-03-15 12:18:44,758 - src.utils.element_factory - ERROR - Error creating element of type line: LineElement.__init__() missing 1 required positional argument: 'end_point'
+2025-03-15 12:18:44,759 - src.app - INFO - Element created: None
+2025-03-15 12:18:44,759 - src.utils.element_factory - ERROR - Error creating element of type line: LineElement.__init__() missing 1 required positional argument: 'end_point'
+2025-03-15 12:18:44,759 - src.app - INFO - Element created: None
+2025-03-15 12:18:44,760 - src.utils.element_factory - ERROR - Error creating element of type line: LineElement.__init__() missing 1 required positional argument: 'end_point'
+2025-03-15 12:18:44,760 - src.app - INFO - Element created: None
+2025-03-15 12:18:44,761 - src.utils.element_factory - ERROR - Error creating element of type line: LineElement.__init__() missing 1 required positional argument: 'end_point'
+2025-03-15 12:18:44,761 - src.app - INFO - Element created: None
+2025-03-15 12:18:44,762 - src.utils.element_factory - ERROR - Error creating element of type rectangle: 'dict' object has no attribute 'normalized'
+2025-03-15 12:18:44,762 - src.app - INFO - Element created: None
+2025-03-15 12:18:44,762 - src.utils.history_manager - INFO - Added action to history: Load project
+2025-03-15 12:18:44,763 - src.utils.history_manager - INFO - Ended action group with 7 actions: Load project
+2025-03-15 12:18:44,763 - src.utils.project_manager - INFO - Autosave enabled with 10 second interval
+2025-03-15 12:18:44,763 - src.app - INFO - Autosave enabled with 10 second interval
+2025-03-15 12:18:54,268 - src.utils.image_handler - INFO - Image loaded successfully: C:\Users\paulb\Pictures\Alone in the stillness of the night.jpg (1024x1024)
+2025-03-15 12:18:54,268 - src.ui.canvas - INFO - Background image set, size: 1024x1024
+2025-03-15 12:18:54,870 - src.utils.project_manager - INFO - Project saved to C:\Users\paulb\Documents\Development\Drawing Package\test3.draw.autosave
+2025-03-15 12:18:54,870 - src.utils.project_manager - INFO - Project autosaved to C:\Users\paulb\Documents\Development\Drawing Package\test3.draw.autosave
+2025-03-15 12:19:04,971 - src.utils.project_manager - INFO - Project saved to C:\Users\paulb\Documents\Development\Drawing Package\test3.draw.autosave.autosave
+2025-03-15 12:19:04,971 - src.utils.project_manager - INFO - Project autosaved to C:\Users\paulb\Documents\Development\Drawing Package\test3.draw.autosave.autosave
+2025-03-15 12:19:06,981 - src.utils.project_manager - INFO - Autosave disabled
+2025-03-15 12:23:08,158 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-15 12:23:08,158 - root - INFO - Starting Drawing Package application
+2025-03-15 12:23:08,182 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-15 12:23:08,183 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-15 12:23:08,183 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-15 12:23:08,183 - src.utils.element_factory - INFO - Registered element type: rectangle
+2025-03-15 12:23:08,183 - src.utils.element_factory - INFO - Registered element type: line
+2025-03-15 12:23:08,183 - src.utils.element_factory - INFO - Registered element type: circle
+2025-03-15 12:23:08,183 - src.utils.element_factory - INFO - Registered element type: text
+2025-03-15 12:23:08,183 - src.utils.element_factory - INFO - Registered element type: image
+2025-03-15 12:23:08,183 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-15 12:23:08,183 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-15 12:23:08,193 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 12:23:08,216 - src.utils.selection_manager - INFO - Selection manager initialized
+2025-03-15 12:23:08,216 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 12:23:08,217 - src.ui.canvas - INFO - Canvas initialized
+2025-03-15 12:23:08,220 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-15 12:23:08,225 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 12:23:08,226 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 12:23:08,231 - src.app - INFO - Light theme applied
+2025-03-15 12:23:08,231 - src.app - INFO - Application initialized
+2025-03-15 12:23:20,480 - src.utils.image_handler - INFO - Image loaded successfully: C:/Users/paulb/Pictures/444481698_783705507231439_2006159460782346893_n.jpg (600x504)
+2025-03-15 12:23:20,481 - src.ui.canvas - INFO - Background image set, size: 600x504
+2025-03-15 12:23:28,871 - src.utils.history_manager - INFO - No actions to undo
+2025-03-15 12:23:39,730 - src.utils.image_handler - INFO - Image loaded successfully: C:/Users/paulb/Pictures/21244476_819224081571040_132760387_n-2.jpg (288x289)
+2025-03-15 12:23:39,730 - src.ui.canvas - INFO - Background image set, size: 288x289
+2025-03-15 12:23:49,411 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-15 12:23:49,412 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-15 12:23:49,802 - src.utils.tool_manager - INFO - Started drawing rectangle at (811.2543153049482, 313.8089758342923)
+2025-03-15 12:23:50,347 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 12:23:50,347 - src.app - INFO - Element created: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000001A12FCBE710>
+2025-03-15 12:24:01,441 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000001A12FCBE710>
+2025-03-15 12:24:22,375 - src.app - INFO - Dark theme applied
+2025-03-15 12:24:28,909 - src.utils.project_manager - INFO - Autosave disabled
+2025-03-15 12:24:37,326 - src.utils.project_manager - INFO - Project saved to C:/Users/paulb/Documents/123.draw
+2025-03-15 12:24:37,327 - src.utils.project_manager - INFO - Autosave enabled with 10 second interval
+2025-03-15 12:24:37,327 - src.app - INFO - Autosave enabled with 10 second interval

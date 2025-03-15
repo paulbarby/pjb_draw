@@ -6,7 +6,7 @@ displayed and manipulated on the canvas.
 """
 from PyQt6.QtCore import QRectF, QPointF, Qt, QByteArray, QBuffer, QIODevice, QRect
 from PyQt6.QtGui import QPen, QColor, QBrush, QPixmap, QImage, QPainter, QTransform
-from PyQt6.QtWidgets import QGraphicsItem
+from PyQt6.QtWidgets import QGraphicsItem, QApplication
 from typing import Optional, Tuple, Dict, Any
 import base64
 import os
@@ -68,6 +68,130 @@ class ImageElement(VectorElement):
             QGraphicsItem.GraphicsItemFlag.ItemIsSelectable |
             QGraphicsItem.GraphicsItemFlag.ItemIsMovable
         )
+    
+    @classmethod
+    def from_file(cls, file_path: str) -> Optional['ImageElement']:
+        """
+        Create an ImageElement by loading an image from a file.
+        
+        Args:
+            file_path: Path to the image file
+            
+        Returns:
+            ImageElement instance or None if loading fails
+        """
+        if not os.path.exists(file_path):
+            return None
+            
+        # Load the image file
+        pixmap = QPixmap(file_path)
+        if pixmap.isNull():
+            return None
+            
+        # Create element with loaded image
+        return cls(pixmap=pixmap, image_path=file_path)
+    
+    @classmethod
+    def from_clipboard(cls) -> Optional['ImageElement']:
+        """
+        Create an ImageElement from clipboard image data.
+        
+        Returns:
+            ImageElement instance or None if no image in clipboard
+        """
+        # Get clipboard instance
+        clipboard = QApplication.clipboard()
+        
+        # Check for image data
+        mime_data = clipboard.mimeData()
+        if not mime_data.hasImage():
+            return None
+            
+        # Get image from clipboard
+        image = clipboard.image()
+        if image.isNull():
+            return None
+            
+        # Convert QImage to QPixmap
+        pixmap = QPixmap.fromImage(image)
+        
+        # Create element with clipboard image
+        return cls(pixmap=pixmap)
+    
+    def load_from_file(self, file_path: str) -> bool:
+        """
+        Load a new image from a file, replacing the current image.
+        
+        Args:
+            file_path: Path to the image file
+            
+        Returns:
+            True if loading was successful, False otherwise
+        """
+        if not os.path.exists(file_path):
+            return False
+            
+        # Load the image file
+        pixmap = QPixmap(file_path)
+        if pixmap.isNull():
+            return False
+            
+        # Update the element
+        self._pixmap = pixmap
+        self._image_path = file_path
+        
+        # Adjust rectangle to match new image dimensions while maintaining position
+        top_left = self._rect.topLeft()
+        self._rect = QRectF(
+            top_left.x(),
+            top_left.y(),
+            pixmap.width(),
+            pixmap.height()
+        )
+        
+        self.update_handles()
+        self.update()
+        return True
+    
+    def load_from_clipboard(self) -> bool:
+        """
+        Load a new image from clipboard, replacing the current image.
+        
+        Returns:
+            True if loading was successful, False otherwise
+        """
+        # Get clipboard instance
+        clipboard = QApplication.clipboard()
+        
+        # Check for image data
+        mime_data = clipboard.mimeData()
+        if not mime_data.hasImage():
+            return False
+            
+        # Get image from clipboard
+        image = clipboard.image()
+        if image.isNull():
+            return False
+            
+        # Convert QImage to QPixmap
+        pixmap = QPixmap.fromImage(image)
+        
+        # Update the element
+        self._pixmap = pixmap
+        self._image_path = None  # Clear image path as this is from clipboard
+        
+        # Adjust rectangle to match new image dimensions while maintaining position
+        top_left = self._rect.topLeft()
+        self._rect = QRectF(
+            top_left.x(),
+            top_left.y(),
+            pixmap.width(),
+            pixmap.height()
+        )
+        
+        self.update_handles()
+        self.update()
+        return True
     
     def boundingRect(self):
         """Return the bounding rectangle of the image."""

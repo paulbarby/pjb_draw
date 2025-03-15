@@ -106,8 +106,16 @@
    - [x] Implement image-specific properties (opacity, flip, rotation)
    - [x] Add image manipulation methods (crop, resize, rotate)
    - [x] Implement image data storage and retrieval
+   - [x] Implement loading image element from file and paste from clipboard
 
-4. [ ] **Implement Element Grouping** (CURRENT TASK)
+4. [ ] Create Interactive UI elements
+
+   - [ ] Implement click drag for moving elements <--Next
+   - [ ] Implement centrepoint helper that is anchord to the elements center
+   - [ ] Implement resizing using UI anchor points on elements in the canvas
+   - [ ] Implement rotation on a selected element via the center point helper
+
+5. [ ] **Implement Element Grouping**
    - [ ] Create GroupElement class inheriting from VectorElement
      - [ ] Add child element management (add, remove)
      - [ ] Implement dynamic bounding box calculation

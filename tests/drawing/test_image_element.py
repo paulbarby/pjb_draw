@@ -5,9 +5,11 @@ This module contains tests for the ImageElement class functionality,
 ensuring it works properly within the Drawing Package framework.
 """
 import pytest
-from PyQt6.QtCore import QRectF, QPointF
-from PyQt6.QtGui import QPixmap, QColor
-from PyQt6.QtWidgets import QGraphicsScene
+from PyQt6.QtCore import QRectF, QPointF, Qt
+from PyQt6.QtGui import QPixmap, QColor, QImage
+from PyQt6.QtWidgets import QGraphicsScene, QApplication
+import os
+import tempfile
 
 from src.drawing.elements.image_element import ImageElement
 
@@ -27,6 +29,17 @@ def image_element(test_pixmap, qapp):
 def scene(qapp):
     """Create a QGraphicsScene for testing."""
     return QGraphicsScene()
+
+@pytest.fixture
+def test_image_file():
+    """Create a temporary test image file."""
+    with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp:
+        # Create a test image
+        image = QImage(100, 100, QImage.Format.Format_RGB32)
+        image.fill(QColor(255, 0, 0))  # Red test image
+        image.save(tmp.name, 'PNG')
+        yield tmp.name
+    os.unlink(tmp.name)
 
 def test_image_element_creation(test_pixmap, qapp):
     """Test creating image elements with different parameters."""
@@ -184,4 +197,67 @@ def test_clone(image_element, qapp):
     assert clone.rect.x() == 10
     assert clone.rect.y() == 20
     assert clone.rect.width() == 150
-    assert clone.rect.height() == 120 
+    assert clone.rect.height() == 120
+
+def test_load_from_file(test_image_file, qapp):
+    """Test loading image from file."""
+    # Test class method
+    img1 = ImageElement.from_file(test_image_file)
+    assert img1 is not None
+    assert img1.image_path == test_image_file
+    assert not img1.pixmap.isNull()
+    assert img1.rect.width() == 100
+    assert img1.rect.height() == 100
+    
+    # Test instance method
+    img2 = ImageElement()
+    original_size = (img2.rect.width(), img2.rect.height())
+    success = img2.load_from_file(test_image_file)
+    assert success is True
+    assert img2.image_path == test_image_file
+    assert img2.rect.width() == 100
+    assert img2.rect.height() == 100
+    
+    # Test with non-existent file
+    img3 = ImageElement.from_file("nonexistent.png")
+    assert img3 is None
+    
+    img4 = ImageElement()
+    success = img4.load_from_file("nonexistent.png")
+    assert success is False
+
+def test_load_from_clipboard(qapp):
+    """Test loading image from clipboard."""
+    # Prepare test image for clipboard
+    test_image = QImage(100, 100, QImage.Format.Format_RGB32)
+    test_image.fill(QColor(0, 255, 0))  # Green test image
+    
+    # Set image to clipboard
+    clipboard = QApplication.clipboard()
+    clipboard.setImage(test_image)
+    
+    # Test class method
+    img1 = ImageElement.from_clipboard()
+    assert img1 is not None
+    assert img1.image_path is None  # Clipboard images have no path
+    assert not img1.pixmap.isNull()
+    assert img1.rect.width() == 100
+    assert img1.rect.height() == 100
+    
+    # Test instance method
+    img2 = ImageElement()
+    original_size = (img2.rect.width(), img2.rect.height())
+    success = img2.load_from_clipboard()
+    assert success is True
+    assert img2.image_path is None
+    assert img2.rect.width() == 100
+    assert img2.rect.height() == 100
+    
+    # Test with no image in clipboard
+    clipboard.clear()
+    img3 = ImageElement.from_clipboard()
+    assert img3 is None
+    
+    img4 = ImageElement()
+    success = img4.load_from_clipboard()
+    assert success is False 
