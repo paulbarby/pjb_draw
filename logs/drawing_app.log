@@ -3611,3 +3611,522 @@
 2025-03-15 05:06:54,859 - src.utils.project_manager - INFO - Autosave enabled with 10 second interval
 2025-03-15 05:06:54,859 - src.app - INFO - Autosave enabled with 10 second interval
 2025-03-15 05:06:59,894 - src.utils.project_manager - INFO - Autosave disabled
+2025-03-15 08:44:36,903 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-15 08:44:36,903 - root - INFO - Starting Drawing Package application
+2025-03-15 08:44:36,933 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-15 08:44:36,933 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-15 08:44:36,933 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-15 08:44:36,933 - src.utils.element_factory - INFO - Registered element type: rectangle
+2025-03-15 08:44:36,933 - src.utils.element_factory - INFO - Registered element type: line
+2025-03-15 08:44:36,933 - src.utils.element_factory - INFO - Registered element type: circle
+2025-03-15 08:44:36,934 - src.utils.element_factory - INFO - Registered element type: text
+2025-03-15 08:44:36,934 - src.utils.element_factory - INFO - Registered element type: image
+2025-03-15 08:44:36,934 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-15 08:44:36,934 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-15 08:44:36,944 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 08:44:36,969 - src.utils.selection_manager - INFO - Selection manager initialized
+2025-03-15 08:44:36,970 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 08:44:36,970 - src.ui.canvas - INFO - Canvas initialized
+2025-03-15 08:44:36,974 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-15 08:44:36,983 - src.app - INFO - Light theme applied
+2025-03-15 08:44:36,984 - src.app - INFO - Application initialized
+2025-03-15 08:44:40,795 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-15 08:44:41,312 - src.utils.tool_manager - INFO - Started drawing line at (320.7825086306099, 327.75604142692754)
+2025-03-15 08:44:41,777 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 08:44:41,778 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000001EAC1C365F0>
+2025-03-15 08:44:43,482 - src.utils.tool_manager - INFO - Started drawing line at (381.21979286536254, 539.2865362485616)
+2025-03-15 08:44:44,387 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 08:44:44,387 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000001EAC1C36830>
+2025-03-15 08:44:45,345 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-15 08:44:45,996 - src.utils.tool_manager - INFO - Started drawing rectangle at (973.9700805523591, 339.37859608745686)
+2025-03-15 08:44:46,500 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 08:44:46,500 - src.app - INFO - Element created: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000001EAC1C368C0>
+2025-03-15 08:44:51,945 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 08:44:55,782 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x000001EAC1C36830>
+2025-03-15 08:44:58,045 - src.app - INFO - No elements selected
+2025-03-15 08:45:11,868 - src.app - INFO - Multiple elements selected: 2
+2025-03-15 08:45:12,960 - src.app - INFO - No elements selected
+2025-03-15 08:45:15,571 - src.app - INFO - Multiple elements selected: 2
+2025-03-15 08:45:19,036 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x000001EAC1C365F0>
+2025-03-15 08:45:20,840 - src.app - INFO - No elements selected
+2025-03-15 08:45:21,470 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x000001EAC1C36830>
+2025-03-15 08:45:23,945 - src.app - INFO - No elements selected
+2025-03-15 08:45:32,884 - src.utils.project_manager - INFO - Autosave disabled
+2025-03-15 09:06:32,269 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-15 09:06:32,270 - root - INFO - Starting Drawing Package application
+2025-03-15 09:06:32,298 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-15 09:06:32,298 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-15 09:06:32,298 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-15 09:06:32,298 - src.utils.element_factory - INFO - Registered element type: rectangle
+2025-03-15 09:06:32,298 - src.utils.element_factory - INFO - Registered element type: line
+2025-03-15 09:06:32,298 - src.utils.element_factory - INFO - Registered element type: circle
+2025-03-15 09:06:32,298 - src.utils.element_factory - INFO - Registered element type: text
+2025-03-15 09:06:32,298 - src.utils.element_factory - INFO - Registered element type: image
+2025-03-15 09:06:32,298 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-15 09:06:32,299 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-15 09:06:32,309 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 09:06:32,336 - src.utils.selection_manager - INFO - Selection manager initialized
+2025-03-15 09:06:32,337 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 09:06:32,337 - src.ui.canvas - INFO - Canvas initialized
+2025-03-15 09:06:32,341 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-15 09:06:32,352 - src.app - INFO - Light theme applied
+2025-03-15 09:06:32,353 - src.app - INFO - Application initialized
+2025-03-15 09:06:36,028 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-15 09:06:36,541 - src.utils.tool_manager - INFO - Started drawing line at (376.5707710011508, 441.6570771001151)
+2025-03-15 09:06:36,939 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 09:06:36,939 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000001F9E902AEF0>
+2025-03-15 09:06:38,486 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 09:06:43,428 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-15 09:06:44,376 - src.utils.tool_manager - INFO - Started drawing line at (553.2336018411968, 432.3590333716916)
+2025-03-15 09:06:45,060 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 09:06:45,060 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000001F9E902AD40>
+2025-03-15 09:06:46,560 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 09:06:48,477 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x000001F9E902AD40>
+2025-03-15 09:06:50,234 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x000001F9E902AEF0>
+2025-03-15 09:06:52,466 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x000001F9E902AD40>
+2025-03-15 09:06:54,751 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-15 09:06:55,252 - src.utils.tool_manager - INFO - Started drawing rectangle at (753.1415420023015, 318.4579976985041)
+2025-03-15 09:06:56,007 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 09:06:56,008 - src.app - INFO - Element created: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000001F9E902B1C0>
+2025-03-15 09:06:58,136 - src.utils.tool_manager - INFO - Selected tool: circle
+2025-03-15 09:07:01,213 - src.utils.tool_manager - INFO - Started drawing circle at (832.1749136939011, 706.6513233601842)
+2025-03-15 09:07:02,196 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 09:07:02,197 - src.app - INFO - Element created: <src.drawing.elements.circle_element.CircleElement object at 0x000001F9E902B130>
+2025-03-15 09:07:03,343 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 09:07:04,819 - src.app - INFO - No elements selected
+2025-03-15 09:07:07,583 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x000001F9E902AEF0>
+2025-03-15 09:07:08,928 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x000001F9E902AD40>
+2025-03-15 09:07:10,877 - src.app - INFO - No elements selected
+2025-03-15 09:07:12,108 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000001F9E902B1C0>
+2025-03-15 09:07:22,709 - src.utils.project_manager - INFO - Autosave disabled
+2025-03-15 09:09:05,915 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-15 09:09:05,916 - root - INFO - Starting Drawing Package application
+2025-03-15 09:09:05,945 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-15 09:09:05,945 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-15 09:09:05,946 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-15 09:09:05,946 - src.utils.element_factory - INFO - Registered element type: rectangle
+2025-03-15 09:09:05,946 - src.utils.element_factory - INFO - Registered element type: line
+2025-03-15 09:09:05,946 - src.utils.element_factory - INFO - Registered element type: circle
+2025-03-15 09:09:05,946 - src.utils.element_factory - INFO - Registered element type: text
+2025-03-15 09:09:05,946 - src.utils.element_factory - INFO - Registered element type: image
+2025-03-15 09:09:05,946 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-15 09:09:05,946 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-15 09:09:05,956 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 09:09:05,980 - src.utils.selection_manager - INFO - Selection manager initialized
+2025-03-15 09:09:05,980 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 09:09:05,981 - src.ui.canvas - INFO - Canvas initialized
+2025-03-15 09:09:05,984 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-15 09:09:05,994 - src.app - INFO - Light theme applied
+2025-03-15 09:09:05,995 - src.app - INFO - Application initialized
+2025-03-15 09:09:19,151 - src.utils.project_manager - INFO - Autosave disabled
+2025-03-15 09:47:36,663 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-15 09:47:36,663 - root - INFO - Starting Drawing Package application
+2025-03-15 09:47:36,691 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-15 09:47:36,691 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-15 09:47:36,691 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-15 09:47:36,691 - src.utils.element_factory - INFO - Registered element type: rectangle
+2025-03-15 09:47:36,692 - src.utils.element_factory - INFO - Registered element type: line
+2025-03-15 09:47:36,692 - src.utils.element_factory - INFO - Registered element type: circle
+2025-03-15 09:47:36,692 - src.utils.element_factory - INFO - Registered element type: text
+2025-03-15 09:47:36,692 - src.utils.element_factory - INFO - Registered element type: image
+2025-03-15 09:47:36,692 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-15 09:47:36,692 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-15 09:47:36,702 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 09:47:36,725 - src.utils.selection_manager - INFO - Selection manager initialized
+2025-03-15 09:47:36,725 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 09:47:36,726 - src.ui.canvas - INFO - Canvas initialized
+2025-03-15 09:47:36,729 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-15 09:47:36,739 - src.app - INFO - Light theme applied
+2025-03-15 09:47:36,739 - src.app - INFO - Application initialized
+2025-03-15 09:53:05,244 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-15 09:53:05,244 - root - INFO - Starting Drawing Package application
+2025-03-15 09:53:05,269 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-15 09:53:05,269 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-15 09:53:05,269 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-15 09:53:05,269 - src.utils.element_factory - INFO - Registered element type: rectangle
+2025-03-15 09:53:05,269 - src.utils.element_factory - INFO - Registered element type: line
+2025-03-15 09:53:05,269 - src.utils.element_factory - INFO - Registered element type: circle
+2025-03-15 09:53:05,269 - src.utils.element_factory - INFO - Registered element type: text
+2025-03-15 09:53:05,269 - src.utils.element_factory - INFO - Registered element type: image
+2025-03-15 09:53:05,269 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-15 09:53:05,269 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-15 09:53:05,278 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 09:53:05,303 - src.utils.selection_manager - INFO - Selection manager initialized
+2025-03-15 09:53:05,304 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 09:53:05,304 - src.ui.canvas - INFO - Canvas initialized
+2025-03-15 09:53:05,307 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-15 09:53:05,317 - src.app - INFO - Light theme applied
+2025-03-15 09:53:05,318 - src.app - INFO - Application initialized
+2025-03-15 09:53:08,693 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-15 09:53:09,178 - src.utils.tool_manager - INFO - Started drawing line at (367.2727272727273, 302.186421173763)
+2025-03-15 09:53:09,501 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 09:53:09,501 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x0000029BFFADB370>
+2025-03-15 09:53:10,736 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-15 09:53:11,189 - src.utils.tool_manager - INFO - Started drawing rectangle at (583.4522439585731, 446.30609896432685)
+2025-03-15 09:53:11,592 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 09:53:11,592 - src.app - INFO - Element created: <src.drawing.elements.rectangle_element.RectangleElement object at 0x0000029BFFADB520>
+2025-03-15 09:53:12,675 - src.utils.tool_manager - INFO - Selected tool: circle
+2025-03-15 09:53:13,034 - src.utils.tool_manager - INFO - Started drawing circle at (409.11392405063293, 606.6973532796318)
+2025-03-15 09:53:13,828 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 09:53:13,828 - src.app - INFO - Element created: <src.drawing.elements.circle_element.CircleElement object at 0x0000029BFFADB5B0>
+2025-03-15 09:53:14,646 - src.utils.tool_manager - INFO - Selected tool: text
+2025-03-15 09:53:15,075 - src.utils.tool_manager - INFO - Added text annotation at (622.9689298043729, 369.59723820483316)
+2025-03-15 09:53:18,838 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x0000029BFFADB520>
+2025-03-15 09:53:19,355 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x0000029BFFADB370>
+2025-03-15 09:53:20,196 - src.app - INFO - Element selected: <src.drawing.elements.circle_element.CircleElement object at 0x0000029BFFADB5B0>
+2025-03-15 09:53:20,575 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x0000029BFFADB520>
+2025-03-15 09:53:20,974 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x0000029BFFADB370>
+2025-03-15 09:53:25,699 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 09:53:27,386 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x0000029BFFADB370>
+2025-03-15 09:53:28,181 - src.app - INFO - No elements selected
+2025-03-15 09:53:40,635 - src.app - INFO - Multiple elements selected: 2
+2025-03-15 09:53:41,546 - src.app - INFO - No elements selected
+2025-03-15 09:53:42,558 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x0000029BFFADB370>
+2025-03-15 09:53:45,196 - src.app - INFO - No elements selected
+2025-03-15 09:53:46,854 - src.app - INFO - Element selected: <src.drawing.elements.circle_element.CircleElement object at 0x0000029BFFADB5B0>
+2025-03-15 09:53:49,242 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x0000029BFFADB520>
+2025-03-15 09:53:51,871 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x0000029BFFADB370>
+2025-03-15 09:53:53,568 - src.app - INFO - No elements selected
+2025-03-15 09:53:55,538 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x0000029BFFADB370>
+2025-03-15 09:53:57,100 - src.app - INFO - No elements selected
+2025-03-15 09:54:23,596 - src.utils.project_manager - INFO - Autosave disabled
+2025-03-15 10:04:03,935 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-15 10:04:03,936 - root - INFO - Starting Drawing Package application
+2025-03-15 10:04:03,961 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-15 10:04:03,961 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-15 10:04:03,961 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-15 10:04:03,961 - src.utils.element_factory - INFO - Registered element type: rectangle
+2025-03-15 10:04:03,961 - src.utils.element_factory - INFO - Registered element type: line
+2025-03-15 10:04:03,961 - src.utils.element_factory - INFO - Registered element type: circle
+2025-03-15 10:04:03,961 - src.utils.element_factory - INFO - Registered element type: text
+2025-03-15 10:04:03,961 - src.utils.element_factory - INFO - Registered element type: image
+2025-03-15 10:04:03,961 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-15 10:04:03,961 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-15 10:04:03,971 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 10:04:03,993 - src.utils.selection_manager - INFO - Selection manager initialized
+2025-03-15 10:04:03,994 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 10:04:03,994 - src.ui.canvas - INFO - Canvas initialized
+2025-03-15 10:04:03,998 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-15 10:04:04,008 - src.app - INFO - Light theme applied
+2025-03-15 10:04:04,008 - src.app - INFO - Application initialized
+2025-03-15 10:04:07,180 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-15 10:04:07,540 - src.utils.tool_manager - INFO - Started drawing rectangle at (729.8964326812429, 411.43843498273884)
+2025-03-15 10:04:07,865 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 10:04:07,865 - src.app - INFO - Element created: <src.drawing.elements.rectangle_element.RectangleElement object at 0x00000270CF253E20>
+2025-03-15 10:04:08,949 - src.utils.tool_manager - INFO - Selected tool: circle
+2025-03-15 10:04:09,487 - src.utils.tool_manager - INFO - Started drawing circle at (492.79631760644423, 718.2738780207135)
+2025-03-15 10:04:09,859 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 10:04:09,859 - src.app - INFO - Element created: <src.drawing.elements.circle_element.CircleElement object at 0x00000270CF253D90>
+2025-03-15 10:04:10,871 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-15 10:04:11,540 - src.utils.tool_manager - INFO - Started drawing line at (762.4395857307251, 855.4200230149598)
+2025-03-15 10:04:11,860 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 10:04:11,860 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x00000270D251C160>
+2025-03-15 10:04:13,093 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 10:04:19,604 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x00000270CF253E20>
+2025-03-15 10:04:20,952 - src.app - INFO - Element selected: <src.drawing.elements.circle_element.CircleElement object at 0x00000270CF253D90>
+2025-03-15 10:04:22,705 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x00000270D251C160>
+2025-03-15 10:04:26,709 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x00000270CF253E20>
+2025-03-15 10:04:32,550 - src.app - INFO - No elements selected
+2025-03-15 10:04:33,625 - src.app - INFO - Element selected: <src.drawing.elements.circle_element.CircleElement object at 0x00000270CF253D90>
+2025-03-15 10:04:35,102 - src.app - INFO - No elements selected
+2025-03-15 10:04:40,918 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x00000270D251C160>
+2025-03-15 10:04:42,121 - src.utils.project_manager - INFO - Autosave disabled
+2025-03-15 11:15:27,705 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-15 11:15:27,706 - root - INFO - Starting Drawing Package application
+2025-03-15 11:15:27,730 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-15 11:15:27,730 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-15 11:15:27,730 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-15 11:15:27,730 - src.utils.element_factory - INFO - Registered element type: rectangle
+2025-03-15 11:15:27,730 - src.utils.element_factory - INFO - Registered element type: line
+2025-03-15 11:15:27,731 - src.utils.element_factory - INFO - Registered element type: circle
+2025-03-15 11:15:27,731 - src.utils.element_factory - INFO - Registered element type: text
+2025-03-15 11:15:27,731 - src.utils.element_factory - INFO - Registered element type: image
+2025-03-15 11:15:27,731 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-15 11:15:27,731 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-15 11:15:27,740 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 11:15:27,765 - src.utils.selection_manager - INFO - Selection manager initialized
+2025-03-15 11:15:27,766 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 11:15:27,766 - src.ui.canvas - INFO - Canvas initialized
+2025-03-15 11:15:27,770 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-15 11:15:27,774 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 11:15:27,774 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 11:15:27,779 - src.app - INFO - Light theme applied
+2025-03-15 11:15:27,780 - src.app - INFO - Application initialized
+2025-03-15 11:15:29,854 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-15 11:15:29,854 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-15 11:15:30,176 - src.utils.tool_manager - INFO - Started drawing line at (148.76869965477562, 446.30609896432685)
+2025-03-15 11:15:30,453 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 11:15:30,453 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000002575706C5E0>
+2025-03-15 11:15:31,556 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 11:15:31,557 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 11:15:33,129 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x000002575706C5E0>
+2025-03-15 11:15:35,583 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-15 11:15:35,583 - src.utils.tool_manager - INFO - Selected tool: line
+2025-03-15 11:15:36,091 - src.utils.tool_manager - INFO - Started drawing line at (216.1795166858458, 448.6306098964327)
+2025-03-15 11:15:36,463 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 11:15:36,463 - src.app - INFO - Element created: <src.drawing.elements.line_element.LineElement object at 0x000002575706C820>
+2025-03-15 11:15:37,453 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-15 11:15:37,453 - src.utils.tool_manager - INFO - Selected tool: rectangle
+2025-03-15 11:15:37,893 - src.utils.tool_manager - INFO - Started drawing rectangle at (309.15995397008055, 264.9942462600691)
+2025-03-15 11:15:39,228 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 11:15:39,229 - src.app - INFO - Element created: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000002575706C430>
+2025-03-15 11:15:40,185 - src.utils.tool_manager - INFO - Selected tool: circle
+2025-03-15 11:15:40,185 - src.utils.tool_manager - INFO - Selected tool: circle
+2025-03-15 11:15:40,548 - src.utils.tool_manager - INFO - Started drawing circle at (153.41772151898735, 325.4315304948217)
+2025-03-15 11:15:41,059 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 11:15:41,059 - src.app - INFO - Element created: <src.drawing.elements.circle_element.CircleElement object at 0x000002575706CA60>
+2025-03-15 11:15:42,371 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 11:15:42,371 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 11:15:43,350 - src.app - INFO - Element selected: <src.drawing.elements.circle_element.CircleElement object at 0x000002575706CA60>
+2025-03-15 11:15:44,546 - src.app - INFO - No elements selected
+2025-03-15 11:15:46,528 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000002575706C430>
+2025-03-15 11:15:53,055 - src.app - INFO - Element selected: <src.drawing.elements.circle_element.CircleElement object at 0x000002575706CA60>
+2025-03-15 11:15:54,824 - src.app - INFO - No elements selected
+2025-03-15 11:15:56,310 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000002575706C430>
+2025-03-15 11:15:57,812 - src.app - INFO - No elements selected
+2025-03-15 11:15:58,300 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x000002575706C820>
+2025-03-15 11:15:59,283 - src.app - INFO - Element selected: <src.drawing.elements.line_element.LineElement object at 0x000002575706C5E0>
+2025-03-15 11:16:00,840 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000002575706C430>
+2025-03-15 11:16:05,780 - src.utils.tool_manager - INFO - Selected tool: text
+2025-03-15 11:16:05,781 - src.utils.tool_manager - INFO - Selected tool: text
+2025-03-15 11:16:06,133 - src.utils.tool_manager - INFO - Added text annotation at (585.776754890679, 325.4315304948217)
+2025-03-15 11:16:07,839 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 11:16:07,839 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 11:16:08,686 - src.app - INFO - Element selected: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:12,389 - src.app - INFO - No elements selected
+2025-03-15 11:16:12,973 - src.app - INFO - Element selected: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:22,171 - src.utils.history_manager - INFO - Started action group: Change text
+2025-03-15 11:16:22,174 - src.utils.history_manager - INFO - Added action to history: Change text
+2025-03-15 11:16:22,174 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change text
+2025-03-15 11:16:22,175 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:22,178 - src.app - INFO - Changing property 'text' to 'W' for TextElement
+2025-03-15 11:16:22,843 - src.utils.history_manager - INFO - Started action group: Change text
+2025-03-15 11:16:22,844 - src.utils.history_manager - INFO - Added action to history: Change text
+2025-03-15 11:16:22,845 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change text
+2025-03-15 11:16:22,846 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:22,850 - src.app - INFO - Changing property 'text' to 'We' for TextElement
+2025-03-15 11:16:22,976 - src.utils.history_manager - INFO - Started action group: Change text
+2025-03-15 11:16:22,976 - src.utils.history_manager - INFO - Added action to history: Change text
+2025-03-15 11:16:22,977 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change text
+2025-03-15 11:16:22,978 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:22,983 - src.app - INFO - Changing property 'text' to 'Wel' for TextElement
+2025-03-15 11:16:23,164 - src.utils.history_manager - INFO - Started action group: Change text
+2025-03-15 11:16:23,165 - src.utils.history_manager - INFO - Added action to history: Change text
+2025-03-15 11:16:23,166 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change text
+2025-03-15 11:16:23,166 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:23,173 - src.app - INFO - Changing property 'text' to 'Welc' for TextElement
+2025-03-15 11:16:23,264 - src.utils.history_manager - INFO - Started action group: Change text
+2025-03-15 11:16:23,264 - src.utils.history_manager - INFO - Added action to history: Change text
+2025-03-15 11:16:23,264 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change text
+2025-03-15 11:16:23,264 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:23,266 - src.app - INFO - Changing property 'text' to 'Welco' for TextElement
+2025-03-15 11:16:23,351 - src.utils.history_manager - INFO - Started action group: Change text
+2025-03-15 11:16:23,352 - src.utils.history_manager - INFO - Added action to history: Change text
+2025-03-15 11:16:23,352 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change text
+2025-03-15 11:16:23,352 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:23,354 - src.app - INFO - Changing property 'text' to 'Welcom' for TextElement
+2025-03-15 11:16:23,566 - src.utils.history_manager - INFO - Started action group: Change text
+2025-03-15 11:16:23,567 - src.utils.history_manager - INFO - Added action to history: Change text
+2025-03-15 11:16:23,567 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change text
+2025-03-15 11:16:23,567 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:23,572 - src.app - INFO - Changing property 'text' to 'Welcome' for TextElement
+2025-03-15 11:16:25,519 - src.utils.history_manager - INFO - Started action group: Change font_size
+2025-03-15 11:16:25,519 - src.utils.history_manager - INFO - Added action to history: Change font_size
+2025-03-15 11:16:25,519 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change font_size
+2025-03-15 11:16:25,519 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:25,522 - src.app - INFO - Changing property 'font_size' to '13' for TextElement
+2025-03-15 11:16:25,904 - src.utils.history_manager - INFO - Started action group: Change font_size
+2025-03-15 11:16:25,906 - src.utils.history_manager - INFO - Added action to history: Change font_size
+2025-03-15 11:16:25,907 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change font_size
+2025-03-15 11:16:25,907 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:25,912 - src.app - INFO - Changing property 'font_size' to '14' for TextElement
+2025-03-15 11:16:26,088 - src.utils.history_manager - INFO - Started action group: Change font_size
+2025-03-15 11:16:26,090 - src.utils.history_manager - INFO - Added action to history: Change font_size
+2025-03-15 11:16:26,091 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change font_size
+2025-03-15 11:16:26,091 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:26,096 - src.app - INFO - Changing property 'font_size' to '15' for TextElement
+2025-03-15 11:16:26,265 - src.utils.history_manager - INFO - Started action group: Change font_size
+2025-03-15 11:16:26,268 - src.utils.history_manager - INFO - Added action to history: Change font_size
+2025-03-15 11:16:26,269 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change font_size
+2025-03-15 11:16:26,270 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:26,276 - src.app - INFO - Changing property 'font_size' to '16' for TextElement
+2025-03-15 11:16:26,417 - src.utils.history_manager - INFO - Started action group: Change font_size
+2025-03-15 11:16:26,419 - src.utils.history_manager - INFO - Added action to history: Change font_size
+2025-03-15 11:16:26,420 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change font_size
+2025-03-15 11:16:26,421 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:26,428 - src.app - INFO - Changing property 'font_size' to '17' for TextElement
+2025-03-15 11:16:26,596 - src.utils.history_manager - INFO - Started action group: Change font_size
+2025-03-15 11:16:26,598 - src.utils.history_manager - INFO - Added action to history: Change font_size
+2025-03-15 11:16:26,599 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change font_size
+2025-03-15 11:16:26,600 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:26,603 - src.app - INFO - Changing property 'font_size' to '18' for TextElement
+2025-03-15 11:16:26,754 - src.utils.history_manager - INFO - Started action group: Change font_size
+2025-03-15 11:16:26,756 - src.utils.history_manager - INFO - Added action to history: Change font_size
+2025-03-15 11:16:26,757 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change font_size
+2025-03-15 11:16:26,757 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:26,760 - src.app - INFO - Changing property 'font_size' to '19' for TextElement
+2025-03-15 11:16:26,927 - src.utils.history_manager - INFO - Started action group: Change font_size
+2025-03-15 11:16:26,930 - src.utils.history_manager - INFO - Added action to history: Change font_size
+2025-03-15 11:16:26,930 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change font_size
+2025-03-15 11:16:26,931 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:26,935 - src.app - INFO - Changing property 'font_size' to '20' for TextElement
+2025-03-15 11:16:27,094 - src.utils.history_manager - INFO - Started action group: Change font_size
+2025-03-15 11:16:27,096 - src.utils.history_manager - INFO - Added action to history: Change font_size
+2025-03-15 11:16:27,097 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change font_size
+2025-03-15 11:16:27,097 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:27,106 - src.app - INFO - Changing property 'font_size' to '21' for TextElement
+2025-03-15 11:16:27,266 - src.utils.history_manager - INFO - Started action group: Change font_size
+2025-03-15 11:16:27,268 - src.utils.history_manager - INFO - Added action to history: Change font_size
+2025-03-15 11:16:27,269 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change font_size
+2025-03-15 11:16:27,269 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:27,276 - src.app - INFO - Changing property 'font_size' to '22' for TextElement
+2025-03-15 11:16:27,430 - src.utils.history_manager - INFO - Started action group: Change font_size
+2025-03-15 11:16:27,433 - src.utils.history_manager - INFO - Added action to history: Change font_size
+2025-03-15 11:16:27,434 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change font_size
+2025-03-15 11:16:27,434 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:27,438 - src.app - INFO - Changing property 'font_size' to '23' for TextElement
+2025-03-15 11:16:30,133 - src.utils.history_manager - INFO - Started action group: Change line_style
+2025-03-15 11:16:30,134 - src.utils.history_manager - INFO - Added action to history: Change line_style
+2025-03-15 11:16:30,134 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change line_style
+2025-03-15 11:16:30,134 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:30,136 - src.app - INFO - Changing property 'line_style' to 'Dashed' for TextElement
+2025-03-15 11:16:32,042 - src.utils.history_manager - INFO - Started action group: Change line_style
+2025-03-15 11:16:32,042 - src.utils.history_manager - INFO - Added action to history: Change line_style
+2025-03-15 11:16:32,042 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change line_style
+2025-03-15 11:16:32,043 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:32,044 - src.app - INFO - Changing property 'line_style' to 'Solid' for TextElement
+2025-03-15 11:16:33,295 - src.utils.history_manager - INFO - Started action group: Change line_thickness
+2025-03-15 11:16:33,295 - src.utils.history_manager - INFO - Added action to history: Change line_thickness
+2025-03-15 11:16:33,296 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change line_thickness
+2025-03-15 11:16:33,296 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:33,299 - src.app - INFO - Changing property 'line_thickness' to '2' for TextElement
+2025-03-15 11:16:33,518 - src.utils.history_manager - INFO - Started action group: Change line_thickness
+2025-03-15 11:16:33,519 - src.utils.history_manager - INFO - Added action to history: Change line_thickness
+2025-03-15 11:16:33,520 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change line_thickness
+2025-03-15 11:16:33,520 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:33,524 - src.app - INFO - Changing property 'line_thickness' to '3' for TextElement
+2025-03-15 11:16:33,731 - src.utils.history_manager - INFO - Started action group: Change line_thickness
+2025-03-15 11:16:33,734 - src.utils.history_manager - INFO - Added action to history: Change line_thickness
+2025-03-15 11:16:33,734 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change line_thickness
+2025-03-15 11:16:33,735 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:33,738 - src.app - INFO - Changing property 'line_thickness' to '4' for TextElement
+2025-03-15 11:16:33,946 - src.utils.history_manager - INFO - Started action group: Change line_thickness
+2025-03-15 11:16:33,947 - src.utils.history_manager - INFO - Added action to history: Change line_thickness
+2025-03-15 11:16:33,947 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change line_thickness
+2025-03-15 11:16:33,948 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:33,951 - src.app - INFO - Changing property 'line_thickness' to '5' for TextElement
+2025-03-15 11:16:34,155 - src.utils.history_manager - INFO - Started action group: Change line_thickness
+2025-03-15 11:16:34,155 - src.utils.history_manager - INFO - Added action to history: Change line_thickness
+2025-03-15 11:16:34,155 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change line_thickness
+2025-03-15 11:16:34,155 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:34,156 - src.app - INFO - Changing property 'line_thickness' to '6' for TextElement
+2025-03-15 11:16:34,745 - src.utils.history_manager - INFO - Started action group: Change line_thickness
+2025-03-15 11:16:34,746 - src.utils.history_manager - INFO - Added action to history: Change line_thickness
+2025-03-15 11:16:34,747 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change line_thickness
+2025-03-15 11:16:34,748 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:34,752 - src.app - INFO - Changing property 'line_thickness' to '5' for TextElement
+2025-03-15 11:16:34,954 - src.utils.history_manager - INFO - Started action group: Change line_thickness
+2025-03-15 11:16:34,955 - src.utils.history_manager - INFO - Added action to history: Change line_thickness
+2025-03-15 11:16:34,955 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change line_thickness
+2025-03-15 11:16:34,956 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:34,959 - src.app - INFO - Changing property 'line_thickness' to '4' for TextElement
+2025-03-15 11:16:35,149 - src.utils.history_manager - INFO - Started action group: Change line_thickness
+2025-03-15 11:16:35,150 - src.utils.history_manager - INFO - Added action to history: Change line_thickness
+2025-03-15 11:16:35,150 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change line_thickness
+2025-03-15 11:16:35,151 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:35,154 - src.app - INFO - Changing property 'line_thickness' to '3' for TextElement
+2025-03-15 11:16:35,342 - src.utils.history_manager - INFO - Started action group: Change line_thickness
+2025-03-15 11:16:35,343 - src.utils.history_manager - INFO - Added action to history: Change line_thickness
+2025-03-15 11:16:35,344 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change line_thickness
+2025-03-15 11:16:35,344 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:35,347 - src.app - INFO - Changing property 'line_thickness' to '2' for TextElement
+2025-03-15 11:16:35,522 - src.utils.history_manager - INFO - Started action group: Change line_thickness
+2025-03-15 11:16:35,523 - src.utils.history_manager - INFO - Added action to history: Change line_thickness
+2025-03-15 11:16:35,524 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change line_thickness
+2025-03-15 11:16:35,524 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:35,528 - src.app - INFO - Changing property 'line_thickness' to '1' for TextElement
+2025-03-15 11:16:39,346 - src.utils.history_manager - INFO - Started action group: Change color
+2025-03-15 11:16:39,346 - src.utils.history_manager - INFO - Added action to history: Change color
+2025-03-15 11:16:39,346 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change color
+2025-03-15 11:16:39,346 - src.app - INFO - Element modified: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:16:39,347 - src.app - INFO - Changing property 'color' to '<PyQt6.QtGui.QColor object at 0x00000257535215B0>' for TextElement
+2025-03-15 11:17:00,767 - src.app - INFO - No elements selected
+2025-03-15 11:17:05,686 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000002575706C430>
+2025-03-15 11:17:08,655 - src.app - INFO - No elements selected
+2025-03-15 11:17:10,094 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000002575706C430>
+2025-03-15 11:17:10,440 - src.app - INFO - No elements selected
+2025-03-15 11:17:12,208 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000002575706C430>
+2025-03-15 11:17:12,930 - src.app - INFO - No elements selected
+2025-03-15 11:17:13,931 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000002575706C430>
+2025-03-15 11:17:14,188 - src.app - INFO - No elements selected
+2025-03-15 11:17:14,926 - src.app - INFO - Multiple elements selected: 2
+2025-03-15 11:17:15,185 - src.app - INFO - No elements selected
+2025-03-15 11:17:16,364 - src.app - INFO - Multiple elements selected: 2
+2025-03-15 11:17:18,196 - src.app - INFO - No elements selected
+2025-03-15 11:17:20,278 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000002575706C430>
+2025-03-15 11:17:23,413 - src.app - INFO - No elements selected
+2025-03-15 11:17:24,230 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000002575706C430>
+2025-03-15 11:17:29,126 - src.app - INFO - Element selected: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:17:30,409 - src.app - INFO - Element selected: <src.drawing.elements.text_element.TextElement object at 0x000002575706CAF0>
+2025-03-15 11:17:38,947 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000002575706C430>
+2025-03-15 11:17:50,230 - src.utils.history_manager - INFO - Started action group: Change width for multiple elements
+2025-03-15 11:17:50,230 - src.utils.history_manager - INFO - Added action to history: Change width for multiple elements
+2025-03-15 11:17:50,231 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change width for multiple elements
+2025-03-15 11:17:50,231 - src.app - INFO - Changed property 'width' to '147.4' for 1 elements
+2025-03-15 11:17:50,723 - src.utils.history_manager - INFO - Started action group: Change width for multiple elements
+2025-03-15 11:17:50,724 - src.utils.history_manager - INFO - Added action to history: Change width for multiple elements
+2025-03-15 11:17:50,724 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change width for multiple elements
+2025-03-15 11:17:50,724 - src.app - INFO - Changed property 'width' to '148.4' for 1 elements
+2025-03-15 11:17:50,883 - src.utils.history_manager - INFO - Started action group: Change width for multiple elements
+2025-03-15 11:17:50,884 - src.utils.history_manager - INFO - Added action to history: Change width for multiple elements
+2025-03-15 11:17:50,884 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change width for multiple elements
+2025-03-15 11:17:50,886 - src.app - INFO - Changed property 'width' to '149.4' for 1 elements
+2025-03-15 11:17:51,037 - src.utils.history_manager - INFO - Started action group: Change width for multiple elements
+2025-03-15 11:17:51,037 - src.utils.history_manager - INFO - Added action to history: Change width for multiple elements
+2025-03-15 11:17:51,037 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change width for multiple elements
+2025-03-15 11:17:51,037 - src.app - INFO - Changed property 'width' to '150.4' for 1 elements
+2025-03-15 11:17:51,192 - src.utils.history_manager - INFO - Started action group: Change width for multiple elements
+2025-03-15 11:17:51,193 - src.utils.history_manager - INFO - Added action to history: Change width for multiple elements
+2025-03-15 11:17:51,193 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change width for multiple elements
+2025-03-15 11:17:51,194 - src.app - INFO - Changed property 'width' to '151.4' for 1 elements
+2025-03-15 11:17:51,349 - src.utils.history_manager - INFO - Started action group: Change width for multiple elements
+2025-03-15 11:17:51,349 - src.utils.history_manager - INFO - Added action to history: Change width for multiple elements
+2025-03-15 11:17:51,350 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change width for multiple elements
+2025-03-15 11:17:51,351 - src.app - INFO - Changed property 'width' to '152.4' for 1 elements
+2025-03-15 11:17:51,504 - src.utils.history_manager - INFO - Started action group: Change width for multiple elements
+2025-03-15 11:17:51,505 - src.utils.history_manager - INFO - Added action to history: Change width for multiple elements
+2025-03-15 11:17:51,505 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change width for multiple elements
+2025-03-15 11:17:51,505 - src.app - INFO - Changed property 'width' to '153.4' for 1 elements
+2025-03-15 11:17:51,660 - src.utils.history_manager - INFO - Started action group: Change width for multiple elements
+2025-03-15 11:17:51,660 - src.utils.history_manager - INFO - Added action to history: Change width for multiple elements
+2025-03-15 11:17:51,660 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change width for multiple elements
+2025-03-15 11:17:51,660 - src.app - INFO - Changed property 'width' to '154.4' for 1 elements
+2025-03-15 11:17:51,816 - src.utils.history_manager - INFO - Started action group: Change width for multiple elements
+2025-03-15 11:17:51,816 - src.utils.history_manager - INFO - Added action to history: Change width for multiple elements
+2025-03-15 11:17:51,818 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change width for multiple elements
+2025-03-15 11:17:51,818 - src.app - INFO - Changed property 'width' to '155.4' for 1 elements
+2025-03-15 11:17:51,973 - src.utils.history_manager - INFO - Started action group: Change width for multiple elements
+2025-03-15 11:17:51,974 - src.utils.history_manager - INFO - Added action to history: Change width for multiple elements
+2025-03-15 11:17:51,975 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change width for multiple elements
+2025-03-15 11:17:51,975 - src.app - INFO - Changed property 'width' to '156.4' for 1 elements
+2025-03-15 11:17:52,131 - src.utils.history_manager - INFO - Started action group: Change width for multiple elements
+2025-03-15 11:17:52,132 - src.utils.history_manager - INFO - Added action to history: Change width for multiple elements
+2025-03-15 11:17:52,132 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change width for multiple elements
+2025-03-15 11:17:52,133 - src.app - INFO - Changed property 'width' to '157.4' for 1 elements
+2025-03-15 11:17:52,285 - src.utils.history_manager - INFO - Started action group: Change width for multiple elements
+2025-03-15 11:17:52,286 - src.utils.history_manager - INFO - Added action to history: Change width for multiple elements
+2025-03-15 11:17:52,286 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change width for multiple elements
+2025-03-15 11:17:52,287 - src.app - INFO - Changed property 'width' to '158.4' for 1 elements
+2025-03-15 11:17:52,442 - src.utils.history_manager - INFO - Started action group: Change width for multiple elements
+2025-03-15 11:17:52,443 - src.utils.history_manager - INFO - Added action to history: Change width for multiple elements
+2025-03-15 11:17:52,443 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change width for multiple elements
+2025-03-15 11:17:52,443 - src.app - INFO - Changed property 'width' to '159.4' for 1 elements
+2025-03-15 11:17:52,603 - src.utils.history_manager - INFO - Started action group: Change width for multiple elements
+2025-03-15 11:17:52,604 - src.utils.history_manager - INFO - Added action to history: Change width for multiple elements
+2025-03-15 11:17:52,605 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change width for multiple elements
+2025-03-15 11:17:52,605 - src.app - INFO - Changed property 'width' to '160.4' for 1 elements
+2025-03-15 11:17:52,756 - src.utils.history_manager - INFO - Started action group: Change width for multiple elements
+2025-03-15 11:17:52,757 - src.utils.history_manager - INFO - Added action to history: Change width for multiple elements
+2025-03-15 11:17:52,758 - src.utils.history_manager - INFO - Ended action group with 1 actions: Change width for multiple elements
+2025-03-15 11:17:52,759 - src.app - INFO - Changed property 'width' to '161.4' for 1 elements
+2025-03-15 11:19:25,289 - src.utils.project_manager - INFO - Autosave disabled

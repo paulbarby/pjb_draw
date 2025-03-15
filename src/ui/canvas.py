@@ -25,6 +25,7 @@ from src.utils.tool_manager import ToolManager, ToolType
 from src.utils.history_manager import HistoryManager, HistoryAction, ActionType
 from src.drawing.elements import VectorElement
 from src.utils.selection_manager import SelectionManager, SelectionMode
+from src.utils.element_hit_detection import debug_visualize_hit_areas, is_element_hit
 
 logger = logging.getLogger(__name__)
 
@@ -97,6 +98,9 @@ class Canvas(QGraphicsView):
         
         # Background image
         self.background_image = None
+        
+        # Debug flags
+        self.debug_show_hit_areas = False
         
         # Element being actively drawn
         self.drawing_element = None
@@ -187,10 +191,17 @@ class Canvas(QGraphicsView):
             else:
                 self.setCursor(Qt.CursorShape.CrossCursor)
                 
+            # Update internal tool state
+            self._current_tool = tool_type
+                
             self.status_message.emit(f"Selected tool: {tool_type.value}")
         except ValueError:
             logger.error(f"Invalid tool type: {tool_type}")
             self.status_message.emit(f"Invalid tool type: {tool_type}")
+            # Default to select tool on error
+            self.tool_manager.set_tool(ToolType.SELECT)
+            self.setCursor(Qt.CursorShape.ArrowCursor)
+            self._current_tool = ToolType.SELECT
     
     def mousePressEvent(self, event):
         """Handle mouse press events on the canvas."""
@@ -214,17 +225,17 @@ class Canvas(QGraphicsView):
             else:
                 self.selection_manager.selection_mode = SelectionMode.REPLACE
             
-            # Get the item under the mouse
-            item = self.scene.itemAt(scene_pos, self.transform())
+            # Use enhanced hit detection to get the element at the clicked point
+            element = self.selection_manager.get_element_at_point(scene_pos)
             
-            if item and isinstance(item, VectorElement):
-                # An element was clicked
+            if element:
+                # An element was hit
                 if event.modifiers() == Qt.KeyboardModifier.ControlModifier:
                     # Toggle the selection
-                    self.selection_manager.toggle_element_selection(item)
+                    self.selection_manager.toggle_element_selection(element)
                 else:
                     # Select just this element
-                    self.selection_manager.select_elements([item], SelectionMode.REPLACE)
+                    self.selection_manager.select_elements([element], SelectionMode.REPLACE)
             else:
                 # No element was clicked, start marquee selection
                 self.is_selecting_with_marquee = True
@@ -860,6 +871,19 @@ class Canvas(QGraphicsView):
                 drawing_menu.addAction(tool_action)
             
             context_menu.addMenu(drawing_menu)
+            
+            # Add debug options
+            context_menu.addSeparator()
+            debug_menu = QMenu("Debug", context_menu)
+            
+            # Toggle hit areas visualization
+            hit_areas_action = QAction("Show Hit Areas", self)
+            hit_areas_action.setCheckable(True)
+            hit_areas_action.setChecked(self.debug_show_hit_areas)
+            hit_areas_action.triggered.connect(self.toggle_debug_hit_areas)
+            debug_menu.addAction(hit_areas_action)
+            
+            context_menu.addMenu(debug_menu)
         
         # Show the context menu
         context_menu.exec(event.globalPos())
@@ -978,3 +1002,62 @@ class Canvas(QGraphicsView):
         """Paste element from clipboard at scene position."""
         # This is a stub method that would be implemented for real clipboard functionality
         self.status_message.emit("Paste not yet implemented")
+
+    def paintEvent(self, event):
+        """Override paintEvent to enable debug visualization."""
+        # Call the parent paintEvent first
+        super().paintEvent(event)
+        
+        # If debug is enabled, visualize hit areas
+        if self.debug_show_hit_areas:
+            # Create painter for the viewport
+            painter = QPainter(self.viewport())
+            painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+            
+            # Adjust painter's transform to match the view's transform
+            painter.setWorldTransform(self.viewportTransform())
+            
+            # Draw hit areas for all elements
+            debug_visualize_hit_areas(self.scene, painter)
+            
+            # Done painting
+            painter.end()
+
+    def toggle_debug_hit_areas(self):
+        """Toggle the visualization of element hit areas for debugging."""
+        self.debug_show_hit_areas = not self.debug_show_hit_areas
+        if self.debug_show_hit_areas:
+            self.status_message.emit("Debug: Hit areas visualization enabled")
+        else:
+            self.status_message.emit("Debug: Hit areas visualization disabled")
+        self.viewport().update()
+
+    def keyPressEvent(self, event):
+        """Handle key press events."""
+        # Check for debug keys
+        if event.modifiers() == Qt.KeyboardModifier.ControlModifier:
+            if event.key() == Qt.Key.Key_H:
+                # Toggle hit areas debug visualization with Ctrl+H
+                self.toggle_debug_hit_areas()
+                event.accept()
+                return
+                
+        # Pass to parent for default handling
+        super().keyPressEvent(event)
+
+    def set_debug_hit_areas(self, show):
+        """
+        Set the visibility of element hit areas for debugging.
+        
+        Args:
+            show: Boolean indicating whether to show hit areas
+        """
+        # Only toggle if the current state doesn't match the desired state
+        if self.debug_show_hit_areas != show:
+            self.toggle_debug_hit_areas()
+        else:
+            # Update the status message even if we're not toggling
+            if show:
+                self.status_message.emit("Debug: Hit areas visualization enabled")
+            else:
+                self.status_message.emit("Debug: Hit areas visualization disabled")

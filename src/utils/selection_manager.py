@@ -12,6 +12,7 @@ from PyQt6.QtGui import QPen, QColor, QBrush
 from PyQt6.QtWidgets import QGraphicsRectItem
 
 from src.drawing.elements import VectorElement
+from src.utils.element_hit_detection import is_element_hit, HIT_TOLERANCE
 
 logger = logging.getLogger(__name__)
 
@@ -195,9 +196,38 @@ class SelectionManager(QObject):
         
         self._marquee_rect.setRect(rect)
         
+    def get_element_at_point(self, scene_point: QPointF) -> Optional[VectorElement]:
+        """
+        Get the element at a specific point using specialized hit detection.
+        
+        This method uses enhanced hit detection algorithms for different element types:
+        - For lines: Uses perpendicular distance
+        - For rectangles and circles: Checks edge proximity
+        - For text: Uses rectangle containment
+        - For other elements: Falls back to standard hit detection
+        
+        Args:
+            scene_point: Point in scene coordinates
+            
+        Returns:
+            Element at the point or None if no element is hit
+        """
+        if not self._scene:
+            return None
+            
+        # Check each element in the scene
+        for item in self._scene.items():
+            if isinstance(item, VectorElement):
+                if is_element_hit(item, scene_point):
+                    return item
+        
+        return None
+        
     def _get_elements_in_rect(self, rect: QRectF) -> List[VectorElement]:
         """
         Get all elements that intersect with the given rectangle.
+        
+        Uses specialized hit detection for edge cases.
         
         Args:
             rect: The rectangle to check intersection with
@@ -209,9 +239,21 @@ class SelectionManager(QObject):
             return []
             
         elements = []
-        for item in self._scene.items(rect):
+        # First get items that might intersect using Qt's standard methods
+        potential_items = self._scene.items(rect)
+        
+        for item in potential_items:
             if isinstance(item, VectorElement):
                 elements.append(item)
+                
+        # For small selection rectangles (close to a click), also check individual points
+        if rect.width() < HIT_TOLERANCE * 2 and rect.height() < HIT_TOLERANCE * 2:
+            center = rect.center()
+            # Check each element in the scene that's not already in our list
+            for item in self._scene.items():
+                if isinstance(item, VectorElement) and item not in elements:
+                    if is_element_hit(item, center):
+                        elements.append(item)
                 
         return elements
         
