@@ -910,3 +910,164 @@
 2025-03-15 15:12:20,179 - src.utils.tool_manager - INFO - Selected tool: select
 2025-03-15 15:12:24,096 - src.app - INFO - Element selected: <src.drawing.elements.rectangle_element.RectangleElement object at 0x000001E3C94A20E0>
 2025-03-15 15:12:28,342 - src.app - INFO - Element selected: <src.drawing.elements.circle_element.CircleElement object at 0x000001E3C94A2320>
+2025-03-15 15:14:04,614 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-15 15:14:04,614 - root - INFO - Starting Drawing Package application
+2025-03-15 15:14:04,640 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-15 15:14:04,640 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-15 15:14:04,640 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-15 15:14:04,640 - src.utils.element_factory - INFO - Registered element type: rectangle
+2025-03-15 15:14:04,640 - src.utils.element_factory - INFO - Registered element type: line
+2025-03-15 15:14:04,640 - src.utils.element_factory - INFO - Registered element type: circle
+2025-03-15 15:14:04,641 - src.utils.element_factory - INFO - Registered element type: text
+2025-03-15 15:14:04,641 - src.utils.element_factory - INFO - Registered element type: image
+2025-03-15 15:14:04,641 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-15 15:14:04,641 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-15 15:14:04,650 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 15:14:04,651 - src.utils.selection_manager - INFO - Selection manager initialized
+2025-03-15 15:14:04,652 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 15:14:04,652 - src.ui.canvas - INFO - Canvas initialized
+2025-03-15 15:14:04,679 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-15 15:14:04,684 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 15:14:04,685 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 15:14:04,689 - src.app - INFO - Application initialized
+2025-03-15 15:14:19,831 - src.utils.image_handler - INFO - Image loaded successfully: C:/Users/paulb/Pictures/Micah.jpg (526x526)
+2025-03-15 15:14:19,832 - src.ui.canvas - INFO - Background image set, size: 526x526
+2025-03-15 15:14:37,129 - src.utils.image_handler - INFO - Image loaded successfully: C:/Users/paulb/Pictures/69516077_10157763027841803_792786697245949952_n.jpg (540x960)
+2025-03-15 15:14:37,129 - src.ui.canvas - INFO - Background image set, size: 540x960
+2025-03-15 15:15:02,414 - src.utils.project_manager - INFO - Autosave disabled
+2025-03-15 15:16:56,417 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-15 15:16:56,417 - root - INFO - Starting Drawing Package application
+2025-03-15 15:16:56,441 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-15 15:16:56,442 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-15 15:16:56,442 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-15 15:16:56,442 - src.utils.element_factory - INFO - Registered element type: rectangle
+2025-03-15 15:16:56,442 - src.utils.element_factory - INFO - Registered element type: line
+2025-03-15 15:16:56,442 - src.utils.element_factory - INFO - Registered element type: circle
+2025-03-15 15:16:56,442 - src.utils.element_factory - INFO - Registered element type: text
+2025-03-15 15:16:56,442 - src.utils.element_factory - INFO - Registered element type: image
+2025-03-15 15:16:56,442 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-15 15:16:56,443 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-15 15:16:56,452 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 15:16:56,453 - src.utils.selection_manager - INFO - Selection manager initialized
+2025-03-15 15:16:56,454 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 15:16:56,454 - src.ui.canvas - INFO - Canvas initialized
+2025-03-15 15:16:56,482 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-15 15:16:56,487 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 15:16:56,487 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 15:16:56,491 - src.app - INFO - Application initialized
+2025-03-15 15:17:15,143 - src.utils.image_handler - INFO - Image loaded successfully: C:/Users/paulb/Pictures/Micah and friend.jpg (1440x1230)
+2025-03-15 15:17:15,144 - src.ui.canvas - INFO - Background image set, size: 1440x1230
+2025-03-15 15:18:25,492 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-15 15:18:25,492 - root - INFO - Starting Drawing Package application
+2025-03-15 15:18:25,516 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-15 15:18:25,517 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-15 15:18:25,517 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-15 15:18:25,517 - src.utils.element_factory - INFO - Registered element type: rectangle
+2025-03-15 15:18:25,517 - src.utils.element_factory - INFO - Registered element type: line
+2025-03-15 15:18:25,517 - src.utils.element_factory - INFO - Registered element type: circle
+2025-03-15 15:18:25,517 - src.utils.element_factory - INFO - Registered element type: text
+2025-03-15 15:18:25,517 - src.utils.element_factory - INFO - Registered element type: image
+2025-03-15 15:18:25,517 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-15 15:18:25,518 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-15 15:18:25,527 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 15:18:25,528 - src.utils.selection_manager - INFO - Selection manager initialized
+2025-03-15 15:18:25,529 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 15:18:25,529 - src.ui.canvas - INFO - Canvas initialized
+2025-03-15 15:18:25,556 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-15 15:18:25,561 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 15:18:25,561 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 15:18:25,565 - src.app - INFO - Application initialized
+2025-03-15 15:18:34,121 - src.utils.image_handler - INFO - Image loaded successfully: C:/Users/paulb/Pictures/A and P.jpg (1080x1920)
+2025-03-15 15:18:34,121 - src.ui.canvas - INFO - Background image set, size: 1080x1920
+2025-03-15 15:23:22,014 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-15 15:23:22,014 - root - INFO - Starting Drawing Package application
+2025-03-15 15:23:22,037 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-15 15:23:22,038 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-15 15:23:22,038 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-15 15:23:22,038 - src.utils.element_factory - INFO - Registered element type: rectangle
+2025-03-15 15:23:22,038 - src.utils.element_factory - INFO - Registered element type: line
+2025-03-15 15:23:22,038 - src.utils.element_factory - INFO - Registered element type: circle
+2025-03-15 15:23:22,038 - src.utils.element_factory - INFO - Registered element type: text
+2025-03-15 15:23:22,038 - src.utils.element_factory - INFO - Registered element type: image
+2025-03-15 15:23:22,038 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-15 15:23:22,038 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-15 15:23:22,048 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 15:23:22,049 - src.utils.selection_manager - INFO - Selection manager initialized
+2025-03-15 15:23:22,049 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 15:23:22,049 - src.ui.canvas - INFO - Canvas initialized
+2025-03-15 15:23:22,075 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-15 15:23:22,080 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 15:23:22,080 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 15:23:22,085 - src.app - INFO - Application initialized
+2025-03-15 15:23:30,857 - src.utils.image_handler - INFO - Image loaded successfully: C:/Users/paulb/Pictures/21244476_819224081571040_132760387_n-2.jpg (288x289)
+2025-03-15 15:23:30,857 - src.ui.canvas - INFO - Background image set, size: 288x289
+2025-03-15 15:25:23,065 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-15 15:25:23,065 - root - INFO - Starting Drawing Package application
+2025-03-15 15:25:23,089 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-15 15:25:23,089 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-15 15:25:23,089 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-15 15:25:23,089 - src.utils.element_factory - INFO - Registered element type: rectangle
+2025-03-15 15:25:23,089 - src.utils.element_factory - INFO - Registered element type: line
+2025-03-15 15:25:23,089 - src.utils.element_factory - INFO - Registered element type: circle
+2025-03-15 15:25:23,090 - src.utils.element_factory - INFO - Registered element type: text
+2025-03-15 15:25:23,090 - src.utils.element_factory - INFO - Registered element type: image
+2025-03-15 15:25:23,090 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-15 15:25:23,090 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-15 15:25:23,099 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 15:25:23,100 - src.utils.selection_manager - INFO - Selection manager initialized
+2025-03-15 15:25:23,101 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 15:25:23,101 - src.ui.canvas - INFO - Canvas initialized
+2025-03-15 15:25:23,126 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-15 15:25:23,131 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 15:25:23,131 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 15:25:23,136 - src.app - INFO - Application initialized
+2025-03-15 15:25:30,069 - src.utils.image_handler - INFO - Image loaded successfully: C:/Users/paulb/Pictures/21244476_819224081571040_132760387_n-2.jpg (288x289)
+2025-03-15 15:25:30,069 - src.ui.canvas - INFO - Background image set, size: 288x289
+2025-03-15 15:25:30,070 - src.utils.history_manager - INFO - Added action to history: Set background to 21244476_819224081571040_132760387_n-2.jpg
+2025-03-15 15:25:32,685 - src.ui.canvas - INFO - Background image set, size: 288x289
+2025-03-15 15:25:32,685 - src.utils.history_manager - INFO - Undid action: Set background to 21244476_819224081571040_132760387_n-2.jpg
+2025-03-15 15:25:36,043 - src.utils.history_manager - INFO - No actions to undo
+2025-03-15 15:27:11,174 - src.app - INFO - Logging to file: C:\Users\paulb\Documents\Development\Drawing Package\logs\drawing_app.log
+2025-03-15 15:27:11,174 - root - INFO - Starting Drawing Package application
+2025-03-15 15:27:11,198 - src.utils.history_manager - INFO - History manager initialized with max history size: 50
+2025-03-15 15:27:11,198 - src.utils.project_manager - INFO - Project manager initialized
+2025-03-15 15:27:11,198 - src.utils.export_manager - INFO - Export manager initialized
+2025-03-15 15:27:11,198 - src.utils.element_factory - INFO - Registered element type: rectangle
+2025-03-15 15:27:11,198 - src.utils.element_factory - INFO - Registered element type: line
+2025-03-15 15:27:11,199 - src.utils.element_factory - INFO - Registered element type: circle
+2025-03-15 15:27:11,199 - src.utils.element_factory - INFO - Registered element type: text
+2025-03-15 15:27:11,199 - src.utils.element_factory - INFO - Registered element type: image
+2025-03-15 15:27:11,199 - src.utils.element_factory - INFO - Element factory initialized
+2025-03-15 15:27:11,199 - src.utils.image_handler - INFO - Image handler initialized
+2025-03-15 15:27:11,209 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 15:27:11,210 - src.utils.selection_manager - INFO - Selection manager initialized
+2025-03-15 15:27:11,211 - src.utils.tool_manager - INFO - Tool manager initialized with SELECT tool
+2025-03-15 15:27:11,211 - src.ui.canvas - INFO - Canvas initialized
+2025-03-15 15:27:11,237 - src.ui.property_panel - INFO - Property panel initialized
+2025-03-15 15:27:11,242 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 15:27:11,242 - src.utils.tool_manager - INFO - Selected tool: select
+2025-03-15 15:27:11,247 - src.app - INFO - Application initialized
+2025-03-15 15:27:17,331 - src.utils.image_handler - INFO - Image loaded successfully: C:/Users/paulb/Pictures/21244476_819224081571040_132760387_n-2.jpg (288x289)
+2025-03-15 15:27:17,331 - src.ui.canvas - INFO - Background image set, size: 288x289
+2025-03-15 15:27:17,332 - src.utils.history_manager - INFO - Added action to history: Set background to 21244476_819224081571040_132760387_n-2.jpg
+2025-03-15 15:27:22,629 - src.utils.history_manager - INFO - Added action to history: Clear background image
+2025-03-15 15:27:22,630 - src.ui.canvas - INFO - Background image cleared or invalid pixmap provided
+2025-03-15 15:27:28,014 - src.utils.image_handler - INFO - Image loaded successfully: C:/Users/paulb/Pictures/448299132_3724178784486914_2671488676727854644_n.jpg (1104x1057)
+2025-03-15 15:27:28,015 - src.ui.canvas - INFO - Background image set, size: 1104x1057
+2025-03-15 15:27:28,016 - src.utils.history_manager - INFO - Added action to history: Set background to 448299132_3724178784486914_2671488676727854644_n.jpg
+2025-03-15 15:27:29,358 - src.ui.canvas - INFO - Background image set, size: 1104x1057
+2025-03-15 15:27:29,358 - src.utils.history_manager - INFO - Undid action: Set background to 448299132_3724178784486914_2671488676727854644_n.jpg
+2025-03-15 15:27:31,327 - src.ui.canvas - INFO - Background image set, size: 288x289
+2025-03-15 15:27:31,327 - src.utils.history_manager - INFO - Undid action: Clear background image
+2025-03-15 15:27:32,521 - src.ui.canvas - INFO - Background image set, size: 288x289
+2025-03-15 15:27:32,521 - src.utils.history_manager - INFO - Undid action: Set background to 21244476_819224081571040_132760387_n-2.jpg
+2025-03-15 15:27:33,135 - src.utils.history_manager - INFO - No actions to undo
+2025-03-15 15:27:33,737 - src.utils.history_manager - INFO - No actions to undo
+2025-03-15 15:27:37,933 - src.utils.history_manager - INFO - Added action to history: Clear background image
+2025-03-15 15:27:37,934 - src.ui.canvas - INFO - Background image cleared or invalid pixmap provided
+2025-03-15 15:27:51,418 - src.utils.tool_manager - INFO - Selected tool: circle
+2025-03-15 15:27:51,419 - src.utils.tool_manager - INFO - Selected tool: circle
+2025-03-15 15:27:51,710 - src.utils.tool_manager - INFO - Started drawing circle at (748.83295194508, 337.4370709382151)
+2025-03-15 15:27:51,984 - src.utils.tool_manager - INFO - Drawing operation completed
+2025-03-15 15:27:51,984 - src.app - INFO - Element created: <src.drawing.elements.circle_element.CircleElement object at 0x000001FAF08F4280>
+2025-03-15 15:27:55,242 - src.utils.history_manager - INFO - Added action to history: Clear canvas

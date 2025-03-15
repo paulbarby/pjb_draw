@@ -662,39 +662,39 @@ class DrawingApp(QMainWindow):
         
     def _load_image(self, file_path: str):
         """Load an image from file."""
-        try:
-            # Use the image handler to load the image
-            if self.image_handler.load_image(file_path):
-                pixmap = self.image_handler.get_pixmap()
-                
-                # Set the image as the canvas background
-                self.canvas.set_background(pixmap, file_path)
-                
-                # Add to recent files
-                self.add_to_recent_files(file_path)
-                
-                # Create a special history action for setting background
-                self.history_manager.add_action(
-                    HistoryAction(
-                        action_type=ActionType.SET_BACKGROUND,
-                        description=f"Set background to {os.path.basename(file_path)}",
-                        data={
-                            "pixmap": pixmap,
-                            "file_path": file_path
-                        },
-                        undo_function=self._create_undo_set_background(),
-                        redo_function=self._create_redo_set_background(pixmap, file_path)
-                    )
+        #try:
+        # Use the image handler to load the image
+        if self.image_handler.load_image(file_path):
+            pixmap = self.image_handler.get_pixmap()
+            
+            # Set the image as the canvas background
+            self.canvas.set_background(pixmap, file_path)
+            
+            # Add to recent files
+            self.add_to_recent_files(file_path)
+            
+            # Create a special history action for setting background
+            self.history_manager.add_action(
+                HistoryAction(
+                    action_type=ActionType.SET_BACKGROUND,
+                    undo_callback=self._create_undo_set_background(),
+                    redo_callback=self._create_redo_set_background(pixmap, file_path),
+                    description=f"Set background to {os.path.basename(file_path)}",
+                    metadata={
+                        "pixmap": pixmap,
+                        "file_path": file_path
+                    }
                 )
-                
-                self._update_status(f"Loaded image: {file_path}")
-                return True
-            else:
-                QMessageBox.warning(self, "Error", f"Could not load image: {file_path}")
-                return False
-        except Exception as e:
-            QMessageBox.critical(self, "Error", f"An error occurred: {str(e)}")
+            )
+            
+            self._update_status(f"Loaded image: {file_path}")
+            return True
+        else:
+            QMessageBox.warning(self, "Error", f"Could not load image: {file_path}")
             return False
+        #except Exception as e:
+        #    QMessageBox.critical(self, "Error", f"An error occurred: {str(e)}")
+        #    return False
 
     def open_project(self):
         """Open a project file."""
@@ -951,7 +951,29 @@ class DrawingApp(QMainWindow):
 
     def clear_background(self):
         """Clear the canvas background."""
-        self.canvas.clear_background()
+        if not self.canvas.has_background():
+            return
+            
+        # Store the current background for undo
+        old_pixmap = self.canvas.get_background_image()
+        old_path = self.canvas.background_path if hasattr(self.canvas, 'background_path') else None
+        
+        # Create a history action for clearing the background
+        self.history_manager.add_action(
+            HistoryAction(
+                action_type=ActionType.SET_BACKGROUND,
+                undo_callback=lambda: self.canvas.set_background(old_pixmap, old_path),
+                redo_callback=lambda: self.canvas.set_background(None, None),
+                description="Clear background image",
+                metadata={
+                    "old_pixmap": old_pixmap,
+                    "old_path": old_path
+                }
+            )
+        )
+        
+        # Clear the background
+        self.canvas.set_background(None, None)
         self.status_bar.showMessage("Background cleared")
 
     def toggle_properties_panel(self):
@@ -1563,3 +1585,29 @@ class DrawingApp(QMainWindow):
             if selected_files:
                 file_path = selected_files[0]
                 self._load_image(file_path)
+
+    def _create_undo_set_background(self):
+        """Create an undo function for setting the background image."""
+        # Store the current background
+        old_pixmap = self.canvas.get_background_image()
+        
+        def undo():
+            """Restore the previous background."""
+            self.canvas.set_background_image(old_pixmap)
+            self.canvas.update()
+            
+        return undo
+        
+    def _create_redo_set_background(self, new_pixmap, file_path):
+        """Create a redo function for setting the background image.
+        
+        Args:
+            new_pixmap: The new background image pixmap
+            file_path: Path to the image file
+        """
+        def redo():
+            """Set the new background."""
+            self.canvas.set_background_image(new_pixmap)
+            self.canvas.update()
+            
+        return redo
