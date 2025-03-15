@@ -64,7 +64,7 @@ class CircleElement(VectorElement):
         scene_pos = self.mapToScene(top_left)
         return scene_pos.x(), scene_pos.y()
     
-    def set_visual_position(self, x: float, y: float) -> bool:
+    def set_visual_position(self, x: float, y: float):
         """
         Set the visual position of the circle.
         
@@ -74,9 +74,6 @@ class CircleElement(VectorElement):
         Args:
             x: The visual x-coordinate for the top-left corner
             y: The visual y-coordinate for the top-left corner
-            
-        Returns:
-            True if position was set successfully, False otherwise
         """
         if self.scene():
             # Calculate the difference between current visual position and new position
@@ -96,7 +93,6 @@ class CircleElement(VectorElement):
             self.update_handles()
         
         self.update()
-        return True
         
     def boundingRect(self):
         """Return the bounding rectangle of the circle."""
@@ -218,12 +214,9 @@ class CircleElement(VectorElement):
         """Set a geometry-specific property value."""
         if property_name == self.PROPERTY_RADIUS:
             self.radius = value
-            return True
         elif property_name == self.PROPERTY_WIDTH or property_name == self.PROPERTY_HEIGHT:
             # For compatibility with property panel, update radius from width/height (diameter)
             self.radius = value / 2
-            return True
-        return False
     
     def _get_geometry_properties(self):
         """Get all geometry-specific properties."""

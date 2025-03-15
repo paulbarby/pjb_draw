@@ -290,7 +290,7 @@ class VectorElement(QGraphicsItem):
         # Subclasses should override to provide element-specific logic
         return self.x(), self.y()
     
-    def set_visual_position(self, x: float, y: float) -> bool:
+    def set_visual_position(self, x: float, y: float):
         """
         Set the visual position of the element.
         
@@ -300,14 +300,10 @@ class VectorElement(QGraphicsItem):
         Args:
             x: The visual x-coordinate
             y: The visual y-coordinate
-            
-        Returns:
-            True if position was set successfully, False otherwise
         """
         # Base implementation just sets the item's position
         # Subclasses should override to provide element-specific logic
         self.setPos(x, y)
-        return True
     
     def get_global_position(self) -> Tuple[float, float]:
         """
@@ -443,37 +439,35 @@ class VectorElement(QGraphicsItem):
             value: The value to set
             
         Returns:
-            True if the property was set successfully, False otherwise
+            True if the property was set successfully
         """
         # Handle new position properties
         if property_name == self.PROPERTY_VISUAL_X:
             _, y = self.get_visual_position()
-            return self.set_visual_position(value, y)
+            self.set_visual_position(value, y)
         elif property_name == self.PROPERTY_VISUAL_Y:
             x, _ = self.get_visual_position()
-            return self.set_visual_position(x, value)
+            self.set_visual_position(x, value)
         elif property_name == self.PROPERTY_GLOBAL_X:
             _, y = self.get_global_position()
-            return self.set_global_position(value, y)
+            self.set_global_position(value, y)
         elif property_name == self.PROPERTY_GLOBAL_Y:
             x, _ = self.get_global_position()
-            return self.set_global_position(x, value)
+            self.set_global_position(x, value)
         elif property_name == self.PROPERTY_LOCAL_X:
             self.setX(value)
-            return True
         elif property_name == self.PROPERTY_LOCAL_Y:
             self.setY(value)
-            return True
             
         # Default implementation for common properties
-        if property_name == self.PROPERTY_X:
+        elif property_name == self.PROPERTY_X:
             # For backward compatibility, PROPERTY_X now maps to visual position
             _, y = self.get_visual_position()
-            return self.set_visual_position(value, y)
+            self.set_visual_position(value, y)
         elif property_name == self.PROPERTY_Y:
             # For backward compatibility, PROPERTY_Y now maps to visual position
             x, _ = self.get_visual_position()
-            return self.set_visual_position(x, value)
+            self.set_visual_position(x, value)
         elif property_name == self.PROPERTY_COLOR and hasattr(self, "pen"):
             pen = self.pen() if callable(getattr(self, "pen")) else self.pen
             pen.setColor(value)
@@ -481,7 +475,6 @@ class VectorElement(QGraphicsItem):
                 self.setPen(pen)
             else:
                 self._pen = pen
-            return True
         elif property_name == self.PROPERTY_LINE_THICKNESS and hasattr(self, "pen"):
             pen = self.pen() if callable(getattr(self, "pen")) else self.pen
             pen.setWidth(value)
@@ -489,7 +482,6 @@ class VectorElement(QGraphicsItem):
                 self.setPen(pen)
             else:
                 self._pen = pen
-            return True
         elif property_name == self.PROPERTY_LINE_STYLE and hasattr(self, "pen"):
             pen = self.pen() if callable(getattr(self, "pen")) else self.pen
             if value == self.LINE_STYLE_SOLID:
@@ -503,10 +495,11 @@ class VectorElement(QGraphicsItem):
                 self.setPen(pen)
             else:
                 self._pen = pen
-            return True
-        
-        # Geometry-specific properties should be handled by subclasses
-        return self._set_geometry_property(property_name, value)
+        else:
+            # Geometry-specific properties should be handled by subclasses
+            return self._set_geometry_property(property_name, value)
+            
+        return True
     
     def get_properties(self):
         """

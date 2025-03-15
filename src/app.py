@@ -26,6 +26,7 @@ from src.utils.project_manager import ProjectManager
 from src.utils.export_manager import ExportManager, ExportFormat
 from src.utils.element_factory import ElementFactory
 from src.utils.theme_manager import ThemeManager
+from src.ui.menus.menu_factory import MenuFactory
 
 # Configure logging
 # Create logs directory if it doesn't exist
@@ -75,8 +76,8 @@ class DrawingApp(QMainWindow):
         # Initialize settings
         self.settings = QSettings("DrawingPackage", "DrawingApp")
         
-        # Initialize theme preference early
-        self.is_dark_mode = self.settings.value("dark_mode", False, bool)
+        # Initialize theme manager early
+        self.theme_manager = ThemeManager(self)
         
         # Set up the main widget and layout
         self.main_widget = QWidget()
@@ -98,9 +99,6 @@ class DrawingApp(QMainWindow):
         # Create tool manager
         self.tool_manager = ToolManager()
         
-        # Create menu bar
-        self.create_menu_bar()
-        
         # Create and add the canvas
         self.canvas = Canvas(parent=self, history_manager=self.history_manager)
         self.canvas.tool_manager = self.tool_manager
@@ -112,6 +110,10 @@ class DrawingApp(QMainWindow):
         self.canvas.element_created.connect(self._on_element_created)
         self.canvas.element_selected.connect(self._on_element_selected)
         self.canvas.element_changed.connect(self._on_element_changed)
+        
+        # Initialize menu factory and create menu bar
+        self.menu_factory = MenuFactory(self)
+        self.setMenuBar(self.menu_factory.create_menu_bar())
         
         # Create property panel in a dock widget
         self.property_panel = PropertyPanel()
@@ -153,8 +155,8 @@ class DrawingApp(QMainWindow):
         # Initialize the elements list in the property panel
         self._refresh_elements_list()
         
-        # Apply theme (moved initialization of is_dark_mode above)
-        self.apply_theme()
+        # Apply theme using theme manager
+        self.theme_manager.apply_theme()
         
         # Restore window state and geometry if available
         if self.settings.contains("window_geometry"):
@@ -373,104 +375,106 @@ class DrawingApp(QMainWindow):
     
     def _on_property_changed(self, property_name, value, element=None):
         """Handle property changes from the property panel."""
-        # Check if we're in multi-selection mode
-        if hasattr(self.property_panel, 'multiple_elements') and self.property_panel.multiple_elements:
-            # Apply the change to all selected elements
-            selected_elements = self.canvas.selection_manager.current_selection
-            if selected_elements:
-                self._apply_property_to_multiple(selected_elements, property_name, value)
-            return
-            
-        # If no element is provided, get the current element from the property panel
+        # If no element is provided, use the current element
         if element is None:
             element = self.property_panel.current_element
             
         if not element:
+            logger.warning("No element selected for property change")
+            return
+            
+        # Check if the element supports this property
+        if not element.supports_property(property_name):
+            logger.warning(f"Element {type(element).__name__} does not support property {property_name}")
             return
             
         # Begin a property change action group
         self.history_manager.begin_action_group(f"Change {property_name}")
         
-        try:
-            # Store old property value for undo
-            old_value = element.get_property_value(property_name)
+        # try:
+        # Store old property value for undo
+        old_value = element.get_property_value(property_name)
+        
+        # Create undo/redo functions
+        def undo_property_change():
+            try:
+                element.set_property_value(property_name, old_value)
+                self.canvas.update()
+                # For position changes, notify the scene that item has moved
+                if property_name in ["x", "y", "visual_x", "visual_y", "global_x", "global_y", "local_x", "local_y"]:
+                    element.update()
+                    element.prepareGeometryChange()
+                    # Update handles if available
+                    if hasattr(element, "update_handles"):
+                        element.update_handles()
+            except Exception as e:
+                logger.error(f"Error undoing property change: {str(e)}")
+        
+        def redo_property_change():
+            try:
+                element.set_property_value(property_name, value)
+                self.canvas.update()
+                # For position changes, notify the scene that item has moved
+                if property_name in ["x", "y", "visual_x", "visual_y", "global_x", "global_y", "local_x", "local_y"]:
+                    element.update()
+                    element.prepareGeometryChange()
+                    # Update handles if available
+                    if hasattr(element, "update_handles"):
+                        element.update_handles()
+            except Exception as e:
+                logger.error(f"Error redoing property change: {str(e)}")
+        
+        # Create history action
+        action = HistoryAction(
+            ActionType.CHANGE_PROPERTY,
+            undo_property_change,
+            redo_property_change,
+            f"Change {property_name} to {value}",
+            {
+                "property": property_name,
+                "old_value": str(old_value),
+                "new_value": str(value),
+                "element_type": type(element).__name__
+            }
+        )
+        
+        # Add to history
+        self.history_manager.add_action(action)
+        
+        # Apply the change
+        # try:
+        element.set_property_value(property_name, value)
+        # except Exception as e:
+        #    logger.error(f"Error setting property '{property_name}' to '{value}': {str(e)}")
+        #     raise
+        
+        # End the action group
+        self.history_manager.end_action_group()
+        
+        # Update the canvas
+        self.canvas.viewport().update()
+        
+        # For position changes, ensure the scene is properly notified
+        if property_name in ["x", "y", "visual_x", "visual_y", "global_x", "global_y", "local_x", "local_y"]:
+            element.update()
+            element.prepareGeometryChange()
+            # Update handles if available
+            if hasattr(element, "update_handles"):
+                element.update_handles()
+        
+        # Emit changed signal for canvas
+        self.canvas.element_changed.emit(element)
+        
+        # Log the change
+        logger.info(f"Changing property '{property_name}' to '{value}' for {type(element).__name__}")
             
-            # Create undo/redo functions
-            def undo_property_change():
-                try:
-                    element.set_property_value(property_name, old_value)
-                    self.canvas.update()
-                    # For position changes, notify the scene that item has moved
-                    if property_name in ["x", "y", "visual_x", "visual_y", "global_x", "global_y", "local_x", "local_y"]:
-                        element.update()
-                        element.prepareGeometryChange()
-                        # Update handles if available
-                        if hasattr(element, "update_handles"):
-                            element.update_handles()
-                except Exception as e:
-                    logger.error(f"Error undoing property change: {str(e)}")
-            
-            def redo_property_change():
-                try:
-                    element.set_property_value(property_name, value)
-                    self.canvas.update()
-                    # For position changes, notify the scene that item has moved
-                    if property_name in ["x", "y", "visual_x", "visual_y", "global_x", "global_y", "local_x", "local_y"]:
-                        element.update()
-                        element.prepareGeometryChange()
-                        # Update handles if available
-                        if hasattr(element, "update_handles"):
-                            element.update_handles()
-                except Exception as e:
-                    logger.error(f"Error redoing property change: {str(e)}")
-            
-            # Create history action
-            action = HistoryAction(
-                ActionType.CHANGE_PROPERTY,
-                undo_property_change,
-                redo_property_change,
-                f"Change {property_name} to {value}",
-                {
-                    "property": property_name,
-                    "old_value": str(old_value),
-                    "new_value": str(value),
-                    "element_type": type(element).__name__
-                }
-            )
-            
-            # Add to history
-            self.history_manager.add_action(action)
-            
-            # Apply the change
-            element.set_property_value(property_name, value)
-            
-            # End the action group
-            self.history_manager.end_action_group()
-            
-            # Update the canvas
-            self.canvas.viewport().update()
-            
-            # For position changes, ensure the scene is properly notified
-            if property_name in ["x", "y", "visual_x", "visual_y", "global_x", "global_y", "local_x", "local_y"]:
-                element.update()
-                element.prepareGeometryChange()
-                # Update handles if available
-                if hasattr(element, "update_handles"):
-                    element.update_handles()
-            
-            # Emit changed signal for canvas
-            self.canvas.element_changed.emit(element)
-            
-            # Log the change
-            logger.info(f"Changing property '{property_name}' to '{value}' for {type(element).__name__}")
-            
-        except Exception as e:
-            # Log the error
-            logger.error(f"Error setting property '{property_name}' to '{value}': {str(e)}")
-            QMessageBox.warning(self, "Error", f"Could not set property: {str(e)}")
+        #except Exception as e:
+        # Log the error
+        #    logger.error(f"Error setting property '{property_name}' to '{value}': {str(e)}")
+        #    QMessageBox.warning(self, "Error", f"Could not set property: {str(e)}")
             
             # End the action group (will be empty if the change failed)
-            self.history_manager.end_action_group()
+        #    self.history_manager.end_action_group()
     
     def _apply_property_to_multiple(self, elements, property_name, value):
         """
@@ -583,6 +587,16 @@ class DrawingApp(QMainWindow):
             tool_id = sender.data()
             self.canvas.set_tool(tool_id)
     
+    @property
+    def can_undo(self) -> bool:
+        """Check if undo is available."""
+        return bool(self.history_manager.can_undo())
+
+    @property
+    def can_redo(self) -> bool:
+        """Check if redo is available."""
+        return bool(self.history_manager.can_redo())
+
     def closeEvent(self, event):
         """Handle application close event."""
         # Disable autosave
@@ -607,12 +621,16 @@ class DrawingApp(QMainWindow):
                 return
             
         # Save window state and geometry
-        self.settings.setValue("geometry", self.saveGeometry())
-        self.settings.setValue("windowState", self.saveState())
+        self.settings.setValue("window_geometry", self.saveGeometry())
+        self.settings.setValue("window_state", self.saveState())
+        
+        # Save theme preference
+        self.settings.setValue("dark_theme", self.theme_manager.is_dark_theme)
         
         # Save other settings
-        self.settings.setValue("dark_mode", self.is_dark_mode)
+        self.settings.sync()
         
+        # Accept the close event
         event.accept()
         
     def dragEnterEvent(self, event: QDragEnterEvent):
@@ -917,17 +935,279 @@ class DrawingApp(QMainWindow):
             )
     
     def zoom_in(self):
-        """Zoom in the canvas."""
-        if hasattr(self, 'canvas') and self.canvas:
-            self.canvas.scale(1.2, 1.2)
-        self.status_bar.showMessage("Zoomed in")
-    
+        """Zoom in on the canvas."""
+        self.canvas.zoom_in()
+        self.status_bar.showMessage(f"Zoom level: {self.canvas.get_zoom_level():.0%}")
+
     def zoom_out(self):
-        """Zoom out the canvas."""
-        if hasattr(self, 'canvas') and self.canvas:
-            self.canvas.scale(0.8, 0.8)
-        self.status_bar.showMessage("Zoomed out")
-    
+        """Zoom out on the canvas."""
+        self.canvas.zoom_out()
+        self.status_bar.showMessage(f"Zoom level: {self.canvas.get_zoom_level():.0%}")
+
+    def reset_zoom(self):
+        """Reset zoom to 100%."""
+        self.canvas.reset_zoom()
+        self.status_bar.showMessage("Zoom level: 100%")
+
+    def clear_background(self):
+        """Clear the canvas background."""
+        self.canvas.clear_background()
+        self.status_bar.showMessage("Background cleared")
+
+    def toggle_properties_panel(self):
+        """Toggle the visibility of the properties panel."""
+        if self.property_dock.isVisible():
+            self.property_dock.hide()
+            self.status_bar.showMessage("Properties panel hidden")
+        else:
+            self.property_dock.show()
+            self.status_bar.showMessage("Properties panel shown")
+
+    def toggle_theme(self):
+        """Toggle between light and dark themes."""
+        self.theme_manager.toggle_theme()
+        theme = "dark" if self.theme_manager.is_dark_theme else "light"
+        self.status_bar.showMessage(f"Switched to {theme} mode")
+
+    def apply_theme(self):
+        """Apply the current theme to the application."""
+        self.theme_manager.apply_theme()
+
+    def set_line_color(self):
+        """Set the line color of the selected elements."""
+        selected_elements = self.canvas.selection_manager.get_selected_elements()
+        if not selected_elements:
+            return
+        
+        # TODO: Show color picker dialog
+        self.status_bar.showMessage("Line color picker not implemented yet")
+
+    def set_fill_color(self):
+        """Set the fill color of the selected elements."""
+        selected_elements = self.canvas.selection_manager.get_selected_elements()
+        if not selected_elements:
+            return
+        
+        # TODO: Show color picker dialog
+        self.status_bar.showMessage("Fill color picker not implemented yet")
+
+    def set_line_thickness(self, thickness):
+        """Set the line thickness of the selected elements.
+        
+        Args:
+            thickness (int): The new line thickness in pixels
+        """
+        selected_elements = self.canvas.selection_manager.get_selected_elements()
+        if not selected_elements:
+            return
+        
+        # Record the action for undo/redo
+        old_thicknesses = {element: element.line_thickness for element in selected_elements}
+        
+        def undo_thickness_change():
+            for element, old_thickness in old_thicknesses.items():
+                element.line_thickness = old_thickness
+            self.canvas.viewport().update()
+        
+        def redo_thickness_change():
+            for element in selected_elements:
+                element.line_thickness = thickness
+            self.canvas.viewport().update()
+        
+        self.history_manager.add_action(
+            HistoryAction(
+                f"Set Line Thickness to {thickness}px",
+                undo_thickness_change,
+                redo_thickness_change,
+                ActionType.PROPERTY_CHANGE
+            )
+        )
+        
+        # Perform the change
+        redo_thickness_change()
+        self.status_bar.showMessage(f"Set line thickness to {thickness}px")
+
+    def rotate_selected_elements(self):
+        """Rotate the selected elements."""
+        selected_elements = self.canvas.selection_manager.get_selected_elements()
+        if not selected_elements:
+            return
+        
+        # TODO: Show rotation dialog
+        self.status_bar.showMessage("Rotation dialog not implemented yet")
+
+    def scale_selected_elements(self):
+        """Scale the selected elements."""
+        selected_elements = self.canvas.selection_manager.get_selected_elements()
+        if not selected_elements:
+            return
+        
+        # TODO: Show scale dialog
+        self.status_bar.showMessage("Scale dialog not implemented yet")
+
+    def flip_horizontal(self):
+        """Flip the selected elements horizontally."""
+        selected_elements = self.canvas.selection_manager.get_selected_elements()
+        if not selected_elements:
+            return
+        
+        # TODO: Implement horizontal flip
+        self.status_bar.showMessage("Horizontal flip not implemented yet")
+
+    def flip_vertical(self):
+        """Flip the selected elements vertically."""
+        selected_elements = self.canvas.selection_manager.get_selected_elements()
+        if not selected_elements:
+            return
+        
+        # TODO: Implement vertical flip
+        self.status_bar.showMessage("Vertical flip not implemented yet")
+
+    def bring_to_front(self):
+        """Bring the selected elements to the front."""
+        selected_elements = self.canvas.selection_manager.get_selected_elements()
+        if not selected_elements:
+            return
+        
+        # Record the action for undo/redo
+        old_z_values = {element: element.zValue() for element in selected_elements}
+        max_z = self.canvas.get_max_z_value()
+        
+        def undo_z_change():
+            for element, old_z in old_z_values.items():
+                element.setZValue(old_z)
+            self.canvas.viewport().update()
+        
+        def redo_z_change():
+            for i, element in enumerate(selected_elements):
+                element.setZValue(max_z + 1 + i)
+            self.canvas.viewport().update()
+        
+        self.history_manager.add_action(
+            HistoryAction(
+                "Bring to Front",
+                undo_z_change,
+                redo_z_change,
+                ActionType.Z_ORDER
+            )
+        )
+        
+        # Perform the change
+        redo_z_change()
+        self.status_bar.showMessage("Brought elements to front")
+
+    def send_to_back(self):
+        """Send the selected elements to the back."""
+        selected_elements = self.canvas.selection_manager.get_selected_elements()
+        if not selected_elements:
+            return
+        
+        # Record the action for undo/redo
+        old_z_values = {element: element.zValue() for element in selected_elements}
+        min_z = self.canvas.get_min_z_value()
+        
+        def undo_z_change():
+            for element, old_z in old_z_values.items():
+                element.setZValue(old_z)
+            self.canvas.viewport().update()
+        
+        def redo_z_change():
+            for i, element in enumerate(selected_elements):
+                element.setZValue(min_z - 1 - i)
+            self.canvas.viewport().update()
+        
+        self.history_manager.add_action(
+            HistoryAction(
+                "Send to Back",
+                undo_z_change,
+                redo_z_change,
+                ActionType.Z_ORDER
+            )
+        )
+        
+        # Perform the change
+        redo_z_change()
+        self.status_bar.showMessage("Sent elements to back")
+
+    def bring_forward(self):
+        """Bring the selected elements forward by one level."""
+        selected_elements = self.canvas.selection_manager.get_selected_elements()
+        if not selected_elements:
+            return
+        
+        # Record the action for undo/redo
+        old_z_values = {element: element.zValue() for element in selected_elements}
+        
+        def undo_z_change():
+            for element, old_z in old_z_values.items():
+                element.setZValue(old_z)
+            self.canvas.viewport().update()
+        
+        def redo_z_change():
+            for element in selected_elements:
+                element.setZValue(element.zValue() + 1)
+            self.canvas.viewport().update()
+        
+        self.history_manager.add_action(
+            HistoryAction(
+                "Bring Forward",
+                undo_z_change,
+                redo_z_change,
+                ActionType.Z_ORDER
+            )
+        )
+        
+        # Perform the change
+        redo_z_change()
+        self.status_bar.showMessage("Brought elements forward")
+
+    def send_backward(self):
+        """Send the selected elements backward by one level."""
+        selected_elements = self.canvas.selection_manager.get_selected_elements()
+        if not selected_elements:
+            return
+        
+        # Record the action for undo/redo
+        old_z_values = {element: element.zValue() for element in selected_elements}
+        
+        def undo_z_change():
+            for element, old_z in old_z_values.items():
+                element.setZValue(old_z)
+            self.canvas.viewport().update()
+        
+        def redo_z_change():
+            for element in selected_elements:
+                element.setZValue(element.zValue() - 1)
+            self.canvas.viewport().update()
+        
+        self.history_manager.add_action(
+            HistoryAction(
+                "Send Backward",
+                undo_z_change,
+                redo_z_change,
+                ActionType.Z_ORDER
+            )
+        )
+        
+        # Perform the change
+        redo_z_change()
+        self.status_bar.showMessage("Sent elements backward")
+
+    def show_user_guide(self):
+        """Show the user guide."""
+        # TODO: Implement user guide dialog
+        self.status_bar.showMessage("User guide not implemented yet")
+
+    def show_shortcuts(self):
+        """Show the keyboard shortcuts dialog."""
+        # TODO: Implement keyboard shortcuts dialog
+        self.status_bar.showMessage("Keyboard shortcuts dialog not implemented yet")
+
+    def show_about_dialog(self):
+        """Show the about dialog."""
+        # TODO: Implement about dialog
+        self.status_bar.showMessage("About dialog not implemented yet")
+
     def undo_action(self):
         """Undo the last action."""
         action = self.history_manager.undo()
@@ -960,905 +1240,96 @@ class DrawingApp(QMainWindow):
     
     def _update_history_actions(self, can_undo: bool, can_redo: bool):
         """Update the enabled state of undo/redo actions."""
-        if hasattr(self, 'action_undo'):
-            self.action_undo.setEnabled(can_undo)
-            
-        if hasattr(self, 'undo_action_menu'):
-            self.undo_action_menu.setEnabled(can_undo)
-        
-        if can_undo:
-            undo_desc = self.history_manager.get_undo_description()
-            if undo_desc:
-                if hasattr(self, 'action_undo'):
-                    self.action_undo.setStatusTip(f"Undo: {undo_desc}")
-                if hasattr(self, 'undo_action_menu'):
-                    self.undo_action_menu.setStatusTip(f"Undo: {undo_desc}")
-        else:
-            if hasattr(self, 'action_undo'):
-                self.action_undo.setStatusTip("Undo")
-            if hasattr(self, 'undo_action_menu'):
-                self.undo_action_menu.setStatusTip("Undo")
-            
-        if hasattr(self, 'action_redo'):
-            self.action_redo.setEnabled(can_redo)
-            
-        if hasattr(self, 'redo_action_menu'):
-            self.redo_action_menu.setEnabled(can_redo)
-        
-        if can_redo:
-            redo_desc = self.history_manager.get_redo_description()
-            if redo_desc:
-                if hasattr(self, 'action_redo'):
-                    self.action_redo.setStatusTip(f"Redo: {redo_desc}")
-                if hasattr(self, 'redo_action_menu'):
-                    self.redo_action_menu.setStatusTip(f"Redo: {redo_desc}")
-        else:
-            if hasattr(self, 'action_redo'):
-                self.action_redo.setStatusTip("Redo")
-            if hasattr(self, 'redo_action_menu'):
-                self.redo_action_menu.setStatusTip("Redo")
-
+        # Update menu states through the menu factory
+        self.menu_factory.update_menu_states()
+    
     def _update_status(self, message):
         """Update the status bar message."""
-        self.status_bar.showMessage(message)
+        self.statusBar().showMessage(message)
     
     def _on_element_selected_from_list(self, element):
-        """Handle when user selects an element from the property panel list."""
-        if element is None:
-            # This is a request to refresh the list
-            self._refresh_elements_list()
-            return
-            
-        # Select the element on the canvas
-        self.canvas.scene.clearSelection()
-        element.setSelected(True)
-        self.canvas.element_selected.emit(element)
-        
-        # Update property panel
-        self.property_panel.update_from_element(element)
-        
-        # Update status bar
-        self.status_bar.showMessage(f"Selected {type(element).__name__}")
-    
+        """Handle element selection from the elements list."""
+        if element:
+            self.canvas.selection_manager.select_elements([element])
+            self.canvas.viewport().update()
+
     def _refresh_elements_list(self):
         """Refresh the elements list in the property panel."""
         if hasattr(self, 'canvas') and self.canvas:
-            # Get all elements from the canvas
             elements = self.canvas.get_all_elements()
-            
-            # Update the property panel's elements list
-            self.property_panel.set_elements_list(elements)
-
-    def create_menu_bar(self):
-        """Create the application menu bar."""
-        menu_bar = self.menuBar()
-        
-        # File menu
-        file_menu = menu_bar.addMenu("&File")
-        
-        # New Project
-        new_action = QAction("&New Project", self)
-        new_action.setShortcut("Ctrl+N")
-        new_action.setStatusTip("Create a new project")
-        new_action.triggered.connect(self.new_project)
-        file_menu.addAction(new_action)
-        
-        # Open submenu
-        open_menu = QMenu("&Open", self)
-        file_menu.addMenu(open_menu)
-        
-        # Open Project
-        open_project_action = QAction("&Project...", self)
-        open_project_action.setShortcut("Ctrl+O")
-        open_project_action.setStatusTip("Open an existing project")
-        open_project_action.triggered.connect(self.open_project)
-        open_menu.addAction(open_project_action)
-        
-        # Open Image
-        open_image_action = QAction("&Image as Background...", self)
-        open_image_action.setShortcut("Ctrl+I")
-        open_image_action.setStatusTip("Open an image as background")
-        open_image_action.triggered.connect(self.open_image)
-        open_menu.addAction(open_image_action)
-        
-        # Recent Files (placeholder for now)
-        self.recent_files_menu = QMenu("Recent &Files", self)
-        self.update_recent_files_menu()  # Will implement this method
-        file_menu.addMenu(self.recent_files_menu)
-        self.update_recent_files_menu()
-        
-        file_menu.addSeparator()
-        
-        # Save submenu
-        save_menu = QMenu("&Save", self)
-        file_menu.addMenu(save_menu)
-        
-        # Save
-        save_action = QAction("&Save Project", self)
-        save_action.setShortcut("Ctrl+S")
-        save_action.setStatusTip("Save the current project")
-        save_action.triggered.connect(self.save_project)
-        save_menu.addAction(save_action)
-        
-        # Save As
-        save_as_action = QAction("Save Project &As...", self)
-        save_as_action.setShortcut("Ctrl+Shift+S")
-        save_as_action.setStatusTip("Save the current project with a new name")
-        save_as_action.triggered.connect(self.save_project_as)
-        save_menu.addAction(save_as_action)
-        
-        file_menu.addSeparator()
-        
-        # Export submenu
-        export_menu = QMenu("&Export", self)
-        file_menu.addMenu(export_menu)
-        
-        # Export as PNG
-        export_png_action = QAction("Export as &PNG...", self)
-        export_png_action.setStatusTip("Export the canvas as a PNG image")
-        export_png_action.triggered.connect(lambda: self.export_image(ExportFormat.PNG))
-        export_menu.addAction(export_png_action)
-        
-        # Export as JPG
-        export_jpg_action = QAction("Export as &JPG...", self)
-        export_jpg_action.setStatusTip("Export the canvas as a JPG image")
-        export_jpg_action.triggered.connect(lambda: self.export_image(ExportFormat.JPG))
-        export_menu.addAction(export_jpg_action)
-        
-        # Export as PDF
-        export_pdf_action = QAction("Export as P&DF...", self)
-        export_pdf_action.setStatusTip("Export the canvas as a PDF document")
-        export_pdf_action.triggered.connect(lambda: self.export_image(ExportFormat.PDF))
-        export_menu.addAction(export_pdf_action)
-        
-        # Export as SVG
-        export_svg_action = QAction("Export as &SVG...", self)
-        export_svg_action.setStatusTip("Export the canvas as an SVG vector image")
-        export_svg_action.triggered.connect(lambda: self.export_image(ExportFormat.SVG))
-        export_menu.addAction(export_svg_action)
-        
-        file_menu.addSeparator()
-        
-        # Exit
-        exit_action = QAction("E&xit", self)
-        exit_action.setShortcut("Ctrl+Q")
-        exit_action.setStatusTip("Exit the application")
-        exit_action.triggered.connect(self.close)
-        file_menu.addAction(exit_action)
-        
-        # ----- Edit menu -----
-        edit_menu = menu_bar.addMenu("&Edit")
-        
-        # Undo
-        undo_action = QAction("&Undo", self)
-        undo_action.setShortcut("Ctrl+Z")
-        undo_action.setStatusTip("Undo the last action")
-        undo_action.triggered.connect(self.undo_action)
-        edit_menu.addAction(undo_action)
-        self.undo_action_menu = undo_action  # Store for enabling/disabling
-        
-        # Redo
-        redo_action = QAction("&Redo", self)
-        redo_action.setShortcut("Ctrl+Y")
-        redo_action.setStatusTip("Redo the previously undone action")
-        redo_action.triggered.connect(self.redo_action)
-        edit_menu.addAction(redo_action)
-        self.redo_action_menu = redo_action  # Store for enabling/disabling
-        
-        # History submenu
-        history_menu = QMenu("&History", self)
-        history_action = edit_menu.addMenu(history_menu)
-        
-        # Clear history action
-        clear_history_action = QAction("Clear History", self)
-        clear_history_action.setStatusTip("Clear all undo/redo history")
-        clear_history_action.triggered.connect(self._clear_history)
-        history_menu.addAction(clear_history_action)
-        
-        # View history action
-        view_history_action = QAction("View History...", self)
-        view_history_action.setStatusTip("View the edit history")
-        view_history_action.triggered.connect(self._show_history_panel)
-        history_menu.addAction(view_history_action)
-        
-        edit_menu.addSeparator()
-        
-        # Select All (placeholder)
-        select_all_action = QAction("Select &All", self)
-        select_all_action.setShortcut("Ctrl+A")
-        select_all_action.setStatusTip("Select all elements on the canvas")
-        select_all_action.triggered.connect(lambda: self.canvas.selection_manager.select_all())
-        edit_menu.addAction(select_all_action)
-        
-        # Deselect All
-        deselect_all_action = QAction("&Deselect All", self)
-        deselect_all_action.setShortcut("Ctrl+D")
-        deselect_all_action.setStatusTip("Deselect all elements")
-        deselect_all_action.triggered.connect(lambda: self.canvas.selection_manager.deselect_all())
-        edit_menu.addAction(deselect_all_action)
-        
-        # Invert Selection
-        invert_selection_action = QAction("&Invert Selection", self)
-        invert_selection_action.setShortcut("Ctrl+I")
-        invert_selection_action.setStatusTip("Invert the current selection")
-        invert_selection_action.triggered.connect(lambda: self.canvas.invert_selection())
-        edit_menu.addAction(invert_selection_action)
-        
-        # Selection submenu
-        selection_menu = QMenu("Se&lection", self)
-        edit_menu.addMenu(selection_menu)
-        
-        # Save Selection
-        save_selection_action = QAction("&Save Current Selection...", self)
-        save_selection_action.setStatusTip("Save the current selection for later use")
-        save_selection_action.triggered.connect(self._save_selection_with_dialog)
-        selection_menu.addAction(save_selection_action)
-        
-        # Selection history
-        selection_menu.addSeparator()
-        
-        # Undo Selection
-        undo_selection_action = QAction("&Undo Selection Change", self)
-        undo_selection_action.setShortcut("Ctrl+Shift+Z")
-        undo_selection_action.setStatusTip("Undo the last selection change")
-        undo_selection_action.triggered.connect(lambda: self.canvas.selection_manager.undo_selection())
-        selection_menu.addAction(undo_selection_action)
-        
-        # Redo Selection
-        redo_selection_action = QAction("&Redo Selection Change", self)
-        redo_selection_action.setShortcut("Ctrl+Shift+Y")
-        redo_selection_action.setStatusTip("Redo a previously undone selection change")
-        redo_selection_action.triggered.connect(lambda: self.canvas.selection_manager.redo_selection())
-        selection_menu.addAction(redo_selection_action)
-        
-        # Named selections submenu (will be populated dynamically)
-        self.named_selections_menu = QMenu("&Named Selections", self)
-        selection_menu.addMenu(self.named_selections_menu)
-        
-        # Add a placeholder item
-        no_selections_action = QAction("No saved selections", self)
-        no_selections_action.setEnabled(False)
-        self.named_selections_menu.addAction(no_selections_action)
-        
-        edit_menu.addSeparator()
-        
-        # Cut (placeholder)
-        cut_action = QAction("Cu&t", self)
-        cut_action.setShortcut("Ctrl+X")
-        cut_action.setStatusTip("Cut the selected elements")
-        cut_action.triggered.connect(self.not_implemented)
-        edit_menu.addAction(cut_action)
-        
-        # Copy (placeholder)
-        copy_action = QAction("&Copy", self)
-        copy_action.setShortcut("Ctrl+C")
-        copy_action.setStatusTip("Copy the selected elements")
-        copy_action.triggered.connect(self.not_implemented)
-        edit_menu.addAction(copy_action)
-        
-        # Paste (placeholder)
-        paste_action = QAction("&Paste", self)
-        paste_action.setShortcut("Ctrl+V")
-        paste_action.setStatusTip("Paste elements from clipboard")
-        paste_action.triggered.connect(self.not_implemented)
-        edit_menu.addAction(paste_action)
-        
-        # Delete (placeholder)
-        delete_action = QAction("&Delete", self)
-        delete_action.setShortcut("Delete")
-        delete_action.setStatusTip("Delete the selected elements")
-        delete_action.triggered.connect(self.not_implemented)
-        edit_menu.addAction(delete_action)
-        
-        edit_menu.addSeparator()
-        
-        # Clear Canvas
-        clear_action = QAction("&Clear Canvas", self)
-        clear_action.setShortcut("Ctrl+Shift+C")
-        clear_action.setStatusTip("Clear all elements from the canvas")
-        clear_action.triggered.connect(self.clear_canvas)
-        edit_menu.addAction(clear_action)
-        
-        # ----- View menu -----
-        view_menu = menu_bar.addMenu("&View")
-        
-        # Zoom submenu
-        zoom_menu = QMenu("&Zoom", self)
-        view_menu.addMenu(zoom_menu)
-        
-        # Zoom In
-        zoom_in_action = QAction("Zoom &In", self)
-        zoom_in_action.setShortcut("Ctrl++")
-        zoom_in_action.setStatusTip("Zoom in on the canvas")
-        zoom_in_action.triggered.connect(self.zoom_in)
-        zoom_menu.addAction(zoom_in_action)
-        
-        # Zoom Out
-        zoom_out_action = QAction("Zoom &Out", self)
-        zoom_out_action.setShortcut("Ctrl+-")
-        zoom_out_action.setStatusTip("Zoom out on the canvas")
-        zoom_out_action.triggered.connect(self.zoom_out)
-        zoom_menu.addAction(zoom_out_action)
-        
-        # Reset Zoom (placeholder)
-        reset_zoom_action = QAction("&Reset Zoom", self)
-        reset_zoom_action.setShortcut("Ctrl+0")
-        reset_zoom_action.setStatusTip("Reset zoom to 100%")
-        reset_zoom_action.triggered.connect(self.not_implemented)
-        zoom_menu.addAction(reset_zoom_action)
-        
-        view_menu.addSeparator()
-        
-        # Background submenu
-        background_menu = QMenu("&Background", self)
-        view_menu.addMenu(background_menu)
-        
-        # Set Background
-        set_bg_action = QAction("&Set Background Image...", self)
-        set_bg_action.setStatusTip("Set a background image for the canvas")
-        set_bg_action.triggered.connect(self.open_image)
-        background_menu.addAction(set_bg_action)
-        
-        # Clear Background
-        clear_bg_action = QAction("&Clear Background", self)
-        clear_bg_action.setStatusTip("Remove the background image")
-        clear_bg_action.triggered.connect(self.clear_background)
-        background_menu.addAction(clear_bg_action)
-        
-        view_menu.addSeparator()
-        
-        # UI Options submenu
-        ui_options_menu = QMenu("&UI Options", self)
-        view_menu.addMenu(ui_options_menu)
-        
-        # Theme toggle
-        self.dark_mode_action = QAction("&Dark Mode", self)
-        self.dark_mode_action.setShortcut("Ctrl+Shift+D")
-        self.dark_mode_action.setStatusTip("Toggle between dark and light mode")
-        self.dark_mode_action.setCheckable(True)
-        self.dark_mode_action.setChecked(self.is_dark_mode)
-        self.dark_mode_action.triggered.connect(self.toggle_theme)
-        ui_options_menu.addAction(self.dark_mode_action)
-        
-        # Show/Hide Toolbar (placeholder)
-        toggle_toolbar_action = QAction("Show/Hide &Toolbar", self)
-        toggle_toolbar_action.setStatusTip("Toggle toolbar visibility")
-        toggle_toolbar_action.setCheckable(True)
-        toggle_toolbar_action.setChecked(True)
-        toggle_toolbar_action.triggered.connect(self.not_implemented)
-        ui_options_menu.addAction(toggle_toolbar_action)
-        
-        # Show/Hide Properties Panel (placeholder)
-        toggle_properties_action = QAction("Show/Hide &Properties Panel", self)
-        toggle_properties_action.setStatusTip("Toggle properties panel visibility")
-        toggle_properties_action.setCheckable(True)
-        toggle_properties_action.setChecked(True)
-        toggle_properties_action.triggered.connect(self.not_implemented)
-        ui_options_menu.addAction(toggle_properties_action)
-        
-        # ----- Draw menu -----
-        draw_menu = menu_bar.addMenu("&Draw")
-        
-        # Drawing Tools submenu
-        tools_menu = QMenu("Drawing &Tools", self)
-        draw_menu.addMenu(tools_menu)
-        
-        # Select Tool
-        select_tool_action = QAction("&Select Tool", self)
-        select_tool_action.setShortcut("S")
-        select_tool_action.setStatusTip("Select and edit elements")
-        select_tool_action.triggered.connect(lambda: self.select_tool("select"))
-        tools_menu.addAction(select_tool_action)
-        
-        # Line Tool
-        line_tool_action = QAction("&Line Tool", self)
-        line_tool_action.setShortcut("L")
-        line_tool_action.setStatusTip("Draw straight lines")
-        line_tool_action.triggered.connect(lambda: self.select_tool("line"))
-        tools_menu.addAction(line_tool_action)
-        
-        # Rectangle Tool
-        rect_tool_action = QAction("&Rectangle Tool", self)
-        rect_tool_action.setShortcut("R")
-        rect_tool_action.setStatusTip("Draw rectangles")
-        rect_tool_action.triggered.connect(lambda: self.select_tool("rectangle"))
-        tools_menu.addAction(rect_tool_action)
-        
-        # Circle Tool
-        circle_tool_action = QAction("&Circle Tool", self)
-        circle_tool_action.setShortcut("C")
-        circle_tool_action.setStatusTip("Draw circles")
-        circle_tool_action.triggered.connect(lambda: self.select_tool("circle"))
-        tools_menu.addAction(circle_tool_action)
-        
-        # Text Tool
-        text_tool_action = QAction("&Text Tool", self)
-        text_tool_action.setShortcut("T")
-        text_tool_action.setStatusTip("Add text annotations")
-        text_tool_action.triggered.connect(lambda: self.select_tool("text"))
-        tools_menu.addAction(text_tool_action)
-        
-        draw_menu.addSeparator()
-        
-        # Element Properties submenu (placeholder)
-        properties_menu = QMenu("Element &Properties", self)
-        draw_menu.addMenu(properties_menu)
-        
-        # Line Color
-        line_color_action = QAction("Line &Color...", self)
-        line_color_action.setStatusTip("Change the line color of the selected element")
-        line_color_action.triggered.connect(self.not_implemented)
-        properties_menu.addAction(line_color_action)
-        
-        # Fill Color
-        fill_color_action = QAction("&Fill Color...", self)
-        fill_color_action.setStatusTip("Change the fill color of the selected element")
-        fill_color_action.triggered.connect(self.not_implemented)
-        properties_menu.addAction(fill_color_action)
-        
-        # Line Thickness submenu (placeholder)
-        thickness_menu = QMenu("Line &Thickness", self)
-        properties_menu.addMenu(thickness_menu)
-        
-        for thickness in [1, 2, 3, 5, 8, 12]:
-            thickness_action = QAction(f"{thickness}px", self)
-            thickness_action.setStatusTip(f"Set line thickness to {thickness} pixels")
-            thickness_action.triggered.connect(lambda checked, t=thickness: self.not_implemented())
-            thickness_menu.addAction(thickness_action)
-        
-        # ----- Tools menu -----
-        tools_menu = QMenu("&Tools")
-        
-        # Transform submenu (placeholder)
-        transform_menu = QMenu("&Transform", self)
-        tools_menu.addMenu(transform_menu)
-        
-        # Rotate
-        rotate_action = QAction("&Rotate...", self)
-        rotate_action.setStatusTip("Rotate the selected element")
-        rotate_action.triggered.connect(self.not_implemented)
-        transform_menu.addAction(rotate_action)
-        
-        # Scale
-        scale_action = QAction("&Scale...", self)
-        scale_action.setStatusTip("Scale the selected element")
-        scale_action.triggered.connect(self.not_implemented)
-        transform_menu.addAction(scale_action)
-        
-        # Flip Horizontal
-        flip_h_action = QAction("Flip &Horizontal", self)
-        flip_h_action.setStatusTip("Flip the selected element horizontally")
-        flip_h_action.triggered.connect(self.not_implemented)
-        transform_menu.addAction(flip_h_action)
-        
-        # Flip Vertical
-        flip_v_action = QAction("Flip &Vertical", self)
-        flip_v_action.setStatusTip("Flip the selected element vertically")
-        flip_v_action.triggered.connect(self.not_implemented)
-        transform_menu.addAction(flip_v_action)
-        
-        tools_menu.addSeparator()
-        
-        # Arrange submenu (placeholder)
-        arrange_menu = QMenu("&Arrange", self)
-        tools_menu.addMenu(arrange_menu)
-        
-        # Bring to Front
-        front_action = QAction("Bring to &Front", self)
-        front_action.setShortcut("Ctrl+Shift+]")
-        front_action.setStatusTip("Bring the selected element to the front")
-        front_action.triggered.connect(self.not_implemented)
-        arrange_menu.addAction(front_action)
-        
-        # Send to Back
-        back_action = QAction("Send to &Back", self)
-        back_action.setShortcut("Ctrl+Shift+[")
-        back_action.setStatusTip("Send the selected element to the back")
-        back_action.triggered.connect(self.not_implemented)
-        arrange_menu.addAction(back_action)
-        
-        # Bring Forward
-        forward_action = QAction("Bring &Forward", self)
-        forward_action.setShortcut("Ctrl+]")
-        forward_action.setStatusTip("Bring the selected element forward by one level")
-        forward_action.triggered.connect(self.not_implemented)
-        arrange_menu.addAction(forward_action)
-        
-        # Send Backward
-        backward_action = QAction("Send &Backward", self)
-        backward_action.setShortcut("Ctrl+[")
-        backward_action.setStatusTip("Send the selected element backward by one level")
-        backward_action.triggered.connect(self.not_implemented)
-        arrange_menu.addAction(backward_action)
-        
-        # ----- Preferences submenu -----
-        preferences_menu = QMenu("&Preferences", self)
-        tools_menu.addMenu(preferences_menu)
-        
-        # Theme toggle
-        theme_action = QAction("Toggle &Theme", self)
-        theme_action.setStatusTip("Switch between light and dark theme")
-        theme_action.triggered.connect(self.toggle_theme)
-        preferences_menu.addAction(theme_action)
-        
-        preferences_menu.addSeparator()
-        
-        # Autosave toggle
-        autosave_action = QAction("Enable &Autosave", self)
-        autosave_action.setCheckable(True)
-        autosave_action.setChecked(True)  # Default to enabled
-        autosave_action.setStatusTip("Toggle automatic saving of projects")
-        autosave_action.triggered.connect(lambda checked: self._enable_autosave(checked))
-        preferences_menu.addAction(autosave_action)
-        
-        # Autosave interval submenu
-        autosave_interval_menu = QMenu("Autosave &Interval", self)
-        preferences_menu.addMenu(autosave_interval_menu)
-        
-        # Autosave interval options
-        autosave_1min_action = QAction("1 Minute", self)
-        autosave_1min_action.setStatusTip("Set autosave interval to 1 minute")
-        autosave_1min_action.triggered.connect(lambda: self._set_autosave_interval(60))
-        autosave_interval_menu.addAction(autosave_1min_action)
-        
-        autosave_5min_action = QAction("5 Minutes", self)
-        autosave_5min_action.setStatusTip("Set autosave interval to 5 minutes")
-        autosave_5min_action.triggered.connect(lambda: self._set_autosave_interval(300))
-        autosave_interval_menu.addAction(autosave_5min_action)
-        
-        autosave_10min_action = QAction("10 Minutes", self)
-        autosave_10min_action.setStatusTip("Set autosave interval to 10 minutes")
-        autosave_10min_action.triggered.connect(lambda: self._set_autosave_interval(600))
-        autosave_interval_menu.addAction(autosave_10min_action)
-        
-        autosave_30min_action = QAction("30 Minutes", self)
-        autosave_30min_action.setStatusTip("Set autosave interval to 30 minutes")
-        autosave_30min_action.triggered.connect(lambda: self._set_autosave_interval(1800))
-        autosave_interval_menu.addAction(autosave_30min_action)
-        
-        # ----- Help menu -----
-        help_menu = menu_bar.addMenu("&Help")
-        
-        # User Guide (placeholder)
-        guide_action = QAction("&User Guide", self)
-        guide_action.setStatusTip("View the user guide")
-        guide_action.triggered.connect(self.not_implemented)
-        help_menu.addAction(guide_action)
-        
-        # Keyboard Shortcuts (placeholder)
-        shortcuts_action = QAction("&Keyboard Shortcuts", self)
-        shortcuts_action.setStatusTip("View keyboard shortcuts")
-        shortcuts_action.triggered.connect(self.not_implemented)
-        help_menu.addAction(shortcuts_action)
-        
-        help_menu.addSeparator()
-        
-        # About (placeholder)
-        about_action = QAction("&About Drawing Package", self)
-        about_action.setStatusTip("Show information about the application")
-        about_action.triggered.connect(self.not_implemented)
-        help_menu.addAction(about_action)
-        
-        # Create status bar
-        self.statusBar().showMessage("Ready")
-
-    def open_image(self):
-        """Open an image file and set it as the canvas background."""
-        file_dialog = QFileDialog(self)
-        file_dialog.setWindowTitle("Open Image")
-        file_dialog.setFileMode(QFileDialog.FileMode.ExistingFile)
-        
-        # Get supported formats as filter string
-        filters = self.image_handler.get_supported_formats_filter()
-        file_dialog.setNameFilter(filters)
-        
-        if file_dialog.exec() == QFileDialog.DialogCode.Accepted:
-            selected_files = file_dialog.selectedFiles()
-            if selected_files:
-                file_path = selected_files[0]
-                self._load_image(file_path)
-
-    def resizeEvent(self, event):
-        """Handle window resize events to ensure responsive layout."""
-        super().resizeEvent(event)
-        
-        # Get current window size
-        width = event.size().width()
-        height = event.size().height()
-        
-        # Log resize information
-        logger.debug(f"Window resized to {width}x{height}")
-        
-        # Adjust property panel width based on window size
-        if hasattr(self, 'property_dock') and self.property_dock:
-            # For small windows, make property panel narrower
-            if width < 1000:
-                self.property_dock.setFixedWidth(min(250, int(width * 0.25)))
-            # For medium windows, make it proportional
-            elif width < 1400:
-                self.property_dock.setFixedWidth(int(width * 0.2))
-            # For large windows, cap the width
-            else:
-                self.property_dock.setFixedWidth(300)
-        
-        # Adjust toolbar layout based on window size
-        if hasattr(self, 'toolbar') and self.toolbar:
-            # For narrow windows, use icon-only mode
-            if width < 800:
-                self.toolbar.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonIconOnly)
-            # For wider windows, show text and icon
-            else:
-                self.toolbar.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
-
-    def clear_background(self):
-        """Remove the background image from the canvas."""
-        if hasattr(self, 'canvas') and self.canvas:
-            # Store previous background for undo
-            prev_background = self.canvas.get_background_image()
-            
-            # Clear the background
-            success = self.canvas.set_background_image(None)
-            
-            if success:
-                self.status_bar.showMessage("Background image cleared")
-                
-                # Record in history manager if available
-                if self.history_manager and prev_background:
-                    def undo_clear_background():
-                        self.canvas.set_background_image(prev_background)
-                        
-                    def redo_clear_background():
-                        self.canvas.set_background_image(None)
-                        
-                    action = HistoryAction(
-                        ActionType.SET_BACKGROUND,
-                        undo_clear_background,
-                        redo_clear_background,
-                        "Clear background image"
-                    )
-                    
-                    self.history_manager.add_action(action)
-            else:
-                self.status_bar.showMessage("No background image to clear")
-
-    def toggle_theme(self):
-        """Toggle between dark and light mode."""
-        self.is_dark_mode = not self.is_dark_mode
-        self.dark_mode_action.setChecked(self.is_dark_mode)
-        self.apply_theme()
-        
-        # Save preference
-        self.settings.setValue("dark_mode", self.is_dark_mode)
-        
-        # Update status bar
-        theme_name = "dark" if self.is_dark_mode else "light"
-        self.status_bar.showMessage(f"Switched to {theme_name} mode")
-        
-    def apply_theme(self):
-        """Apply the current theme."""
-        if self.is_dark_mode:
-            self.apply_dark_theme()
-        else:
-            self.apply_light_theme()
-    
-    def apply_dark_theme(self):
-        """Apply dark theme to application."""
-        # Dark theme stylesheet
-        dark_style = """
-        QMainWindow, QWidget {
-            background-color: #2D2D30;
-            color: #E0E0E0;
-        }
-        QToolBar, QStatusBar, QMenuBar, QMenu {
-            background-color: #1E1E1E;
-            color: #E0E0E0;
-            border: none;
-        }
-        QToolBar QToolButton {
-            background-color: #1E1E1E;
-            color: #E0E0E0;
-            border: none;
-            border-radius: 3px;
-            padding: 5px;
-        }
-        QToolBar QToolButton:hover {
-            background-color: #3E3E40;
-        }
-        QToolBar QToolButton:checked {
-            background-color: #0078D7;
-        }
-        QDockWidget {
-            color: #E0E0E0;
-            titlebar-close-icon: url(icons/close_dark.png);
-            titlebar-normal-icon: url(icons/float_dark.png);
-        }
-        QDockWidget::title {
-            background-color: #1E1E1E;
-            padding-left: 10px;
-            padding-top: 4px;
-        }
-        QLabel {
-            color: #E0E0E0;
-        }
-        QPushButton {
-            background-color: #0078D7;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 3px;
-            padding: 5px 10px;
-        }
-        QPushButton:hover {
-            background-color: #1C97EA;
-        }
-        QPushButton:pressed {
-            background-color: #00569C;
-        }
-        QLineEdit, QTextEdit, QComboBox {
-            background-color: #333337;
-            color: #E0E0E0;
-            border: 1px solid #3F3F46;
-            border-radius: 3px;
-            padding: 2px;
-        }
-        QMenuBar::item:selected {
-            background-color: #3E3E40;
-        }
-        QMenu::item:selected {
-            background-color: #3E3E40;
-        }
-        """
-        QApplication.instance().setStyleSheet(dark_style)
-        logger.info("Dark theme applied")
-    
-    def apply_light_theme(self):
-        """Apply light theme to application."""
-        # Light theme stylesheet (default Qt look)
-        light_style = """
-        QMainWindow, QWidget {
-            background-color: #F0F0F0;
-            color: #000000;
-        }
-        QToolBar, QStatusBar, QMenuBar, QMenu {
-            background-color: #F0F0F0;
-            color: #000000;
-            border: none;
-        }
-        QToolBar QToolButton {
-            background-color: #F0F0F0;
-            color: #000000;
-            border: none;
-            border-radius: 3px;
-            padding: 5px;
-        }
-        QToolBar QToolButton:hover {
-            background-color: #E0E0E0;
-        }
-        QToolBar QToolButton:checked {
-            background-color: #DADADA;
-        }
-        QDockWidget {
-            color: #000000;
-            titlebar-close-icon: url(icons/close_light.png);
-            titlebar-normal-icon: url(icons/float_light.png);
-        }
-        QDockWidget::title {
-            background-color: #E0E0E0;
-            padding-left: 10px;
-            padding-top: 4px;
-        }
-        QLabel {
-            color: #000000;
-        }
-        QPushButton {
-            background-color: #0078D7;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 3px;
-            padding: 5px 10px;
-        }
-        QPushButton:hover {
-            background-color: #1C97EA;
-        }
-        QPushButton:pressed {
-            background-color: #00569C;
-        }
-        QLineEdit, QTextEdit, QComboBox {
-            background-color: #FFFFFF;
-            color: #000000;
-            border: 1px solid #CCCCCC;
-            border-radius: 3px;
-            padding: 2px;
-        }
-        QMenuBar::item:selected {
-            background-color: #DADADA;
-        }
-        QMenu::item:selected {
-            background-color: #DADADA;
-        }
-        """
-        QApplication.instance().setStyleSheet(light_style)
-        logger.info("Light theme applied")
+            if hasattr(self, 'property_panel'):
+                self.property_panel.set_elements_list(elements)
 
     def update_recent_files_menu(self):
-        """Update the recent files menu with the recently opened files."""
-        self.recent_files_menu.clear()
-        
-        # Get recent files from settings
-        recent_files = self.settings.value("recent_files", [], str)
-        
-        if recent_files:
-            for i, file_path in enumerate(recent_files):
-                if i < 10:  # Limit to 10 recent files
-                    action = QAction(f"{i+1}. {os.path.basename(file_path)}", self)
-                    action.setData(file_path)
-                    action.setStatusTip(f"Open {file_path}")
-                    action.triggered.connect(lambda checked, path=file_path: self.open_recent_file(path))
-                    self.recent_files_menu.addAction(action)
-            
-            self.recent_files_menu.addSeparator()
-            clear_action = QAction("Clear Recent Files", self)
-            clear_action.triggered.connect(self.clear_recent_files)
-            self.recent_files_menu.addAction(clear_action)
-        else:
-            no_files_action = QAction("No Recent Files", self)
-            no_files_action.setEnabled(False)
-            self.recent_files_menu.addAction(no_files_action)
-    
+        """Update the recent files menu with the current list of recent files."""
+        self.menu_factory.update_recent_files_menu()
+
     def add_to_recent_files(self, file_path):
-        """Add a file to the recent files list."""
-        file_path = os.path.normpath(file_path)
-        recent_files = self.settings.value("recent_files", [], str)
+        """Add a file path to the recent files list."""
+        recent_files = self.get_recent_files()
         
-        # Remove file if already in list
+        # Remove if already exists (to move it to the top)
         if file_path in recent_files:
             recent_files.remove(file_path)
         
-        # Add file to beginning of list
+        # Add to the beginning of the list
         recent_files.insert(0, file_path)
         
-        # Limit to 10 files
+        # Keep only the last 10 files
         recent_files = recent_files[:10]
         
         # Save to settings
         self.settings.setValue("recent_files", recent_files)
         
-        # Update menu
+        # Update the menu
         self.update_recent_files_menu()
-    
+
+    def get_recent_files(self) -> List[str]:
+        """Get the list of recent files from settings."""
+        recent_files = self.settings.value("recent_files", [])
+        if recent_files is None:
+            recent_files = []
+        # Filter out files that no longer exist
+        recent_files = [f for f in recent_files if os.path.exists(f)]
+        # Update settings with filtered list
+        self.settings.setValue("recent_files", recent_files)
+        return recent_files
+
     def open_recent_file(self, file_path):
-        """Open a file from the recent files list."""
-        if os.path.exists(file_path):
-            # Check file extension
-            if file_path.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif')):
-                self._load_image(file_path)
-            else:
-                self._load_from_file(file_path)
-                
-            # Add to recent files
-            self.add_to_recent_files(file_path)
-        else:
-            QMessageBox.warning(
-                self, 
-                "File Not Found", 
-                f"The file {file_path} could not be found."
-            )
-            # Remove from recent files
-            self.remove_from_recent_files(file_path)
-    
-    def remove_from_recent_files(self, file_path):
-        """Remove a file from the recent files list."""
-        recent_files = self.settings.value("recent_files", [], str)
+        """Open a file from the recent files list.
         
+        Args:
+            file_path (str): Path to the file to open
+        """
+        if not os.path.exists(file_path):
+            # File no longer exists
+            QMessageBox.warning(
+                self,
+                "File Not Found",
+                f"The file {file_path} no longer exists."
+            )
+            self.remove_from_recent_files(file_path)
+            return
+        
+        self._load_from_file(file_path)
+
+    def remove_from_recent_files(self, file_path):
+        """Remove a file from the recent files list.
+        
+        Args:
+            file_path (str): Path to the file to remove
+        """
+        recent_files = self.settings.value("recent_files", [], str)
         if file_path in recent_files:
             recent_files.remove(file_path)
             self.settings.setValue("recent_files", recent_files)
             self.update_recent_files_menu()
-    
+
     def clear_recent_files(self):
-        """Clear the recent files list."""
+        """Clear the list of recent files."""
         self.settings.setValue("recent_files", [])
         self.update_recent_files_menu()
-    
+
     def not_implemented(self):
         """Show a message for features that are not yet implemented."""
         QMessageBox.information(
@@ -1949,80 +1420,46 @@ class DrawingApp(QMainWindow):
             QMessageBox.information(self, "History", "History manager not available.")
 
     def _save_selection_with_dialog(self):
-        """Show a dialog to save the current selection with a name."""
-        # Check if there's a selection to save
-        if not self.canvas.selection_manager.selection_count:
-            QMessageBox.information(self, "No Selection", "There are no elements selected to save.")
+        """Save the current selection with a user-provided name."""
+        if not self.canvas.selection_manager.has_selection():
+            QMessageBox.warning(
+                self,
+                "No Selection",
+                "Please select one or more elements to save."
+            )
             return
-            
-        # Show input dialog to get a name
+        
         name, ok = QInputDialog.getText(
-            self, 
-            "Save Selection", 
-            "Enter a name for this selection:",
-            text=f"Selection {len(self.canvas.selection_manager.get_named_groups()) + 1}"
+            self,
+            "Save Selection",
+            "Enter a name for this selection:"
         )
         
         if ok and name:
-            # Save the selection
-            self.canvas.selection_manager.save_selection(name)
-            self._update_status(f"Selection saved as '{name}'")
-            
-            # Update the named selections menu
-            self._update_named_selections_menu()
-    
-    def _update_named_selections_menu(self):
-        """Update the named selections menu with current saved selections."""
-        # Clear the menu
-        self.named_selections_menu.clear()
-        
-        # Get all named groups
-        named_groups = self.canvas.selection_manager.get_named_groups()
-        
-        if not named_groups:
-            # Add a placeholder item if there are no saved selections
-            no_selections_action = QAction("No saved selections", self)
-            no_selections_action.setEnabled(False)
-            self.named_selections_menu.addAction(no_selections_action)
-            return
-            
-        # Add an action for each named group
-        for group_name in named_groups:
-            restore_action = QAction(group_name, self)
-            restore_action.setStatusTip(f"Restore the '{group_name}' selection")
-            restore_action.triggered.connect(
-                lambda checked, name=group_name: self._restore_named_selection(name)
-            )
-            self.named_selections_menu.addAction(restore_action)
-            
-        # Add separator and delete options
-        if named_groups:
-            self.named_selections_menu.addSeparator()
-            
-            # Add a "Delete Selection" submenu
-            delete_menu = QMenu("Delete Selection", self)
-            self.named_selections_menu.addMenu(delete_menu)
-            
-            for group_name in named_groups:
-                delete_action = QAction(group_name, self)
-                delete_action.setStatusTip(f"Delete the '{group_name}' selection")
-                delete_action.triggered.connect(
-                    lambda checked, name=group_name: self._delete_named_selection(name)
+            if self.canvas.selection_manager.save_selection(name):
+                self._update_status(f"Selection saved as '{name}'")
+                # Update the named selections menu in the menu factory
+                self.menu_factory.builders['edit'].update_named_selections_menu()
+            else:
+                QMessageBox.warning(
+                    self,
+                    "Save Failed",
+                    f"Could not save selection as '{name}'"
                 )
-                delete_menu.addAction(delete_action)
-    
+
     def _restore_named_selection(self, name):
         """Restore a named selection."""
         if self.canvas.selection_manager.restore_selection(name):
             self._update_status(f"Selection '{name}' restored")
         else:
             self._update_status(f"Could not restore selection '{name}'")
-    
+
     def _delete_named_selection(self, name):
         """Delete a named selection."""
         if self.canvas.selection_manager.delete_named_group(name):
             self._update_status(f"Selection '{name}' deleted")
-            self._update_named_selections_menu()
+            # Update the named selections menu in the menu factory
+            self.menu_factory.builders['edit'].update_named_selections_menu()
         else:
             self._update_status(f"Could not delete selection '{name}'")
 
@@ -2052,14 +1489,77 @@ class DrawingApp(QMainWindow):
         super().keyPressEvent(event)
 
     def toggle_hit_area_visualization(self):
-        """Toggle the visualization of hit areas for debugging."""
-        if hasattr(self, 'canvas'):
-            self.canvas.set_debug_hit_areas(not self.canvas.debug_show_hit_areas)
-            self.canvas.viewport().update()
-            
-            # Update menu item checked state
-            if hasattr(self, 'hit_areas_action'):
-                self.hit_areas_action.setChecked(self.canvas.debug_show_hit_areas)
-            
-            status = "enabled" if self.canvas.debug_show_hit_areas else "disabled"
-            self.status_bar.showMessage(f"Hit area visualization {status}")
+        """Toggle the visualization of hit areas for elements."""
+        self.canvas.toggle_hit_area_visualization()
+        
+        # Update status bar
+        if self.canvas.show_hit_areas:
+            self.status_bar.showMessage("Hit area visualization enabled")
+        else:
+            self.status_bar.showMessage("Hit area visualization disabled")
+
+    def cut_selected_elements(self):
+        """Cut the selected elements to the clipboard."""
+        self.copy_selected_elements()
+        self.delete_selected_elements()
+
+    def copy_selected_elements(self):
+        """Copy the selected elements to the clipboard."""
+        selected_elements = self.canvas.selection_manager.get_selected_elements()
+        if not selected_elements:
+            return
+        
+        # TODO: Implement copying elements to clipboard
+        self.status_bar.showMessage("Copy not implemented yet")
+
+    def paste_elements(self):
+        """Paste elements from the clipboard."""
+        # TODO: Implement pasting elements from clipboard
+        self.status_bar.showMessage("Paste not implemented yet")
+
+    def delete_selected_elements(self):
+        """Delete the selected elements."""
+        selected_elements = self.canvas.selection_manager.get_selected_elements()
+        if not selected_elements:
+            return
+        
+        # Record the action for undo/redo
+        def undo_delete():
+            for element in selected_elements:
+                self.canvas.add_element(element)
+            self.canvas.selection_manager.select_elements(selected_elements)
+            self._refresh_elements_list()
+        
+        def redo_delete():
+            for element in selected_elements:
+                self.canvas.remove_element(element)
+            self._refresh_elements_list()
+        
+        self.history_manager.add_action(
+            HistoryAction(
+                "Delete Elements",
+                undo_delete,
+                redo_delete,
+                ActionType.DELETE
+            )
+        )
+        
+        # Perform the deletion
+        redo_delete()
+        self.status_bar.showMessage(f"Deleted {len(selected_elements)} element(s)")
+
+    def open_image(self):
+        """Open an image file and set it as the canvas background."""
+        file_dialog = QFileDialog(self)
+        file_dialog.setWindowTitle("Open Image")
+        file_dialog.setFileMode(QFileDialog.FileMode.ExistingFile)
+        
+        # Get supported formats as filter string
+        filters = self.image_handler.get_supported_formats_filter()
+        file_dialog.setNameFilter(filters)
+        
+        if file_dialog.exec() == QFileDialog.DialogCode.Accepted:
+            selected_files = file_dialog.selectedFiles()
+            if selected_files:
+                file_path = selected_files[0]
+                self._load_image(file_path)

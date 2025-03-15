@@ -57,7 +57,7 @@ class RectangleElement(VectorElement):
         scene_pos = self.mapToScene(self._rect.topLeft())
         return scene_pos.x(), scene_pos.y()
     
-    def set_visual_position(self, x: float, y: float) -> bool:
+    def set_visual_position(self, x: float, y: float):
         """
         Set the visual position of the rectangle.
         
@@ -66,9 +66,6 @@ class RectangleElement(VectorElement):
         Args:
             x: The visual x-coordinate for the top-left corner
             y: The visual y-coordinate for the top-left corner
-            
-        Returns:
-            True if position was set successfully, False otherwise
         """
         if self.scene():
             # Calculate the difference between current visual position and new position
@@ -95,8 +92,7 @@ class RectangleElement(VectorElement):
             self.update_handles()
         
         self.update()
-        return True
-        
+    
     def update_handles(self):
         """Update the positions of the resize handles."""
         rect = self._rect
@@ -212,7 +208,6 @@ class RectangleElement(VectorElement):
                 self._rect.height()
             )
             self.rect = new_rect
-            return True
         elif property_name == self.PROPERTY_HEIGHT:
             new_rect = QRectF(
                 self._rect.x(),
@@ -221,8 +216,6 @@ class RectangleElement(VectorElement):
                 value
             )
             self.rect = new_rect
-            return True
-        return False
     
     def _get_geometry_properties(self):
         """Get all geometry-specific properties."""

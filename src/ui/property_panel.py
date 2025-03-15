@@ -140,7 +140,7 @@ class PropertyPanel(QWidget):
         self.x_spinbox.setRange(-10000, 10000)  # Allow negative coordinates
         self.x_spinbox.setDecimals(1)
         self.x_spinbox.valueChanged.connect(
-            lambda value: self.property_changed.emit("visual_x", value)  # Changed from "x" to "visual_x"
+            lambda value: self._on_spinbox_value_changed("visual_x", value, self.x_spinbox)
         )
         self.geometry_layout.addRow(QLabel("X:"), self.x_spinbox)
         
@@ -148,7 +148,7 @@ class PropertyPanel(QWidget):
         self.y_spinbox.setRange(-10000, 10000)  # Allow negative coordinates
         self.y_spinbox.setDecimals(1)
         self.y_spinbox.valueChanged.connect(
-            lambda value: self.property_changed.emit("visual_y", value)  # Changed from "y" to "visual_y"
+            lambda value: self._on_spinbox_value_changed("visual_y", value, self.y_spinbox)
         )
         self.geometry_layout.addRow(QLabel("Y:"), self.y_spinbox)
         
@@ -157,7 +157,7 @@ class PropertyPanel(QWidget):
         self.width_spinbox.setRange(1, 10000)
         self.width_spinbox.setDecimals(1)
         self.width_spinbox.valueChanged.connect(
-            lambda value: self.property_changed.emit("width", value)
+            lambda value: self._on_spinbox_value_changed("width", value, self.width_spinbox)
         )
         self.geometry_layout.addRow(QLabel("Width:"), self.width_spinbox)
         
@@ -165,7 +165,7 @@ class PropertyPanel(QWidget):
         self.height_spinbox.setRange(1, 10000)
         self.height_spinbox.setDecimals(1)
         self.height_spinbox.valueChanged.connect(
-            lambda value: self.property_changed.emit("height", value)
+            lambda value: self._on_spinbox_value_changed("height", value, self.height_spinbox)
         )
         self.geometry_layout.addRow(QLabel("Height:"), self.height_spinbox)
         
@@ -549,3 +549,19 @@ class PropertyPanel(QWidget):
             common_properties = common_properties.intersection(element_properties)
             
         return common_properties
+
+    def _on_spinbox_value_changed(self, property_name, value, spinbox):
+        """
+        Handle spinbox value changes, only emitting signals when the value actually changes.
+        This prevents feedback loops when updating the UI.
+        """
+        if not self.current_element:
+            return
+            
+        # Get the current value from the element
+        current_value = self.current_element.get_property_value(property_name)
+        
+        # Only emit if the value has actually changed
+        # Use a small epsilon for float comparison
+        if abs(current_value - value) > 0.0001:
+            self.property_changed.emit(property_name, value)

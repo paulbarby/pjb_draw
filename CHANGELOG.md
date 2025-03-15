@@ -180,3 +180,18 @@ All notable changes to the Drawing Package will be documented in this file.
 - Basic property panel for editing element properties
 - Project saving and loading
 - Undo/redo functionality
+
+## 23
+
+### Changed
+
+- Refactored menu system for better maintainability and extensibility:
+  - Created MenuFactory class to centralize menu creation
+  - Implemented BaseMenuBuilder for common menu functionality
+  - Split menu creation into separate builder classes (File, Edit, View, Draw, Tools, Help)
+  - Moved menu actions to dedicated action modules
+  - Added comprehensive test coverage for menu system
+  - Improved menu state management and updates
+  - Enhanced keyboard shortcut handling
+  - Maintained backward compatibility with existing functionality
+  - Added proper documentation for menu system components
